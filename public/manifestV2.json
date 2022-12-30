@@ -1,17 +1,14 @@
 {
   "name": "devspark",
-  "description": "A Cross Browser Template for Google Chrome",
+  "description": "A Cross Browser Template for Firefox",
   "version": "1.0.0",
-  "manifest_version": 3,
-  "action": {
+  "manifest_version": 2,
+  "browser_action": {
     "default_popup": "popup/popup.html",
     "default_title": "Open the popup"
   },
-  "host_permissions": [
-    "https://github.com/*",
-    "https://wealth-dev.evooq.ch/*",
-    "https://wealth.evooq.ch/*",
-    "http://localhost:*/"
+  "optional_permissions": [
+    "<all_urls>"
   ],
   "content_scripts": [
     {
@@ -27,15 +24,9 @@
       ]
     }
   ],
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "tabs",
-    "webRequest"
-  ],
   "background": {
-    "service_worker": "./background.global.js"
+    "page": "background/background.html",
+    "persistent": false
   },
   "options_page": "options/options.html",
   "icons": {

@@ -1,12 +1,18 @@
 {
-  "name": "Vite/React/TailwindCSS Plugin",
+  "name": "devspark",
   "description": "A Cross Browser Template for Google Chrome",
   "version": "1.0.0",
   "manifest_version": 3,
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_title": "Open the popup"
   },
+  "host_permissions": [
+    "https://github.com/*",
+    "https://wealth-dev.evooq.ch/*",
+    "https://wealth.evooq.ch/*",
+    "http://localhost:*/"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -22,11 +28,16 @@
     }
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "webRequest"
   ],
   "background": {
     "service_worker": "./background.global.js"
   },
+  "options_page": "options/options.html",
   "icons": {
     "128": "vite.svg"
   }

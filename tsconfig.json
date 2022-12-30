@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "content-script/App.tsx"],
+  "include": ["popup", "content-script/App.tsx", "options"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -9,9 +9,10 @@ export default defineConfig({
     emptyOutDir: false,
     rollupOptions: {
       input: {
-        index: new URL('./popup.html', import.meta.url).pathname,
-        background: new URL('./background.html', import.meta.url).pathname,
-      }
+        index: new URL('./popup/popup.html', import.meta.url).pathname,
+        background: new URL('./background/background.html', import.meta.url).pathname,
+        options: new URL('./options/options.html', import.meta.url).pathname,
+      },
     }
   }
 })

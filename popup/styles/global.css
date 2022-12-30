@@ -1,0 +1,28 @@
+/* Also possible to use tailwind this way: */
+/* @apply text-6xl font-normal leading-normal mt-0 mb-2; */
+.popup-section + .popup-section {
+  margin-top: theme("margin.3");
+  padding-top: theme("margin.2");
+  border-top: 1px solid #ccc;
+}
+
+.input {
+  padding: theme("margin.1");
+  border: 1px solid theme("colors.blue.600");
+  border-radius: theme("borderRadius.md")
+}
+
+.btn-primary {
+  cursor: pointer;
+  padding: theme("padding[1.5]") theme("padding[0.5]");
+  color: theme("colors.white");
+  background-color: theme("colors.blue.600");
+  border-radius: theme("borderRadius.md");
+  border: none;
+  transition: background-color 0.2s ease-in;
+  flex-grow: 1;
+}
+
+.btn-primary:hover {
+  background-color: theme("colors.blue.700");
+}

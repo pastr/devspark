@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react"
 import browser from "webextension-polyfill";
 
 function App() {
   const [count, setCount] = useState(0)
-  const [msg, setMsg] = useState('')
+  const [msg, setMsg] = useState("")
 
   useEffect(() => {
     browser.runtime.onMessage.addListener((msg) => {
-      console.log('message received from content script: ', msg);
+      console.log("message received from content script: ", msg);
       setMsg(msg.action)
     })
   }, [])

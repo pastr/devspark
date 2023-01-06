@@ -1,6 +1,6 @@
-import JiraLogo from '../images/jira.png'
-import GithubLogo from '../images/github.png'
-import { ESupportedApps } from '../../common/enums/ESupportedApps';
+import JiraLogo from "../images/jira.png"
+import GithubLogo from "../images/github.png"
+import { ESupportedApps } from "../../common/enums/ESupportedApps";
 
 type Props = {
   title: string;

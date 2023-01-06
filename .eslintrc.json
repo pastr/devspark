@@ -27,6 +27,30 @@
     }
   },
   "rules": {
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-trailing-spaces": [
+      "error"
+    ],
+    "semi-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "no-multi-spaces": [
+      "error"
+    ],
     "no-multiple-empty-lines": [
       "error"
     ],
@@ -61,6 +85,12 @@
     ],
     "jsx-a11y/no-autofocus": [
       "off"
+    ],
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array"
+      }
     ],
     "@typescript-eslint/indent": [
       "error",

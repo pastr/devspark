@@ -1,5 +1,5 @@
-import {ESupportedApps} from '../../common/enums/ESupportedApps'
-import AppTitle from './AppTitle';
+import { ESupportedApps } from "../../common/enums/ESupportedApps"
+import AppTitle from "./AppTitle";
 
 type Props = {
   title: string;
@@ -7,7 +7,7 @@ type Props = {
   children: JSX.Element;
 }
 
-export default function PopupSection({title, icon, children }: Props) {
+export default function PopupSection({ title, icon, children }: Props) {
   return (
     <article className="popup-section w-full">
       <h1 className="font-bold text-xl flex justify-center mb-2">

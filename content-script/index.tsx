@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './tailwind.css'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import "./tailwind.css"
 
-const index = document.createElement('div')
-index.id = 'extension-root';
+const index = document.createElement("div")
+index.id = "extension-root";
 
-const body = document.querySelector('body')
+const body = document.querySelector("body")
 if (body) {
   body.prepend(index)
 }

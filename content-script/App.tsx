@@ -1,7 +1,7 @@
 import browser from "webextension-polyfill";
 
-function handleClick () {
-  browser.runtime.sendMessage({ action: 'Hi from content script 👋' });
+function handleClick() {
+  browser.runtime.sendMessage({ action: "Hi from content script 👋" });
 }
 
 function App() {

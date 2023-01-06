@@ -12,7 +12,8 @@
     "build:js": "vite build --config vite.content.config.ts",
     "build:web": "tsc && vite build",
     "build": "NODE_ENV=production run-s build:js build:web",
-    "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome"
+    "build:chrome": "NODE_ENV=production run-s build:js build:background:chrome build:web build:manifest:chrome",
+    "lint": "eslint --ext .tsx,.ts popup/ options/ content-script/ background/ common/ --fix"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.48.0",

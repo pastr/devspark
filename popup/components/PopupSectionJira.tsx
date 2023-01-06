@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
+import browser from "webextension-polyfill";
 import PopupSection from "./PopupSection";
 
 type Props = {}
@@ -9,14 +10,14 @@ export default function SectionJira({}: Props) {
   const [jiraTicketNumber, setJiraTicketNumber] = useState('');
 
   useEffect(() => {
-    chrome.storage.sync.get(['jiraTicketPrefix'], function(result: any) {
-      console.log('🚀 ~ chrome.storage.sync.get ~ result', result);
-      setJiraTicketPrefix(result.jiraTicketPrefix)
-    });
+    browser.storage.sync.get('jiraTicketPrefix').then(val => {
+      console.log('🚀 ~ browser.storage.sync.get ~ val', val);
+      setJiraTicketPrefix(val.jiraTicketPrefix)
+    })
   }, [])
 
   useEffect(() => {
-    chrome.storage.sync.set({ jiraTicketPrefix });
+    browser.storage.sync.set({ jiraTicketPrefix });
   }, [jiraTicketPrefix])
 
 

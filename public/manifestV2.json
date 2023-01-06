@@ -3,6 +3,11 @@
   "description": "A Cross Browser Template for Firefox",
   "version": "1.0.0",
   "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "devsparkaddonid@pastr"
+    }
+  },
   "browser_action": {
     "default_popup": "popup/popup.html",
     "default_title": "Open the popup"
@@ -24,11 +29,24 @@
       ]
     }
   ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "webRequest",
+    "https://github.com/*",
+    "https://wealth-dev.evooq.ch/*",
+    "https://wealth.evooq.ch/*",
+    "hhttp://localhost/*"
+  ],
   "background": {
     "page": "background/background.html",
     "persistent": false
   },
-  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
   "icons": {
     "128": "vite.svg"
   }

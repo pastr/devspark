@@ -1,18 +1,15 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "./PopupSection";
 
-type Props = {}
-
-export default function SectionJira({}: Props) {
+export default function SectionJira() {
   const [jiraTicketPrefix, setJiraTicketPrefix] = useState('');
   const [jiraTicketNumber, setJiraTicketNumber] = useState('');
 
   useEffect(() => {
-    browser.storage.sync.get('jiraTicketPrefix').then(val => {
-      console.log('🚀 ~ browser.storage.sync.get ~ val', val);
-      setJiraTicketPrefix(val.jiraTicketPrefix)
+    browser.storage.sync.get('jiraTicketPrefix').then(({ jiraTicketPrefix }) => {
+      setJiraTicketPrefix(jiraTicketPrefix)
     })
   }, [])
 
@@ -37,9 +34,22 @@ export default function SectionJira({}: Props) {
   return (
     <PopupSection title='Jira' icon={ESupportedApps.Jira}>
       <div className="flex flex-col gap-2">
-        <input className="input" placeholder="ticket prefix" value={jiraTicketPrefix} onChange={e => setJiraTicketPrefix(e.target.value)} />
-        <input className="input" autoFocus onKeyDown={(e) => onEnter(e.key)} type="number" min="1" placeholder="ticket number" value={jiraTicketNumber} onChange={e => setJiraTicketNumber(e.target.value)} />
-        <button className="btn-primary" onClick={openJiraTicket}>Open ticket</button>
+        <input className="input" 
+               placeholder="ticket prefix"
+               value={jiraTicketPrefix}
+               onChange={(e) => setJiraTicketPrefix(e.target.value)}/>
+        <input className="input"
+               autoFocus
+               onKeyDown={(e) => onEnter(e.key)}
+               type="number"
+               min="1"
+               placeholder="ticket number"
+               value={jiraTicketNumber}
+               onChange={(e) => setJiraTicketNumber(e.target.value)}/>
+        <button className="btn-primary" 
+                onClick={openJiraTicket}>
+          Open ticket
+        </button>
       </div>
     </PopupSection>
   )

@@ -12,11 +12,11 @@ const LOGOS = {
   [ESupportedApps.Jira]: JiraLogo
 }
 
-export default function AppTitle({title, icon}: Props) {
+export default function AppTitle({ title, icon }: Props) {
   return (
     <div className="flex items-center">
-        {title}
-        {icon && <img className="h-5 ml-1" src={LOGOS[icon]} alt={`${title} logo`} />}
+      {title}
+      {icon && <img className="h-5 ml-1" src={LOGOS[icon]} alt={`${title} logo`} />}
     </div>
   )
 }

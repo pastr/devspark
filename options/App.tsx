@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import browser from "webextension-polyfill";
 
-
-
-
 function App() {
   const [count, setCount] = useState(0)
   const [msg, setMsg] = useState('')

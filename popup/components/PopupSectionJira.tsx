@@ -2,38 +2,43 @@ import { useEffect, useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "./PopupSection";
+import { useOptions } from "../../common/context/options.context";
 
 export default function SectionJira() {
   const [jiraTicketPrefix, setJiraTicketPrefix] = useState("");
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
-  const [jiraTicketHistory, setJiraTicketHistory] = useState<string[]>([])
+  const [jiraTicketHistory, setJiraTicketHistory] = useState<string[]>([]);
+  const [{ options }] = useOptions();
 
   useEffect(() => {
     browser.storage.sync.get("jiraTicketPrefix").then(({ jiraTicketPrefix }) => {
-      setJiraTicketPrefix(jiraTicketPrefix ?? "")
-    })
+      setJiraTicketPrefix(jiraTicketPrefix ?? "");
+    });
 
     browser.storage.sync.get("jiraTicketHistory").then(({ jiraTicketHistory }) => {
-      setJiraTicketHistory(jiraTicketHistory ?? [])
-    })
-  }, [])
+      setJiraTicketHistory(jiraTicketHistory ?? []);
+    });
+  }, []);
 
   useEffect(() => {
     browser.storage.sync.set({ jiraTicketPrefix });
-  }, [jiraTicketPrefix])
+  }, [jiraTicketPrefix]);
 
 
   function openJiraTicket() {
-    const jiraUrl = "https://edgelab.atlassian.net/browse/";
+    const jiraOrganizationName = options.jira.organizationName;
     const fullTicket = `${jiraTicketPrefix}-${jiraTicketNumber}`;
-    const url = `${jiraUrl}${fullTicket}`;
+    const url = `https://${jiraOrganizationName}.atlassian.net/browse/${fullTicket}`;
+    const copyJiraTicketHistory = [...jiraTicketHistory];
+    console.log("🚀 ~ openJiraTicket ~ url", url);
 
-    if (jiraTicketHistory?.length >= 5) {
-      jiraTicketHistory.pop();
+    if (copyJiraTicketHistory.length >= 5) {
+      copyJiraTicketHistory.pop();
     }
-    jiraTicketHistory.unshift(url);
+    copyJiraTicketHistory.unshift(url);
+    setJiraTicketHistory(copyJiraTicketHistory);
 
-    browser.storage.sync.set({ jiraTicketHistory });
+    browser.storage.sync.set({ jiraTicketHistory: copyJiraTicketHistory });
 
     window.open(url, "_blank");
   }
@@ -55,8 +60,8 @@ export default function SectionJira() {
            rel="noreferrer">
           {ticketNumber}
         </a>
-      )
-    })
+      );
+    });
 
   }
 
@@ -79,8 +84,10 @@ export default function SectionJira() {
                 onClick={openJiraTicket}>
           Open ticket
         </button>
-        {showTicketHistory()}
+        <section className="flex flex-col gap-1">
+          {showTicketHistory()}
+        </section>
       </div>
     </PopupSection>
-  )
+  );
 }

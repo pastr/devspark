@@ -27,6 +27,10 @@
     }
   },
   "rules": {
+    "semi": [
+      "error",
+      "always"
+    ],
     "quotes": [
       "error",
       "double"
@@ -35,6 +39,13 @@
       "error",
       {
         "before": true,
+        "after": true
+      }
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
         "after": true
       }
     ],

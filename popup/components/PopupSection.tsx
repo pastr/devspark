@@ -1,5 +1,5 @@
-import { ESupportedApps } from "../../common/enums/ESupportedApps"
-import AppTitle from "./AppTitle";
+import { ESupportedApps } from "../../common/enums/ESupportedApps";
+import AppTitle from "../../common/components/AppTitle";
 
 type Props = {
   title: string;
@@ -19,5 +19,5 @@ export default function PopupSection({ title, icon, children }: Props) {
       </main>
 
     </article>
-  )
+  );
 }

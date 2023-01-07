@@ -1,11 +1,3 @@
-/* Also possible to use tailwind this way: */
-/* @apply text-6xl font-normal leading-normal mt-0 mb-2; */
-.popup-section + .popup-section {
-  margin-top: theme("margin.3");
-  padding-top: theme("margin.2");
-  border-top: 1px solid #ccc;
-}
-
 .input {
   padding: theme("margin.1");
   border: 1px solid theme("colors.blue.600");
@@ -13,6 +5,9 @@
 }
 
 .btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   padding: theme("padding[1.5]") theme("padding[0.5]");
   color: theme("colors.white");

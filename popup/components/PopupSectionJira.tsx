@@ -24,13 +24,11 @@ export default function SectionJira() {
     browser.storage.sync.set({ jiraTicketPrefix });
   }, [jiraTicketPrefix]);
 
-
   function openJiraTicket() {
     const jiraOrganizationName = options.jira.organizationName;
     const fullTicket = `${jiraTicketPrefix}-${jiraTicketNumber}`;
     const url = `https://${jiraOrganizationName}.atlassian.net/browse/${fullTicket}`;
     const copyJiraTicketHistory = [...jiraTicketHistory];
-    console.log("🚀 ~ openJiraTicket ~ url", url);
 
     if (copyJiraTicketHistory.length >= 5) {
       copyJiraTicketHistory.pop();

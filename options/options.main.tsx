@@ -7,5 +7,5 @@ import "./styles/options.global.css";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Options />
-  </React.StrictMode>,
+  </React.StrictMode>
 );

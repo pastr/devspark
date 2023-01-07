@@ -5,15 +5,15 @@ type OptionsContextState = {
   options: {
     jira: {
       organizationName?: string
-    },
+    }
   }
 }
 
 const defaultContextState: OptionsContextState = {
   options: {
     jira: {
-      organizationName: "",
-    },
+      organizationName: ""
+    }
   }
 };
 

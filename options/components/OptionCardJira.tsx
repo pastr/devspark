@@ -14,10 +14,9 @@ export default function OptionCardJira() {
   }, [options.options.jira.organizationName]);
 
 
-  function saveJiraDomain() {
-    const newOptions: typeof options = {
-      options: { ...options.options, jira: { ...options.options.jira, organizationName: jiraOrganizationName } },
-    };
+  function saveJiraOrganizationName() {
+    const newOptions: typeof options = { ...options };
+    newOptions.options.jira.organizationName = jiraOrganizationName;
     setOptions(newOptions);
   }
 
@@ -35,7 +34,7 @@ export default function OptionCardJira() {
                  id="jira_domain"/>
         </div>
         <button className="btn-primary w-16 h-6"
-                onClick={saveJiraDomain}>
+                onClick={saveJiraOrganizationName}>
           Set
         </button>
       </div>

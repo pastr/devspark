@@ -122,6 +122,7 @@
     "jsx-a11y/no-autofocus": [
       "off"
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/array-type": [
       "error",

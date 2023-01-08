@@ -21,3 +21,13 @@
 .btn-primary:hover {
   background-color: theme("colors.blue.700");
 }
+
+.btn-primary:disabled:hover {
+  /* background-color: the; */
+  cursor: not-allowed;
+}
+
+.btn-primary:disabled {
+  background-color: theme("colors.gray.300");
+  color: theme("colors.gray.400");
+}

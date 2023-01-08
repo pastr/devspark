@@ -4,7 +4,7 @@
 // import "./tailwind.css";
 
 // const index = document.createElement("div");
-// index.id = "devspark-root";
+// index.id = "devsparktoolbox-root";
 
 // const body = document.querySelector("body");
 // if (body) {

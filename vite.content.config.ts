@@ -14,7 +14,7 @@ export default defineConfig({
     lib: {
       formats: ["iife"],
       entry: resolve(__dirname, "./content-script/index.tsx"),
-      name: "devspark"
+      name: "devsparktoolbox"
     },
     rollupOptions: {
       output: {

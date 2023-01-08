@@ -41,7 +41,7 @@ browser.tabs.onActivated.addListener(async () => {
   }
 });
 
-function highlightPrStatusWithDelay({ options }: IOptionsContextState) {
+function highlightPrStatusWithDelay() {
   setTimeout(() => {
     const prsStatuses = document.querySelectorAll<HTMLElement>(".js-navigation-item .d-none a.Link--muted");
     const approved = "Approved";
@@ -111,7 +111,9 @@ function highlightPr({ options }: IOptionsContextState) {
 
   function deemphasizedUnwantedPr() {
     const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
-    const deemphasizePrs = options.github.deemphasizeTextList!;
+    const deemphasizePrs = options?.github?.deemphasizeTextList;
+
+    if (!deemphasizePrs) return;
 
     prs.forEach((pr) => {
       const prTitle = pr.textContent;

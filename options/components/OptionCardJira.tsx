@@ -44,7 +44,7 @@ export default function OptionCardJira() {
                  onChange={(e) => setJiraOrganizationName(e.target.value)}
                  onKeyDown={(e) => e.key === "Enter" ? saveJiraOrganizationName() : null}
                  type="text"
-                 placeholder="e.g. devspark"
+                 placeholder="e.g. devsparktoolbox"
                  id="jira_organization_name"/>
           <button className="btn-primary"
                   disabled={jiraOrganizationName === ""}

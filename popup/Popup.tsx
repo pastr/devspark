@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import browser from "webextension-polyfill";
-import PopupSectionGithub from "./components/PopupSectionGithub";
 import PopupSectionJira from "./components/PopupSectionJira";
 import { OptionsProvider } from "../common/context/options.context";
 

@@ -1,35 +1,42 @@
-# Cross Platform Browser Extension template repository
+# Devspark Toolbox
 
+## Requirements
+No special requirement that I'm aware of.
+
+## Stack 
 React + TailwindCSS bundled with Vite.
 
 # Installation
-```
-npm i
-```
+`npm i`
+
+# Dev
+
+The development has to be improved but currently to start the extension in development mode you need to run three command in paralel:
+
+- `npm run dev`
+- `npm run dev:content` (it will generate the `index.global.js` file)
+- `npm run dev:background` (it will generate the `background.global.js` file)
+
+There are multiples `manifest.json` files for now. 
+`manifestV2.json` is a manifest V2 file for firefox.
+`manifestV2.json` is a manifest V3 file for chrome.
+`manifest.json` is the one being read by the browser so you can change its content to match the browser you want to test with. 
 
 # Building the Extension:
 
 ## Firefox
-`npm run build` builds the extension by default for Firefox.
+`npm run build:firefox` builds the extension for Firefox.
 
 The generated files are in `dist/`.
-
-To load the extension in Firefox go to `about:debugging#/runtime/this-firefox` or
-
-Firefox > Preferences > Extensions & Themes > Debug Add-ons > Load Temporary Add-on...
-
-Here locate the `dist/` directory and open `manifest.json`
 
 ## Chrome
 `npm run build:chrome` builds the extensions for Google Chrome.
 
-The generated files are in `dist/`.
-To load the extensions in Google Chrome go to `chrome://extensions/` and click `Load unpacked`. Locate the dist directory and select `manifest.json`.
 
-# Files:
+# Publishing
 
- - content-script - UI files
- - background.ts - Background script/Service worker
- - index.html - popup UI
+## Firefox
 
-If you have any questions feel free to open an issue.
+Simply ziping the `dist` folder didn't work. I had to use [web-ext](https://github.com/mozilla/web-ext).
+
+In the `dist` folder I ran `web-ext build` and it created a zip file that I uplodad to AMO (https://addons.mozilla.org)

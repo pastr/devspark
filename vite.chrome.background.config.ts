@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       formats: ["iife"],
       entry: resolve(__dirname, "./background/background.ts"),
-      name: "devspark"
+      name: "devsparktoolbox"
     },
     rollupOptions: {
       output: {

@@ -9,17 +9,17 @@ export default defineConfig({
     "process.env": {}
   },
   build: {
-    emptyOutDir: true,
+    emptyOutDir: false, // was true
     outDir: resolve(__dirname, "dist"),
     lib: {
       formats: ["iife"],
       entry: resolve(__dirname, "./content-script/index.tsx"),
-      name: "Vite/React/TailwindCSS Plugin"
+      name: "devspark"
     },
     rollupOptions: {
       output: {
         entryFileNames: "index.global.js",
-        extend: true,
+        extend: true
       }
     }
   }

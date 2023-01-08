@@ -11,12 +11,12 @@ export default defineConfig({
     lib: {
       formats: ["iife"],
       entry: resolve(__dirname, "./background/background.ts"),
-      name: "Vite/React/TailwindCSS Plugin"
+      name: "devspark"
     },
     rollupOptions: {
       output: {
         entryFileNames: "background.global.js",
-        extend: true,
+        extend: true
       }
     }
   }

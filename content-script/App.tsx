@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import browser from "webextension-polyfill";
 
 function handleClick() {
-  browser.runtime.sendMessage({ action: "Hi from content script 👋" });
+  browser.runtime.sendMessage({ action: "Hi from content ! " });
 }
 
 function App() {
+  useEffect(() => {
+    browser.runtime.sendMessage({ action: "Hi from content script mounted 👋" });
+  }, []);
+
   return (
     <div className="App flex flex-col gap-4 h-screen items-center justify-center">
       <div className="text-5xl font-extrabold">

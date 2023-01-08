@@ -1,15 +1,8 @@
 import { createContext, Dispatch, useContext } from "react";
 import { useStateStorageSynced } from "../hooks/useStateStorageSynced";
+import { IOptionsContextState } from "../types/IOptionsState";
 
-type OptionsContextState = {
-  options: {
-    jira: {
-      organizationName?: string
-    }
-  }
-}
-
-const defaultContextState: OptionsContextState = {
+const defaultContextState: IOptionsContextState = {
   options: {
     jira: {
       organizationName: ""
@@ -17,7 +10,7 @@ const defaultContextState: OptionsContextState = {
   }
 };
 
-const OptionsContext = createContext<[OptionsContextState, Dispatch<React.SetStateAction<OptionsContextState>>]>([] as unknown as [OptionsContextState, Dispatch<React.SetStateAction<OptionsContextState>>]);
+const OptionsContext = createContext<[IOptionsContextState, Dispatch<React.SetStateAction<IOptionsContextState>>]>([] as unknown as [IOptionsContextState, Dispatch<React.SetStateAction<IOptionsContextState>>]);
 
 export const OptionsProvider = ({ children }: {children: JSX.Element}) => {
   const [localOptions, setLocalOptions] = useStateStorageSynced("options", defaultContextState);

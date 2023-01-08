@@ -17,7 +17,7 @@ export default function AppTitle({ title, icon, iconClassName }: Props) {
   return (
     <span className="flex items-center">
       {title}
-      {icon && <img className={`h-5 ml-1 ${iconClassName}`} src={LOGOS[icon]} alt={`${title} logo`} />}
+      {icon && <img className={`${iconClassName}`} src={LOGOS[icon]} alt={`${title} logo`} />}
     </span>
   );
 }

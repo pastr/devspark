@@ -67,7 +67,8 @@ function highlightPr() {
     const userLogin = userLoginElement!.content;
     prsOpenedBy.forEach((pr) => {
       if (pr.innerHTML.includes(userLogin)) {
-        pr.parentElement?.parentElement?.firstElementChild?.style.setProperty("color", "var(--color-accent-fg)", "important");
+        const ownerPr = pr.parentElement?.parentElement?.firstElementChild as HTMLElement;
+        ownerPr.style.setProperty("color", "var(--color-accent-fg)", "important");
       }
     });
   }
@@ -101,8 +102,25 @@ function highlightPr() {
     });
   }
 
+  function deemphasizedUnwantedPr() {
+    const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
+    const deemphasizePrs = ["PS-"];
+
+    prs.forEach((pr) => {
+      const prTitle = pr.textContent;
+      // bad..
+      deemphasizePrs.forEach((savedText) => {
+        if (prTitle?.includes(savedText)) {
+          pr.style.setProperty("color", "var(--color-workflow-card-connector-inactive)", "important");
+          pr.classList.remove("Link--primary");
+        }
+      });
+    });
+  }
+
 
   highlightOwnPr();
   highlightPrOwner();
   highlightPrStatus();
+  deemphasizedUnwantedPr();
 }

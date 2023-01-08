@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "./PopupSection";
 import { useOptions } from "../../common/context/options.context";
 import { useFocus } from "../../common/hooks/useFocus";
+import { useStateStorageSynced } from "../../common/hooks/useStateStorageSynced";
 
 const TICKET_HISTORY_LENGTH = 5;
 
 export default function SectionJira() {
-  const [jiraTicketPrefix, setJiraTicketPrefix] = useState("");
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
-  const [jiraTicketHistory, setJiraTicketHistory] = useState<string[]>([]);
+  const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
+  const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();
   const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
   const [{ options }] = useOptions();
 
-  useEffect(() => {
-    browser.storage.sync.get("jiraTicketPrefix").then(({ jiraTicketPrefix }) => {
-      setJiraTicketPrefix(jiraTicketPrefix ?? "");
-    });
-
-    browser.storage.sync.get("jiraTicketHistory").then(({ jiraTicketHistory }) => {
-      setJiraTicketHistory(jiraTicketHistory ?? []);
-    });
-  }, []);
-
-  useEffect(() => {
-    browser.storage.sync.set({ jiraTicketPrefix });
-  }, [jiraTicketPrefix]);
-
   function openJiraTicket() {
-    if (isButtonDisabled()) return;
-
     const jiraOrganizationName = options.jira.organizationName;
     const fullTicket = `${jiraTicketPrefix}-${jiraTicketNumber}`;
     const url = `https://${jiraOrganizationName}.atlassian.net/browse/${fullTicket}`;
@@ -49,22 +34,15 @@ export default function SectionJira() {
     window.close();
   }
 
-  function onPrefixInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
-      setTicketNumberInputFocus();
-    }
+  function onPrefixInputEnter() {
+    setTicketNumberInputFocus();
   }
-  function onTicketNumberInputEnter(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.key === "Enter") {
-      isButtonDisabled() ? setPrefixInputFocus() : openJiraTicket();
-    }
+  function onTicketNumberInputEnter() {
+    isButtonDisabled() ? setPrefixInputFocus() : openJiraTicket();
   }
 
   function isButtonDisabled(): boolean {
-    if (jiraTicketNumber === "" || jiraTicketPrefix === "") {
-      return true;
-    }
-    return false;
+    return jiraTicketNumber === "" || jiraTicketPrefix === "" ? true : false;
   }
 
   return (
@@ -74,12 +52,12 @@ export default function SectionJira() {
                placeholder="ticket prefix"
                value={jiraTicketPrefix}
                ref={prefixInputRef}
-               onKeyDown={(e) => onPrefixInputEnter(e)}
+               onKeyDown={(e) => e.key === "Enter" ? onPrefixInputEnter(): null}
                onChange={(e) => setJiraTicketPrefix(e.target.value)}/>
         <input className="input"
                autoFocus
                ref={ticketNumberInputRef}
-               onKeyDown={(e) => onTicketNumberInputEnter(e)}
+               onKeyDown={(e) => e.key === "Enter" ? onTicketNumberInputEnter() : null}
                type="number"
                min="1"
                placeholder="ticket number"
@@ -108,7 +86,7 @@ function JiraTicketHistory({ jiraTickets }: {jiraTickets: string[]}) {
            href={ticketUrl}
            target="_blank"
            rel="noreferrer">
-          {ticketNumber}
+          {ticketNumber.toUpperCase()}
         </a>
       );
     });

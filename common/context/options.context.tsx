@@ -1,5 +1,5 @@
-import browser from "webextension-polyfill";
-import { createContext, Dispatch, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, useContext } from "react";
+import { useStateStorageSynced } from "../hooks/useStateStorageSynced";
 
 type OptionsContextState = {
   options: {
@@ -20,21 +20,7 @@ const defaultContextState: OptionsContextState = {
 const OptionsContext = createContext<[OptionsContextState, Dispatch<React.SetStateAction<OptionsContextState>>]>([] as unknown as [OptionsContextState, Dispatch<React.SetStateAction<OptionsContextState>>]);
 
 export const OptionsProvider = ({ children }: {children: JSX.Element}) => {
-  const [localOptions, setLocalOptions] = useState(defaultContextState);
-
-  useEffect(() => {
-    browser.storage.sync.get("options").then(({ options }) => {
-      if (options) {
-        setLocalOptions(options);
-      }
-      console.log("🚀 ~ browser.storage.sync.get ~ options", options);
-    });
-  }, []);
-
-  useEffect(() => {
-    browser.storage.sync.set({ options: localOptions });
-  }, [localOptions]);
-
+  const [localOptions, setLocalOptions] = useStateStorageSynced("options", defaultContextState);
 
   return (
     <OptionsContext.Provider value={[localOptions, setLocalOptions]}>

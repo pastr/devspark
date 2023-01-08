@@ -1,23 +1,24 @@
 {
   "name": "devspark",
-  "description": "A Cross Browser Template for Google Chrome",
+  "description": "A Cross Browser Template for Firefox",
   "version": "1.0.0",
-  "manifest_version": 3,
-  "action": {
+  "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "devsparkaddonid@pastr"
+    }
+  },
+  "browser_action": {
     "default_popup": "popup/popup.html",
     "default_title": "Open the popup"
   },
-  "host_permissions": [
-    "https://github.com/*",
-    "https://wealth-dev.evooq.ch/*",
-    "https://wealth.evooq.ch/*",
-    "http://localhost:*/"
+  "optional_permissions": [
+    "<all_urls>"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://wealth-dev.evooq.ch/*",
-        "https://github.com/*"
+        "https://blank.org/*"
       ],
       "run_at": "document_end",
       "js": [
@@ -33,12 +34,19 @@
     "activeTab",
     "scripting",
     "tabs",
-    "webRequest"
+    "webRequest",
+    "https://github.com/*",
+    "https://wealth-dev.evooq.ch/*",
+    "https://wealth.evooq.ch/*",
+    "http://localhost/*"
   ],
   "background": {
-    "service_worker": "./background.global.js"
+    "page": "background/background.html",
+    "persistent": false
   },
-  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
   "icons": {
     "128": "vite.svg"
   }

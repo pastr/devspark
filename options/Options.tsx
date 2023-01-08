@@ -1,4 +1,5 @@
 import { OptionsProvider } from "../common/context/options.context";
+import OptionCardGithub from "./components/OptionCardGithub";
 import OptionCardJira from "./components/OptionCardJira";
 
 export default function Options() {
@@ -10,6 +11,7 @@ export default function Options() {
         </header>
         <main className="flex gap-4 px-4">
           <OptionCardJira />
+          <OptionCardGithub />
         </main>
       </div>
     </OptionsProvider>

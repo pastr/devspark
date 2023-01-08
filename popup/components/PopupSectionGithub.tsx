@@ -6,6 +6,7 @@ export default function PopupSectionGithub() {
   return (
     <PopupSection title='Github' icon={ESupportedApps.GitHub}>
       <div>
+        what
       </div>
     </PopupSection>
   );

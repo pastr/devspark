@@ -6,6 +6,9 @@ const defaultContextState: IOptionsContextState = {
   options: {
     jira: {
       organizationName: ""
+    },
+    github: {
+      deemphasizeTextList: []
     }
   }
 };
@@ -14,6 +17,7 @@ const OptionsContext = createContext<[IOptionsContextState, Dispatch<React.SetSt
 
 export const OptionsProvider = ({ children }: {children: JSX.Element}) => {
   const [localOptions, setLocalOptions] = useStateStorageSynced("options", defaultContextState);
+  console.log("🚀 ~ OptionsProvider ~ localOptions", localOptions);
 
   return (
     <OptionsContext.Provider value={[localOptions, setLocalOptions]}>

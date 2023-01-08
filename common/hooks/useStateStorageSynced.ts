@@ -6,7 +6,7 @@ export function useStateStorageSynced<T>(key: string, initialValue: T): [T, Disp
 
   useEffect(() => {
     browser.storage.sync.get(key).then((storage) => {
-      setValue(storage[key] ?? "");
+      setValue(storage[key]);
     });
   }, [key]);
 

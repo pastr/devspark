@@ -1,12 +1,9 @@
 import browser from "webextension-polyfill";
 import { IOptionsContextState } from "../../common/types/IOptionsState";
 
-const organizationName = "edgelab";
-const storagePromise = browser.storage.sync.get("options");
-
 browser.tabs.onUpdated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-  const storage = await storagePromise;
+  const storage = await browser.storage.sync.get("options");
 
   browser.scripting.executeScript({
     target: { tabId: tab.id! },
@@ -17,18 +14,19 @@ browser.tabs.onUpdated.addListener(async () => {
 
 browser.tabs.onActivated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+  const storage = await browser.storage.sync.get("options");
 
   browser.scripting.executeScript({
     target: { tabId: tab.id! },
     func: selectAllLinks,
-    args: [organizationName]
+    args: [storage.options]
   });
 });
 
 
 function selectAllLinks({ options }: IOptionsContextState) {
   const jiraTicketRegex = /[A-Z]{2,}-\d+/g;
-  const jiraUrl = `https://${options.jira.organizationName}.atlassian.net/browse/`;
+  const jiraUrl = `https://${options?.jira?.organizationName}.atlassian.net/browse/`;
 
   const links = document.querySelectorAll<HTMLElement>("h1.gh-header-title .js-issue-title");
 

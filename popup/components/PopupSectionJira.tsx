@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "./PopupSection";
@@ -12,12 +12,21 @@ export default function SectionJira() {
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
   const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
   const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
+  const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();
   const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
   const [{ options }] = useOptions();
 
+  useEffect(() => {
+    if (options?.jira?.organizationName) {
+      setOrganizationNameMissing(false);
+    }
+  }, [options?.jira?.organizationName]);
+
+
   function openJiraTicket() {
-    const jiraOrganizationName = options.jira.organizationName;
+    const jiraOrganizationName = options?.jira?.organizationName;
+
     const fullTicket = `${jiraTicketPrefix}-${jiraTicketNumber}`;
     const url = `https://${jiraOrganizationName}.atlassian.net/browse/${fullTicket}`;
     const copyJiraTicketHistory = [...jiraTicketHistory];
@@ -42,7 +51,23 @@ export default function SectionJira() {
   }
 
   function isButtonDisabled(): boolean {
-    return jiraTicketNumber === "" || jiraTicketPrefix === "" ? true : false;
+    console.log("organizationNameMissing", organizationNameMissing);
+    return jiraTicketNumber === "" || jiraTicketPrefix === "" || organizationNameMissing;
+  }
+
+  function showErrors() {
+    function openOptionsPage() {
+      browser.runtime.openOptionsPage();
+    }
+
+    if (organizationNameMissing) {
+      return (
+        <div >
+          <div className="text-red-400">Please set the organization name in the options first.</div>
+          <div className="text-red-400">You can access the options by clicking <button className="text-blue-600 underline" onClick={openOptionsPage}>here</button></div>
+        </div>
+      );
+    }
   }
 
   return (
@@ -68,6 +93,7 @@ export default function SectionJira() {
                 onClick={openJiraTicket}>
           Open ticket
         </button>
+        {showErrors()}
         <section className="flex flex-col gap-1">
           <JiraTicketHistory jiraTickets={jiraTicketHistory}/>
         </section>
@@ -77,6 +103,7 @@ export default function SectionJira() {
 }
 
 function JiraTicketHistory({ jiraTickets }: {jiraTickets: string[]}) {
+  console.log("🚀 ~ JiraTicketHistory ~ jiraTickets", jiraTickets);
   function showTickets() {
     return jiraTickets.map((ticketUrl, index) => {
       const ticketNumber = ticketUrl.split("/")[4];

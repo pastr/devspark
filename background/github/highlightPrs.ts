@@ -1,22 +1,27 @@
 import browser from "webextension-polyfill";
+import { IOptionsContextState } from "../../common/types/IOptionsState";
 
-chrome.tabs.onUpdated.addListener(async () => {
+browser.tabs.onUpdated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+  const storage = await browser.storage.sync.get("options");
 
   if (tab.url?.includes("github.com")) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
-      func: highlightPr
+      func: highlightPr,
+      args: [storage.options]
     });
   }
 });
 
 browser.webRequest.onCompleted.addListener(
-  (req) => {
+  async (req) => {
+    const storage = await browser.storage.sync.get("options");
     if (req.url === "https://github.com/pull_request_review_decisions") {
       browser.scripting.executeScript({
         target: { tabId: req.tabId },
-        func: highlightPrStatusWithDelay
+        func: highlightPrStatusWithDelay,
+        args: [storage.options]
       });
     }
   },
@@ -25,16 +30,18 @@ browser.webRequest.onCompleted.addListener(
 
 browser.tabs.onActivated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+  const storage = await browser.storage.sync.get("options");
 
   if (tab.url?.includes("github.com")) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
-      func: highlightPr
+      func: highlightPr,
+      args: [storage.options]
     });
   }
 });
 
-function highlightPrStatusWithDelay() {
+function highlightPrStatusWithDelay({ options }: IOptionsContextState) {
   setTimeout(() => {
     const prsStatuses = document.querySelectorAll<HTMLElement>(".js-navigation-item .d-none a.Link--muted");
     const approved = "Approved";
@@ -60,7 +67,7 @@ function highlightPrStatusWithDelay() {
   }, 1000);
 }
 
-function highlightPr() {
+function highlightPr({ options }: IOptionsContextState) {
   function highlightOwnPr() {
     const prsOpenedBy = document.querySelectorAll(".js-navigation-item .opened-by");
     const userLoginElement = document.querySelector<HTMLMetaElement>("[name=user-login]");
@@ -104,7 +111,7 @@ function highlightPr() {
 
   function deemphasizedUnwantedPr() {
     const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
-    const deemphasizePrs = ["PS-"];
+    const deemphasizePrs = options.github.deemphasizeTextList!;
 
     prs.forEach((pr) => {
       const prTitle = pr.textContent;

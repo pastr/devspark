@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import OptionCard from "./OptionCard";
 import { useOptions } from "../../common/context/options.context";
+import set from "lodash.set";
 
 export default function OptionCardJira() {
   const [jiraOrganizationName, setJiraOrganizationName] = useState("");
@@ -9,34 +10,52 @@ export default function OptionCardJira() {
 
   function saveJiraOrganizationName() {
     const newOptions: typeof options = { ...options };
-    newOptions.options.jira.organizationName = jiraOrganizationName;
+    console.log("🚀 ~ saveJiraOrganizationName ~ newOptions", newOptions);
+
+    if (newOptions?.options?.jira?.organizationName) {
+      newOptions.options.jira.organizationName = jiraOrganizationName;
+    } else {
+      set(newOptions, "options.jira.organizationName", jiraOrganizationName);
+    }
+
     setOptions(newOptions);
     setJiraOrganizationName("");
+  }
+
+  function showCurrentOrganizationName() {
+    if (options.options?.jira?.organizationName) {
+      return (
+        <div>Currrent organization name: <span className="font-extrabold">{options.options.jira.organizationName}</span></div>
+      );
+    }
+
   }
 
   return (
     <OptionCard title="Jira" icon={ESupportedApps.Jira}>
       <div>
-        <label htmlFor="jira_domain">
-          Jira organization name:
+        <h1 className="mb-4 text-lg font-semibold">Set your Jira organization name</h1>
+        <label className="text-sm" htmlFor="jira_organization_name">
+          organization name:
         </label>
-        <div className="mb-2">
-          <input className="input w-44"
+        <div className="flex gap-2">
+          <input className="input w-44 flex-[4]"
                  value={jiraOrganizationName}
                  onChange={(e) => setJiraOrganizationName(e.target.value)}
                  onKeyDown={(e) => e.key === "Enter" ? saveJiraOrganizationName() : null}
                  type="text"
-                 id="jira_domain"/>
+                 placeholder="e.g. devspark"
+                 id="jira_organization_name"/>
+          <button className="btn-primary"
+                  disabled={jiraOrganizationName === ""}
+                  onClick={saveJiraOrganizationName}>
+            Set
+          </button>
         </div>
-        <button className="btn-primary w-16 h-6"
-                disabled={jiraOrganizationName === ""}
-                onClick={saveJiraOrganizationName}>
-          Set
-        </button>
 
         <div>
           <div className="mt-4 text-sm">
-            Currrent organization name: <span className="font-extrabold">{options.options.jira.organizationName}</span>
+            {showCurrentOrganizationName()}
           </div>
         </div>
       </div>

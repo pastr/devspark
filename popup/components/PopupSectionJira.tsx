@@ -44,7 +44,7 @@ export default function SectionJira() {
   }
 
   function onPrefixInputEnter() {
-    setTicketNumberInputFocus();
+    isButtonDisabled() ? setTicketNumberInputFocus() : openJiraTicket();
   }
   function onTicketNumberInputEnter() {
     isButtonDisabled() ? setPrefixInputFocus() : openJiraTicket();

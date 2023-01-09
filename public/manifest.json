@@ -23,8 +23,6 @@
     "tabs",
     "webRequest",
     "https://github.com/*",
-    "https://wealth-dev.evooq.ch/*",
-    "https://wealth.evooq.ch/*",
     "http://localhost/*"
   ],
   "background": {

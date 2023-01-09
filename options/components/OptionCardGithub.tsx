@@ -3,9 +3,11 @@ import { ESupportedApps } from "../../common/enums/ESupportedApps";
 import OptionCard from "./OptionCard";
 import { useOptions } from "../../common/context/options.context";
 import set from "lodash.set";
+import { useFocus } from "../../common/hooks/useFocus";
 
 export default function OptionCardJira() {
   const [textToDeemphasize, setTextToDeemphasize] = useState("");
+  const [textInputRef, setTextInputFocus] = useFocus();
   const [options, setOptions] = useOptions();
 
   function addToTheList() {
@@ -18,6 +20,7 @@ export default function OptionCardJira() {
     }
     setOptions(newOptions);
     setTextToDeemphasize("");
+    setTextInputFocus();
   }
 
   function removeFromList(index: number) {
@@ -51,6 +54,8 @@ export default function OptionCardJira() {
         <div className="flex gap-2">
           <input className="input flex-[4]"
                  id="github_deemphasize_text"
+                 ref={textInputRef}
+                 onKeyDown={(e) => e.key === "Enter" ? addToTheList() : null}
                  value={textToDeemphasize}
                  onChange={(e) => setTextToDeemphasize(e.target.value)}
                  placeholder="JiraTicket-123"

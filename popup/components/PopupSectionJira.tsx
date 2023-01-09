@@ -103,7 +103,6 @@ export default function SectionJira() {
 }
 
 function JiraTicketHistory({ jiraTickets }: {jiraTickets: string[]}) {
-  console.log("🚀 ~ JiraTicketHistory ~ jiraTickets", jiraTickets);
   function showTickets() {
     return jiraTickets.map((ticketUrl, index) => {
       const ticketNumber = ticketUrl.split("/")[4];
@@ -120,7 +119,7 @@ function JiraTicketHistory({ jiraTickets }: {jiraTickets: string[]}) {
   }
   return (
     <>
-      {jiraTickets ? `Last ${TICKET_HISTORY_LENGTH} tickets` : null}:
+      {jiraTickets.length ? `Last ${TICKET_HISTORY_LENGTH} tickets` : null}
       {showTickets()}
     </>
   );

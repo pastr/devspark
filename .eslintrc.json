@@ -43,6 +43,7 @@
         "after": true
       }
     ],
+    "no-inner-declarations": ["off"],
     "comma-dangle": [
       "error",
       "never"
@@ -78,6 +79,10 @@
         "after": true
       }
     ],
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+  }],
     "object-property-newline": [
       "error",
       {

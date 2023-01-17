@@ -1,7 +1,7 @@
 {
   "name": "devsparktoolbox",
   "description": "An add-on containing multiple improvement for GitHub and Jira",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {

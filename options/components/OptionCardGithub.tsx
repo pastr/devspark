@@ -49,7 +49,7 @@ export default function OptionCardJira() {
       <div>
         <h1 className="mb-4 text-lg font-semibold">Deemphasize PR containing text</h1>
         <label className="text-sm" htmlFor="github_deemphasize_text">
-          Text to deemphasize:
+          Text to deemphasize (case sensitive):
         </label>
         <div className="flex gap-2">
           <input className="input flex-[4]"

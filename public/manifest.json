@@ -1,37 +1,27 @@
 {
   "name": "devsparktoolbox",
-  "description": "An add-on containing multiple improvement for GitHub and Jira",
+  "description": "A Cross Browser Template for Google Chrome",
   "version": "1.0.1",
-  "manifest_version": 2,
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "devsparktoolboxaddonid@pastr",
-      "update_url": "https://pastr.ch/devsparktoolbox/updates.json"
-    }
-  },
-  "browser_action": {
+  "manifest_version": 3,
+  "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Open the popup"
   },
-  "optional_permissions": [
-    "<all_urls>"
+  "host_permissions": [
+    "https://github.com/*",
+    "http://localhost:*/"
   ],
   "permissions": [
     "storage",
     "activeTab",
     "scripting",
     "tabs",
-    "webRequest",
-    "https://github.com/*",
-    "http://localhost/*"
+    "webRequest"
   ],
   "background": {
-    "page": "background/background.html",
-    "persistent": false
+    "service_worker": "./background.global.js"
   },
-  "options_ui": {
-    "page": "options/options.html"
-  },
+  "options_page": "options/options.html",
   "icons": {
     "128": "Devspark_logo.png"
   }

@@ -5,7 +5,7 @@ browser.tabs.onUpdated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   const storage = await browser.storage.sync.get("options");
 
-  if (tab.url?.includes("github.com")) {
+  if (tab.url?.includes("github.com") && storage.options) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
       func: selectAllLinks,
@@ -18,7 +18,7 @@ browser.tabs.onActivated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   const storage = await browser.storage.sync.get("options");
 
-  if (tab.url?.includes("github.com")) {
+  if (tab.url?.includes("github.com") && storage.options) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
       func: selectAllLinks,

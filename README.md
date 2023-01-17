@@ -39,4 +39,4 @@ The generated files are in `dist/`.
 
 Simply ziping the `dist` folder didn't work. I had to use [web-ext](https://github.com/mozilla/web-ext).
 
-In the `dist` folder I ran `web-ext build` and it created a zip file that I uplodad to AMO (https://addons.mozilla.org)
+In the `dist` folder I ran `web-ext build` and it created a zip file that I uploaded to AMO (https://addons.mozilla.org)

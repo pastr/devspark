@@ -1,7 +1,7 @@
 {
   "name": "devsparktoolbox",
   "description": "A Cross Browser Template for Firefox",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
@@ -31,7 +31,7 @@
   "options_ui": {
     "page": "options/options.html"
   },
-  "ins": {
-    "128": "vite.svg"
+  "icons": {
+    "128": "Devspark_logo.png"
   }
 }

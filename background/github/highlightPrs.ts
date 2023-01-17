@@ -8,20 +8,25 @@ browser.tabs.onUpdated.addListener(async () => {
   if (tab.url?.includes("github.com")) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
-      func: highlightPr,
-      args: [storage.options]
+      func: highlightPr
     });
+
+    if (storage.options) {
+      browser.scripting.executeScript({
+        target: { tabId: tab.id! },
+        func: deemphasizedUnwantedPr,
+        args: [storage.options]
+      });
+    }
   }
 });
 
 browser.webRequest.onCompleted.addListener(
   async (req) => {
-    const storage = await browser.storage.sync.get("options");
     if (req.url === "https://github.com/pull_request_review_decisions") {
       browser.scripting.executeScript({
         target: { tabId: req.tabId },
-        func: highlightPrStatusWithDelay,
-        args: [storage.options]
+        func: highlightPrStatusWithDelay
       });
     }
   },
@@ -35,9 +40,16 @@ browser.tabs.onActivated.addListener(async () => {
   if (tab.url?.includes("github.com")) {
     browser.scripting.executeScript({
       target: { tabId: tab.id! },
-      func: highlightPr,
-      args: [storage.options]
+      func: highlightPr
     });
+
+    if (storage.options) {
+      browser.scripting.executeScript({
+        target: { tabId: tab.id! },
+        func: deemphasizedUnwantedPr,
+        args: [storage.options]
+      });
+    }
   }
 });
 
@@ -67,7 +79,7 @@ function highlightPrStatusWithDelay() {
   }, 1000);
 }
 
-function highlightPr({ options }: IOptionsContextState) {
+function highlightPr() {
   function highlightOwnPr() {
     const prsOpenedBy = document.querySelectorAll(".js-navigation-item .opened-by");
     const userLoginElement = document.querySelector<HTMLMetaElement>("[name=user-login]");
@@ -109,27 +121,25 @@ function highlightPr({ options }: IOptionsContextState) {
     });
   }
 
-  function deemphasizedUnwantedPr() {
-    const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
-    const deemphasizePrs = options?.github?.deemphasizeTextList;
-
-    if (!deemphasizePrs) return;
-
-    prs.forEach((pr) => {
-      const prTitle = pr.textContent;
-      // bad..
-      deemphasizePrs.forEach((savedText) => {
-        if (prTitle?.includes(savedText)) {
-          pr.style.setProperty("color", "var(--color-workflow-card-connector-inactive)", "important");
-          pr.classList.remove("Link--primary");
-        }
-      });
-    });
-  }
-
-
   highlightOwnPr();
   highlightPrOwner();
   highlightPrStatus();
-  deemphasizedUnwantedPr();
+}
+
+function deemphasizedUnwantedPr({ options }: IOptionsContextState) {
+  const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
+  const deemphasizePrs = options?.github?.deemphasizeTextList;
+
+  if (!deemphasizePrs) return;
+
+  prs.forEach((pr) => {
+    const prTitle = pr.textContent;
+    // bad..
+    deemphasizePrs.forEach((savedText) => {
+      if (prTitle?.includes(savedText)) {
+        pr.style.setProperty("color", "var(--color-workflow-card-connector-inactive)", "important");
+        pr.classList.remove("Link--primary");
+      }
+    });
+  });
 }

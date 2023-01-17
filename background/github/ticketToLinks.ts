@@ -5,22 +5,27 @@ browser.tabs.onUpdated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   const storage = await browser.storage.sync.get("options");
 
-  browser.scripting.executeScript({
-    target: { tabId: tab.id! },
-    func: selectAllLinks,
-    args: [storage.options]
-  });
+  if (tab.url?.includes("github.com") && storage?.options?.options?.jira?.organizationName) {
+    browser.scripting.executeScript({
+      target: { tabId: tab.id! },
+      func: selectAllLinks,
+      args: [storage.options]
+    });
+  }
 });
 
 browser.tabs.onActivated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
   const storage = await browser.storage.sync.get("options");
+  console.log("🚀 ~ browser.tabs.onActivated.addListener ~ storage", storage);
 
-  browser.scripting.executeScript({
-    target: { tabId: tab.id! },
-    func: selectAllLinks,
-    args: [storage.options]
-  });
+  if (tab.url?.includes("github.com") && storage?.options?.options?.jira?.organizationName) {
+    browser.scripting.executeScript({
+      target: { tabId: tab.id! },
+      func: selectAllLinks,
+      args: [storage.options]
+    });
+  }
 });
 
 

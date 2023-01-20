@@ -10,7 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: new URL("./popup/popup.html", import.meta.url).pathname,
-        background: new URL("./background/background.html", import.meta.url).pathname,
+        background: new URL("./background/background.html", import.meta.url).pathname, // for firefox, chrome doesn't use the background.html
         options: new URL("./options/options.html", import.meta.url).pathname
       }
     }

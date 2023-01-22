@@ -24,6 +24,18 @@
     "https://github.com/*",
     "http://localhost/*"
   ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://wealth-dev.evooq.ch/*",
+        "http://localhost/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./index.global.js"
+      ]
+    }
+  ],
   "background": {
     "page": "background/background.html",
     "persistent": false

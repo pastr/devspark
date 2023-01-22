@@ -43,7 +43,9 @@
         "after": true
       }
     ],
-    "no-inner-declarations": ["off"],
+    "no-inner-declarations": [
+      "off"
+    ],
     "comma-dangle": [
       "error",
       "never"
@@ -79,10 +81,13 @@
         "after": true
       }
     ],
-    "prefer-const": ["error", {
-      "destructuring": "any",
-      "ignoreReadBeforeAssign": false
-  }],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
     "object-property-newline": [
       "error",
       {
@@ -151,6 +156,7 @@
         "varsIgnorePattern": "^_"
       }
     ],
+    "react/no-unknown-property": "off",
     "react/jsx-indent": [
       "error",
       2
@@ -161,9 +167,6 @@
         "component": true,
         "html": false
       }
-    ],
-    "react/no-unknown-property": [
-      "error"
     ],
     "react/jsx-max-props-per-line": [
       "error",

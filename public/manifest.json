@@ -11,6 +11,19 @@
     "https://github.com/*",
     "http://localhost:*/"
   ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://wealth-dev.evooq.ch/*",
+        "http://localhost:*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./index.global.js"
+      ]
+    }
+  ],
   "permissions": [
     "storage",
     "activeTab",

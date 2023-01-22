@@ -1,14 +1,15 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import solidPlugin from "vite-plugin-solid";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [solidPlugin()],
   define: {
     "process.env": {}
   },
   build: {
+    target: "esnext",
     emptyOutDir: false, // was true
     outDir: resolve(__dirname, "dist"),
     lib: {

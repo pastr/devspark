@@ -7,12 +7,18 @@ const ColumnCheckbox = (issue_id: string) => {
   const checked = () => reviewedPrs()[issue_id];
 
   createEffect(() => {
+    // TODO: Use a data-eqx-own-pr instead of using the style
+    const isOwnPr = PR_LINK_EL?.style.color === "var(--color-accent-fg)";
     if (checked()) {
       PR_LINK_EL?.style.setProperty("text-decoration", "line-through", "important");
-      PR_LINK_EL?.style.setProperty("color", "var(--color-fg-subtle)", "important");
+      if (!isOwnPr) {
+        PR_LINK_EL?.style.setProperty("color", "var(--color-fg-subtle)", "important");
+      }
     } else {
       PR_LINK_EL?.style.setProperty("text-decoration", "");
-      PR_LINK_EL?.style.setProperty("color", "");
+      if (!isOwnPr) {
+        PR_LINK_EL?.style.setProperty("color", "");
+      }
     }
   });
 

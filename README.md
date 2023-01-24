@@ -19,7 +19,7 @@ The development has to be improved but currently to start the extension in devel
 
 There are multiples `manifest.json` files for now. 
 `manifestV2.json` is a manifest V2 file for firefox.
-`manifestV2.json` is a manifest V3 file for chrome.
+`manifestV3.json` is a manifest V3 file for chrome.
 `manifest.json` is the one being read by the browser so you can change its content to match the browser you want to test with. 
 
 # Building the Extension:

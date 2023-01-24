@@ -14,6 +14,7 @@ observer.observe(document, { childList: true, subtree: true });
 
 
 // TODO: Add types, and use organization name + repo name to store the issues id
+// TODO: At some point remove the old PR from the storage
 export const [reviewedPrs, setReviewedPrs] = createSignal<any>({});
 
 

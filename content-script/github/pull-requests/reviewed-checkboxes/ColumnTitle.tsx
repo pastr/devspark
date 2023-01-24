@@ -1,6 +1,6 @@
 const ColumnTitle = () => {
   return (
-    <div id="eqx-col-title" class="pl-3 hide-sm">
+    <div data-eqx-col-title="" class="pl-3 hide-sm">
       <span>
         Reviewed
       </span>

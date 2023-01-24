@@ -1,10 +1,10 @@
-import { createSignal, createEffect, Show } from "solid-js";
+import { createEffect, Show } from "solid-js";
 import { reviewedPrs, setReviewedPrs } from "./index";
 import browser from "webextension-polyfill";
 
 const ColumnCheckbox = (issue_id: string) => {
   const PR_LINK_EL = document.querySelector<HTMLElement>(`#${issue_id}_link`);
-  const [checked, setChecked] = createSignal(reviewedPrs()[issue_id] ?? false);
+  const checked = () => reviewedPrs()[issue_id];
 
   createEffect(() => {
     if (checked()) {
@@ -18,12 +18,11 @@ const ColumnCheckbox = (issue_id: string) => {
 
   async function onClick() {
     setReviewedPrs({ ...reviewedPrs(), [issue_id]: !checked() });
-    await browser.storage.local.set({ reviewedPrs: { ...reviewedPrs(), [issue_id]: !checked() } });
-    setChecked(!checked());
+    await browser.storage.local.set({ reviewedPrs: { ...reviewedPrs(), [issue_id]: checked() } });
   }
 
   return (
-    <span class="ml-4 mt-1">
+    <span data-eqx-checkbox={issue_id} class="ml-4 mt-1">
       {/* Had to use a button because of github's behaviours with input:checkbox */}
       <button onclick={onClick} style="border: none; margin: 0; padding: 0; height: 14px; width: 14px; display: flex; align-items: center; justify-content: center;">
         <Show when={checked()}>

@@ -1,16 +1,15 @@
-import { createEffect, Show } from "solid-js";
+import { createEffect, createSignal, Show } from "solid-js";
 import { reviewedPrs, setReviewedPrs } from "./index";
 import browser from "webextension-polyfill";
 
 const ColumnCheckbox = (issue_id: string) => {
   const PR_LINK_EL = document.querySelector<HTMLElement>(`#${issue_id}_link`);
-  const checked = () => reviewedPrs()[issue_id];
+  const [checked, setChecked] = createSignal(reviewedPrs()[issue_id] ?? false);
 
   createEffect(() => {
     // TODO: Use a data-eqx-own-pr instead of using the style
     const isOwnPr = !!PR_LINK_EL?.dataset.eqxOwnPr;
     const deemphasizedPr = !!PR_LINK_EL?.dataset.eqxDeemphasizedPr;
-    console.log("🚀 ~ createEffect ~ isOwnPr", isOwnPr);
     if (checked()) {
       PR_LINK_EL?.style.setProperty("text-decoration", "line-through", "important");
       if (!isOwnPr && !deemphasizedPr) {
@@ -26,7 +25,8 @@ const ColumnCheckbox = (issue_id: string) => {
 
   async function onClick() {
     setReviewedPrs({ ...reviewedPrs(), [issue_id]: !checked() });
-    await browser.storage.local.set({ reviewedPrs: { ...reviewedPrs(), [issue_id]: checked() } });
+    await browser.storage.local.set({ reviewedPrs: { ...reviewedPrs(), [issue_id]: !checked() } });
+    setChecked(!checked());
   }
 
   return (

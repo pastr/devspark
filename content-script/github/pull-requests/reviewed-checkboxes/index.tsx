@@ -3,10 +3,15 @@ import browser from "webextension-polyfill";
 import { ColumnCheckboxNode } from "./ColumnCheckbox";
 import { ColumnTitleNode } from "./ColumnTitle";
 
+let forceReplaceCheckbox = true;
+window.addEventListener("popstate", () => {
+  forceReplaceCheckbox = true;
+});
+
 const observer = new MutationObserver(function(_mutations) {
   const colTitle = document.querySelector("[data-eqx-col-title]");
   const pathname = window.location.pathname;
-  if (!colTitle && pathname === "/evooq/benzene/pulls") {
+  if (!colTitle && pathname.includes("/pulls") || forceReplaceCheckbox) {
     AddCheckboxesElements();
   }
 });
@@ -18,13 +23,23 @@ observer.observe(document, { childList: true, subtree: true });
 export const [reviewedPrs, setReviewedPrs] = createSignal<any>({});
 
 
+// This is required because AddCheckboxesElements was running multiple times before the appendchild(ColumnTitleNode()) action was finished
+let currentlyAddingColTitle = false;
 export async function AddCheckboxesElements() {
-  const titleRowParent = document.querySelector(".table-list-filters");
-  titleRowParent?.appendChild(ColumnTitleNode());
-
-  await initReviewdPullrequestStorage();
-
+  const colTitle = document.querySelector("[data-eqx-col-title]");
   const prLines = document.querySelectorAll("div[id^=issue_]");
+
+  if (prLines.length > 0) {
+    await initReviewdPullrequestStorage();
+    forceReplaceCheckbox = false;
+    if (!colTitle && !currentlyAddingColTitle) {
+      currentlyAddingColTitle = true;
+      const titleRowParent = document.querySelector(".table-list-filters");
+      titleRowParent?.appendChild(ColumnTitleNode());
+    }
+  }
+
+
   prLines.forEach((prLine) => {
     const lastSectionOfPrLine = prLine.querySelector("div:nth-of-type(3)");
     const prCheckbox = prLine.querySelector("[data-eqx-checkbox]");

@@ -8,15 +8,17 @@ const ColumnCheckbox = (issue_id: string) => {
 
   createEffect(() => {
     // TODO: Use a data-eqx-own-pr instead of using the style
-    const isOwnPr = PR_LINK_EL?.style.color === "var(--color-accent-fg)";
+    const isOwnPr = !!PR_LINK_EL?.dataset.eqxOwnPr;
+    const deemphasizedPr = !!PR_LINK_EL?.dataset.eqxDeemphasizedPr;
+    console.log("🚀 ~ createEffect ~ isOwnPr", isOwnPr);
     if (checked()) {
       PR_LINK_EL?.style.setProperty("text-decoration", "line-through", "important");
-      if (!isOwnPr) {
+      if (!isOwnPr && !deemphasizedPr) {
         PR_LINK_EL?.style.setProperty("color", "var(--color-fg-subtle)", "important");
       }
     } else {
       PR_LINK_EL?.style.setProperty("text-decoration", "");
-      if (!isOwnPr) {
+      if (!isOwnPr && !deemphasizedPr) {
         PR_LINK_EL?.style.setProperty("color", "");
       }
     }
@@ -30,6 +32,7 @@ const ColumnCheckbox = (issue_id: string) => {
   return (
     <span data-eqx-checkbox={issue_id} class="ml-4 mt-1">
       {/* Had to use a button because of github's behaviours with input:checkbox */}
+      ok
       <button onclick={onClick} style="border: none; margin: 0; padding: 0; height: 14px; width: 14px; display: flex; align-items: center; justify-content: center;">
         <Show when={checked()}>
           {/* This SVG comes from github website */}

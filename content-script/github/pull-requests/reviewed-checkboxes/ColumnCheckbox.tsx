@@ -7,7 +7,6 @@ export const ColumnCheckbox = ({ issue_id }: { issue_id: string}) => {
   const [checked, setChecked] = createSignal(reviewedPrs()[issue_id] ?? false);
 
   createEffect(() => {
-    // TODO: Use a data-eqx-own-pr instead of using the style
     const isOwnPr = !!PR_LINK_EL?.dataset.eqxOwnPr;
     const deemphasizedPr = !!PR_LINK_EL?.dataset.eqxDeemphasizedPr;
     if (checked()) {

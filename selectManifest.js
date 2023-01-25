@@ -1,4 +1,5 @@
-const fs = require("fs");
+// const fs = require("fs");
+import fs from "fs";
 
 const manifest = "./dist/manifest.json";
 const manifestV2 = "./dist/manifestV2.json";

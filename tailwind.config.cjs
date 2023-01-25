@@ -8,7 +8,7 @@ module.exports = {
     "./options/options.html"
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
+  plugins: []
 };

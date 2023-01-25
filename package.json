@@ -14,7 +14,7 @@
     "build:background": "vite build --config vite.chrome.background.config.ts",
     "build:content": "vite build --config vite.content.config.ts",
     "lint": "eslint --ext .tsx,.ts popup/ options/ content-script/ background/ common/ --fix",
-    "select:manifests": "node ./selectManifest.cjs"
+    "select:manifests": "node ./selectManifest.js"
   },
   "dependencies": {
     "lodash.set": "4.3.2",

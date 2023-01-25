@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import browser from "webextension-polyfill";
-import { ColumnCheckboxNode } from "./ColumnCheckbox";
-import { ColumnTitleNode } from "./ColumnTitle";
+import { ColumnCheckbox } from "./ColumnCheckbox";
+import { ColumnTitle } from "./ColumnTitle";
 
 let forceReplaceCheckbox = true;
 window.addEventListener("popstate", () => {
@@ -30,12 +30,12 @@ export async function AddCheckboxesElements() {
   const prLines = document.querySelectorAll("div[id^=issue_]");
 
   if (prLines.length > 0) {
-    await initReviewdPullrequestStorage();
+    await initReviewedPullrequestStorage();
     forceReplaceCheckbox = false;
     if (!colTitle && !currentlyAddingColTitle) {
       currentlyAddingColTitle = true;
       const titleRowParent = document.querySelector(".table-list-filters");
-      titleRowParent?.appendChild(ColumnTitleNode());
+      titleRowParent?.appendChild(<ColumnTitle /> as Node);
     }
   }
 
@@ -46,14 +46,14 @@ export async function AddCheckboxesElements() {
     if (prCheckbox) {
       // There is an edge case when the user navigate back to the page (back arrow) the checkbox are visible but not responsive
       // To fix this issue its possible to replace the checkbox by a new one with working reactivity
-      prCheckbox.replaceWith(ColumnCheckboxNode(prLine.id));
+      prCheckbox.replaceWith(<ColumnCheckbox issue_id={prLine.id} /> as Node);
     } else {
-      lastSectionOfPrLine?.appendChild(ColumnCheckboxNode(prLine.id));
+      lastSectionOfPrLine?.appendChild(<ColumnCheckbox issue_id={prLine.id} /> as Node);
     }
   });
 }
 
-async function initReviewdPullrequestStorage() {
+async function initReviewedPullrequestStorage() {
   const storageResponse = await browser.storage.local.get("reviewedPrs");
   if (storageResponse.reviewedPrs) {
     setReviewedPrs(storageResponse.reviewedPrs);

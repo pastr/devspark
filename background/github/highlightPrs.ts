@@ -81,12 +81,13 @@ function highlightPrStatusWithDelay() {
 
 function highlightPr() {
   function highlightOwnPr() {
-    const prsOpenedBy = document.querySelectorAll(".js-navigation-item .opened-by");
+    const prsOpenedBy = document.querySelectorAll<HTMLElement>(".js-navigation-item .opened-by");
     const userLoginElement = document.querySelector<HTMLMetaElement>("[name=user-login]");
     const userLogin = userLoginElement!.content;
     prsOpenedBy.forEach((pr) => {
       if (pr.innerHTML.includes(userLogin)) {
         const ownerPr = pr.parentElement?.parentElement?.firstElementChild as HTMLElement;
+        ownerPr.dataset.eqxOwnPr = "true";
         ownerPr.style.setProperty("color", "var(--color-accent-fg)", "important");
       }
     });
@@ -137,8 +138,9 @@ function deemphasizedUnwantedPr({ options }: IOptionsContextState) {
     // bad..
     deemphasizePrs.forEach((savedText) => {
       if (prTitle?.includes(savedText)) {
+        pr.dataset.eqxDeemphasizedPr = "true";
         pr.style.setProperty("color", "var(--color-workflow-card-connector-inactive)", "important");
-        pr.classList.remove("Link--primary");
+        // pr.classList.remove("Link--primary");
       }
     });
   });

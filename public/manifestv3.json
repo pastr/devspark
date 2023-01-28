@@ -18,6 +18,19 @@
     "tabs",
     "webRequest"
   ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://wealth-dev.evooq.ch/*",
+        "http://localhost:*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./index.global.js"
+      ]
+    }
+  ],
   "background": {
     "service_worker": "./background.global.js"
   },

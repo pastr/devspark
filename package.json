@@ -14,12 +14,14 @@
     "build:background": "vite build --config vite.chrome.background.config.ts",
     "build:content": "vite build --config vite.content.config.ts",
     "lint": "eslint --ext .tsx,.ts popup/ options/ content-script/ background/ common/ --fix",
-    "select:manifests": "node ./selectManifest.cjs"
+    "select:manifests": "node ./selectManifest.js"
   },
   "dependencies": {
-    "lodash.set": "^4.3.2",
+    "lodash.set": "4.3.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sass": "1.57.1",
+    "solid-js": "1.6.9"
   },
   "devDependencies": {
     "@types/chrome": "0.0.206",
@@ -32,16 +34,17 @@
     "@vitejs/plugin-react": "3.0.1",
     "autoprefixer": "10.4.13",
     "cross-env": "7.0.3",
+    "eslint": "8.31.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
-    "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react": "7.31.11",
-    "eslint": "8.31.0",
+    "eslint-plugin-react-hooks": "4.6.0",
     "npm-run-all": "4.1.5",
     "postcss": "8.4.21",
     "tailwindcss": "3.2.4",
     "typescript": "4.9.4",
     "vite": "4.0.3",
+    "vite-plugin-solid": "2.5.0",
     "webextension-polyfill": "0.10.0"
   }
 }

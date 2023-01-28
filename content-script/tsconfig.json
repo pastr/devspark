@@ -18,14 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "exclude": [
-    "./content-script"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+  }
 }

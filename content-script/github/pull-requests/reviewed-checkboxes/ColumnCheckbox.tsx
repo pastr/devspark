@@ -29,9 +29,9 @@ export const ColumnCheckbox = ({ issue_id }: { issue_id: string}) => {
   }
 
   return (
-    <span data-eqx-checkbox={issue_id} class="ml-4 mt-1">
+    <span data-eqx-checkbox={issue_id}>
       {/* Had to use a button because of github's behaviours with input:checkbox */}
-      <button onclick={onClick} style="border: none; margin: 0; padding: 0; height: 14px; width: 14px; display: flex; align-items: center; justify-content: center;">
+      <button onclick={onClick} style={`${checked() ? "background: #99c8ff;" : ""} cursor: pointer; border-radius: 2px; border: none; margin: 0; padding: 0; height: 14px; width: 14px; display: flex; align-items: center; justify-content: center;`}>
         <Show when={checked()}>
           {/* This SVG comes from github website */}
           <svg viewBox="0 0 16 16" version="1.1" class="octicon octicon-check">

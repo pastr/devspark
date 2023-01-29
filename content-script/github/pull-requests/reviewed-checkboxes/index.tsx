@@ -3,11 +3,19 @@ import browser from "webextension-polyfill";
 import { ColumnCheckbox } from "./ColumnCheckbox";
 import { ColumnTitle } from "./ColumnTitle";
 
-type Detail = {
-  url: string
+type TReviewedPrStorage = {
+  [organization: string]: {
+    [repository: string]: {
+      [issueId: string]: boolean;
+    }
+  }
 }
 
-function onTurboLoad(event: CustomEvent<Detail>) {
+type TTurboLoadEventDetail = {
+  url: string;
+};
+
+function onTurboLoad(event: CustomEvent<TTurboLoadEventDetail>) {
   if (event.detail.url.includes("/pull")) {
     const prCheckbox = document.querySelector("[data-eqx-checkbox]");
     if (!prCheckbox) {

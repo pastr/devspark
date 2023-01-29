@@ -11,6 +11,13 @@
     "https://github.com/*",
     "http://localhost:*/"
   ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "webRequest"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -23,13 +30,6 @@
         "./index.global.js"
       ]
     }
-  ],
-  "permissions": [
-    "storage",
-    "activeTab",
-    "scripting",
-    "tabs",
-    "webRequest"
   ],
   "background": {
     "service_worker": "./background.global.js"

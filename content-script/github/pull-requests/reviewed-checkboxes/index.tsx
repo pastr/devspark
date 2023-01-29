@@ -66,6 +66,7 @@ async function initReviewedPullrequestStorage(organization: string, repository: 
   if (storageResponse.reviewedPrs) {
     setReviewedPrs(storageResponse.reviewedPrs);
 
+    // Maybe instead of delete I could just create a new object everytime set the value for all the issues (using the one setter and set the others to false)
     // To update and try later on
     // if (!search && storageResponse.reviewedPrs[organization][repository]) {
     //   const allSavedIssuesIds = Object.keys(storageResponse.reviewedPrs[organization][repository]);

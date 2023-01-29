@@ -17,10 +17,11 @@
     "select:manifests": "node ./selectManifest.js"
   },
   "dependencies": {
-    "lodash.difference": "^4.5.0",
+    "lodash.difference": "4.5.0",
     "lodash.set": "4.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "7.42.1",
     "sass": "1.57.1",
     "solid-js": "1.6.9"
   },

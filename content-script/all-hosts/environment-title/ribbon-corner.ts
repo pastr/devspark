@@ -1,4 +1,4 @@
-type Options = {
+export type RibbonOptions = {
   position: string;
   backgroundColor: string;
   textColor: string;
@@ -9,13 +9,15 @@ type Options = {
   horizontalAlign: "left" | "right"
 }
 
+// TODO: Add square corner option and just a colored line option with (height and text optional)
+
 /**
  * @author gaoliang
  * @param {*} options: see defaults for detail
  * https://github.com/gaoliang/ribbon-corner
  */
-export function ribbonCorner(userOptions: Partial<Options> = {}) {
-  const defaults: Options = {
+export function ribbonCorner(userOptions: Partial<RibbonOptions> = {}) {
+  const defaults: RibbonOptions = {
     backgroundColor: "#67C23A",
     toCorner: 100,
     height: 50,

@@ -1,4 +1,5 @@
 export enum ESupportedApps {
   GitHub = "github",
-  Jira = "jira"
+  Jira = "jira",
+  EnvironmentName = "environmentName",
 }

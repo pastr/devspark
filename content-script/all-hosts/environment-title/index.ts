@@ -1,3 +1,3 @@
 import { ribbonCorner } from "./ribbon-corner";
 
-// ribbonCorner({ horizontalAlign: "right" });
+ribbonCorner({ horizontalAlign: "right" });

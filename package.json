@@ -17,6 +17,7 @@
     "select:manifests": "node ./selectManifest.js"
   },
   "dependencies": {
+    "lodash.difference": "^4.5.0",
     "lodash.set": "4.3.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -26,8 +27,8 @@
   "devDependencies": {
     "@types/chrome": "0.0.206",
     "@types/lodash.set": "4.3.7",
-    "@types/react-dom": "18.0.10",
     "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
     "@types/webextension-polyfill": "0.9.2",
     "@typescript-eslint/eslint-plugin": "5.48.0",
     "@typescript-eslint/parser": "5.48.0",

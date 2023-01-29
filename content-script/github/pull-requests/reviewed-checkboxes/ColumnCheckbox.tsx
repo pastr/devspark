@@ -1,10 +1,18 @@
-import { createEffect, createSignal, Show } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
+import type { Component } from "solid-js";
 import { reviewedPrs, setReviewedPrs } from "./index";
+import set from "lodash.set";
 import browser from "webextension-polyfill";
 
-export const ColumnCheckbox = ({ issue_id }: { issue_id: string}) => {
-  const PR_LINK_EL = document.querySelector<HTMLElement>(`#${issue_id}_link`);
-  const [checked, setChecked] = createSignal(reviewedPrs()[issue_id] ?? false);
+type Props = {
+  issueId: string;
+  organization: string;
+  repository: string;
+}
+
+export const ColumnCheckbox: Component<Props> = ({ organization, repository, issueId }) => {
+  const PR_LINK_EL = document.querySelector<HTMLElement>(`#${issueId}_link`);
+  const [checked, setChecked] = createSignal(reviewedPrs()?.[organization]?.[repository]?.[issueId] ?? false);
 
   createEffect(() => {
     const isOwnPr = !!PR_LINK_EL?.dataset.eqxOwnPr;
@@ -23,13 +31,15 @@ export const ColumnCheckbox = ({ issue_id }: { issue_id: string}) => {
   });
 
   async function onClick() {
-    setReviewedPrs({ ...reviewedPrs(), [issue_id]: !checked() });
-    await browser.storage.local.set({ reviewedPrs: { ...reviewedPrs(), [issue_id]: !checked() } });
+    const updatedData = { ...reviewedPrs() };
+    set(updatedData, [organization, repository, issueId], !checked());
+    setReviewedPrs(updatedData);
+    await browser.storage.local.set({ reviewedPrs: updatedData });
     setChecked(!checked());
   }
 
   return (
-    <span data-eqx-checkbox={issue_id}>
+    <span data-eqx-checkbox={issueId}>
       <input type="checkbox" style="cursor: pointer;" checked={checked()} onchange={onClick} />
     </span>
   );

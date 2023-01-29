@@ -156,6 +156,7 @@
         "varsIgnorePattern": "^_"
       }
     ],
+    "react/prop-types": "off",
     "react/no-unknown-property": "off",
     "react/jsx-indent": [
       "error",

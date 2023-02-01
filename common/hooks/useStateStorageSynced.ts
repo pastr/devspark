@@ -3,7 +3,6 @@ import browser from "webextension-polyfill";
 
 export function useStateStorageSynced<T>(key: string, initialValue: T): [T, Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState(initialValue);
-
   useEffect(() => {
     browser.storage.sync.get(key).then((storage) => {
       if (storage[key]) {

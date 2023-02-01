@@ -11,6 +11,7 @@ const TICKET_HISTORY_LENGTH = 5;
 export default function SectionJira() {
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
   const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
+  // TODO: Move this to the options synced object instead
   const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
   const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();

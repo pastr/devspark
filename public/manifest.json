@@ -8,8 +8,7 @@
     "default_title": "Open the popup"
   },
   "host_permissions": [
-    "https://github.com/*",
-    "http://localhost:*/"
+    "<all_urls>"
   ],
   "permissions": [
     "storage",
@@ -21,9 +20,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/*",
-        "https://wealth-dev.evooq.ch/*",
-        "http://localhost:*/*"
+        "<all_urls>"
       ],
       "run_at": "document_end",
       "js": [

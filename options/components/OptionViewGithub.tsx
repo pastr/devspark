@@ -36,9 +36,9 @@ export default function OptionCardJira() {
     if (!texts?.length) return;
     return texts.map((text, index) => {
       return (
-        <div key={`${index}-${text}`}>
-          <Button className="mr'1" icon={<DeleteOutlined />} onClick={() => removeFromList(index)} />
+        <div className="flex gap-2 items-center justify-between" key={`${index}-${text}`}>
           <span className="text-sm font-semibold">{text}</span>
+          <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removeFromList(index)} />
         </div>
       );
     });

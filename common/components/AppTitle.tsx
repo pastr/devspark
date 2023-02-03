@@ -1,5 +1,5 @@
-import JiraLogo from "../images/jira.png";
-import GithubLogo from "../images/github.png";
+import JiraLogo from "../images/jira.svg";
+import GithubLogo from "../images/github.svg";
 import { ESupportedApps } from "../enums/ESupportedApps";
 
 type Props = {

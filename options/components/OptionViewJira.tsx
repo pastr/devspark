@@ -41,7 +41,8 @@ export default function OptionCardJira() {
           <Col span={8}>
             <Row className="flex-col">
               <h1 className="text-lg font-semibold">Set your Jira organization name</h1>
-              <h2 className="text-gray-600 text-md">Your organization is https://<b>devsparks</b>.atlassian.net </h2>
+              <p className="text-gray-600 text-md">The organization name can be found in the atlassian url. </p>
+              <p className="text-gray-600 text-md">e.g. https://<b>devsparks</b>.atlassian.net </p>
             </Row>
           </Col>
 

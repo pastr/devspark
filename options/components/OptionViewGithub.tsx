@@ -4,6 +4,8 @@ import { useOptions } from "../../common/context/options.context";
 import set from "lodash.set";
 import { useFocus } from "../../common/hooks/useFocus";
 import OptionView from "./OptionView";
+import { Row, Col, Divider, Button, Input } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 
 export default function OptionCardJira() {
   const [textToDeemphasize, setTextToDeemphasize] = useState("");
@@ -35,9 +37,7 @@ export default function OptionCardJira() {
     return texts.map((text, index) => {
       return (
         <div key={`${index}-${text}`}>
-          <button className="bg-gray-200 px-1 mr-1"
-                  onClick={() => removeFromList(index)}>X
-          </button>
+          <Button className="mr'1" icon={<DeleteOutlined />} onClick={() => removeFromList(index)} />
           <span className="text-sm font-semibold">{text}</span>
         </div>
       );
@@ -47,29 +47,48 @@ export default function OptionCardJira() {
   return (
     <OptionView title="GitHub" icon={ESupportedApps.GitHub}>
       <div>
-        <h1 className="mb-4 text-lg font-semibold">Deemphasize PR containing text</h1>
-        <label className="text-sm" htmlFor="github_deemphasize_text">
-          Text to deemphasize (case sensitive):
-        </label>
-        <div className="flex gap-2">
-          <input className="input flex-[4]"
-                 id="github_deemphasize_text"
-                 ref={textInputRef}
-                 onKeyDown={(e) => e.key === "Enter" ? addToTheList() : null}
-                 value={textToDeemphasize}
-                 onChange={(e) => setTextToDeemphasize(e.target.value)}
-                 placeholder="JiraTicket-123"
-                 type="text" />
-          <button className="btn-primary"
-                  disabled={textToDeemphasize === ""}
-                  onClick={addToTheList}>
-            Add
-          </button>
-        </div>
-        <section className="mt-4">
-          <h2 className="text-sm mb-1">{ options.options?.github?.deemphasizeTextList?.length ? "Deemphasize PR containing these text: " : null }</h2>
-          {showSavedTextsToDeemphasize()}
-        </section>
+        <Row gutter={[32, 16]}>
+          <Col span={8}>
+            <Row className="flex-col">
+              <h1 className="mb-4 text-lg font-semibold">Deemphasize PR containing text</h1>
+              <p className="text-gray-600 text-md"></p>
+            </Row>
+          </Col>
+
+          <Col span={16}>
+            <Row>
+              <div>
+                <label className="text-xs font-bold text-gray-500" htmlFor="github_deemphasize_text">
+                  Text to deemphasize (case sensitive)
+                </label>
+                <div className="flex gap-2">
+                  <Input id="github_deemphasize_text"
+                         ref={textInputRef}
+                         onKeyDown={(e) => e.key === "Enter" ? addToTheList() : null}
+                         value={textToDeemphasize}
+                         onChange={(e) => setTextToDeemphasize(e.target.value)}
+                         placeholder="JiraTicket-123"
+                         type="text" />
+                  <Button disabled={textToDeemphasize === ""}
+                          onClick={addToTheList}>
+                    Add
+                  </Button>
+                </div>
+
+                <section className="mt-4">
+                  <h2 className="text-sm mb-1">{ options.options?.github?.deemphasizeTextList?.length ? "Deemphasize PR containing these text: " : null }</h2>
+                  {showSavedTextsToDeemphasize()}
+                </section>
+              </div>
+            </Row>
+          </Col>
+        </Row>
+        {/* <section>
+          <Divider />
+          <Button type="primary" size="large" onClick={addToTheList}>
+            Save
+          </Button>
+        </section> */}
       </div>
     </OptionView>
   );

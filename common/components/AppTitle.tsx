@@ -8,7 +8,7 @@ type Props = {
   iconClassName?: string;
 }
 
-const LOGOS = {
+export const LOGOS = {
   [ESupportedApps.GitHub]: GithubLogo,
   [ESupportedApps.Jira]: JiraLogo
 };

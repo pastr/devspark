@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ESupportedApps } from "../../common/enums/ESupportedApps";
-import OptionCard from "./OptionCard";
 import { useOptions } from "../../common/context/options.context";
 import set from "lodash.set";
 import { useFocus } from "../../common/hooks/useFocus";
+import OptionView from "./OptionView";
 
 export default function OptionCardJira() {
   const [textToDeemphasize, setTextToDeemphasize] = useState("");
@@ -45,7 +45,7 @@ export default function OptionCardJira() {
   }
 
   return (
-    <OptionCard title="GitHub" icon={ESupportedApps.GitHub}>
+    <OptionView title="GitHub" icon={ESupportedApps.GitHub}>
       <div>
         <h1 className="mb-4 text-lg font-semibold">Deemphasize PR containing text</h1>
         <label className="text-sm" htmlFor="github_deemphasize_text">
@@ -66,12 +66,11 @@ export default function OptionCardJira() {
             Add
           </button>
         </div>
-
         <section className="mt-4">
           <h2 className="text-sm mb-1">{ options.options?.github?.deemphasizeTextList?.length ? "Deemphasize PR containing these text: " : null }</h2>
           {showSavedTextsToDeemphasize()}
         </section>
       </div>
-    </OptionCard>
+    </OptionView>
   );
 }

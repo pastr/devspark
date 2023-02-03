@@ -1,4 +1,4 @@
-import OptionCard from "./OptionCard";
+import OptionView from "./OptionView";
 import { RibbonOptions } from "../../content-script/all-hosts/environment-name/ribbon-corner";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -35,7 +35,7 @@ export default function OptionCardEnvironmentName() {
   }
 
   return (
-    <OptionCard title="Environment name">
+    <OptionView title="Environment Name">
       <>
         {createPortal(
           <EnvironmentNameModal visibleState={[showModal, setShowModal]} defaultState={selectedEnvironment} />,
@@ -63,7 +63,7 @@ export default function OptionCardEnvironmentName() {
           }
         </div>
       </>
-    </OptionCard>
+    </OptionView>
   );
 }
 

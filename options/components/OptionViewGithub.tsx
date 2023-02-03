@@ -50,8 +50,8 @@ export default function OptionCardJira() {
         <Row gutter={[32, 16]}>
           <Col span={8}>
             <Row className="flex-col">
-              <h1 className="mb-4 text-lg font-semibold">Deemphasize PR containing text</h1>
-              <p className="text-gray-600 text-md"></p>
+              <h1 className="text-lg font-semibold">Deemphasize PR</h1>
+              <p className="text-gray-600 text-md">Pull request in the pull request page will be deemphasized if their name contains one of the text you added</p>
             </Row>
           </Col>
 

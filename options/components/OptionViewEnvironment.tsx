@@ -4,8 +4,8 @@ import { useForm, SubmitHandler, SubmitErrorHandler, Controller } from "react-ho
 import { useOptions } from "../../common/context/options.context";
 import set from "lodash.set";
 import { IEnvrionmentNameState } from "../../common/types/IOptionsState";
-import { Button, Input, Modal, Popconfirm, Select } from "antd";
-import { PlusOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Col, Divider, Input, Modal, Popconfirm, Row, Select } from "antd";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function OptionCardEnvironmentName() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,35 +67,37 @@ export default function OptionCardEnvironmentName() {
   return (
     <OptionView title="Environment Name">
       <>
-        <div className="flex justify-between">
-          <div className="text-lg font-semibold">
-            {editEnvironmentIndex !== null ? "Edit" : "Add"} an environment name
-          </div>
-          <div className="flex w-8">
-            <Button className="flex items-center justify-center" type="primary" onClick={addEnvironmentName} icon={<PlusOutlined />} />
-          </div>
-        </div>
-        <div>
-          {
-            options?.options?.environmentName?.map((environment, index) => {
-              return (
-                <div key={`${environment.url}-${environment.text}`} className="flex items-center gap-3">
-                  <div className="">
-                    {environment.text}
-                  </div>
-                  <Button type="link" className="" icon={<EditOutlined />} onClick={() => editEnvironment(index)} />
-                  <Popconfirm title="Are you sure you want to delete this environment?"
-                              onConfirm={() => deleteEnvironment(index)}
-                              okText="Yes"
-                              cancelText="No">
-                    <Button type="link" danger className="" icon={<DeleteOutlined />} />
-                  </Popconfirm>
-
-                </div>
-              );
-            })
-          }
-        </div>
+        <Row gutter={[32, 16]}>
+          <Col span={8}>
+            <h1 className="text-lg font-semibold">
+              {editEnvironmentIndex !== null ? "Edit" : "Add"} an environment name
+            </h1>
+            <p className="text-gray-600 text-md">
+              Add a visual identifier to recognize website running in different environments.
+            </p>
+          </Col>
+          <Col span={16} >
+            <div className="mb-4">
+              <Button className="flex items-center justify-center" type="primary" onClick={addEnvironmentName} >Add environment identifier</Button>
+            </div>
+            <div>
+              <p className="text-base font-semibold mb-2 pb-2 border-b-[1px]">Existing Environments</p>
+              {
+                options?.options?.environmentName?.map((environment, index) => {
+                  return (
+                    <>
+                      <EnvironmentLine key={`${environment.url}-${environment.text}`}
+                                       environment={environment}
+                                       index={index}
+                                       onEdit={editEnvironment}
+                                       onDelete={deleteEnvironment} />
+                    </>
+                  );
+                })
+              }
+            </div>
+          </Col>
+        </Row>
 
 
         <Modal title={editEnvironmentIndex !== null ? "Edit Environment" : "Add Environment"}
@@ -104,9 +106,8 @@ export default function OptionCardEnvironmentName() {
                onCancel={onCancelModal}
                destroyOnClose>
           <form>
-            <div>
+            <div className="mb-3">
               <label htmlFor="text">Text:</label>
-              {errors.text && <span>{errors.text.message}</span>}
 
               <Controller control={control}
                           name="text"
@@ -116,15 +117,16 @@ export default function OptionCardEnvironmentName() {
                             <Input onChange={onChange}
                                    onBlur={onBlur}
                                    value={value}
+                                   status={errors.text ? "error" : undefined}
                                    defaultValue={defaultValues?.text}
                                    ref={ref}
                                    id="text"/>
                           }/>
+              <ErrorMessage errors={errors} name="text" render={({ message }) => <p className="text-red-600">{message}</p>}/>
             </div>
 
-            <div>
+            <div className="mb-3">
               <label htmlFor="url">URL:</label>
-              {errors.url && <span>{errors.url?.message}</span>}
               <Controller control={control}
                           name="url"
                           rules={{ required: "This field is required" }}
@@ -133,13 +135,15 @@ export default function OptionCardEnvironmentName() {
                             <Input onChange={onChange}
                                    onBlur={onBlur}
                                    value={value}
+                                   status={errors.url ? "error" : undefined}
                                    defaultValue={defaultValues?.url}
                                    ref={ref}
                                    id="url"/>
                           }/>
+              <ErrorMessage errors={errors} name="url" render={({ message }) => <p className="text-red-600">{message}</p>}/>
             </div>
 
-            <div>
+            <div className="mb-3">
               <label htmlFor="horizontalAlign">Right or left of the screen:</label>
               <div>
                 <Controller control={control}
@@ -159,7 +163,7 @@ export default function OptionCardEnvironmentName() {
               </div>
             </div>
 
-            <div>
+            <div className="mb-3">
               <label htmlFor="position">Position:</label>
               <div>
                 <Controller control={control}
@@ -179,7 +183,7 @@ export default function OptionCardEnvironmentName() {
               </div>
             </div>
 
-            <div>
+            <div className="mb-3">
               <label htmlFor="shape">Shape:</label>
               <div>
                 <Controller control={control}
@@ -204,7 +208,7 @@ export default function OptionCardEnvironmentName() {
               </div>
             </div>
 
-            <div>
+            <div className="mb-3">
               <label htmlFor="textColor">Text Color:</label>
               <div>
                 <Controller control={control}
@@ -223,7 +227,7 @@ export default function OptionCardEnvironmentName() {
                             }/>
               </div>
             </div>
-            <div>
+            <div className="mb-3">
               <label htmlFor="backgroundColor">Background Color:</label>
               <div>
                 <Controller control={control}
@@ -246,5 +250,40 @@ export default function OptionCardEnvironmentName() {
         </Modal>
       </>
     </OptionView>
+  );
+}
+
+type EnvironmentLineProps = {
+  environment: IEnvrionmentNameState;
+  index: number;
+  onEdit: (index: number) => void;
+  onDelete: (index: number) => void;
+}
+
+function EnvironmentLine({ environment, index, onEdit, onDelete }: EnvironmentLineProps) {
+  return (
+    <div className="flex justify-between items-center mb-4 hover:bg-blue-50">
+      <div className="flex items-center gap-4">
+        <div>
+          {environment.url}
+        </div>
+        <div className="text-sm rounded-md py-1 px-2" style={{ backgroundColor: environment.backgroundColor, color: environment.textColor }}>
+          {environment.text}
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <Button type="primary" onClick={() => onEdit(index)} className="mr-2">Edit</Button>
+
+
+        <Popconfirm title="Are you sure you want to delete this environment?"
+                    onConfirm={() => onDelete(index)}
+                    placement="topRight"
+                    okText="Yes"
+                    cancelText="No">
+          <Button danger>Delete</Button>
+        </Popconfirm>
+
+      </div>
+    </div>
   );
 }

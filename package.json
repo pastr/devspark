@@ -17,6 +17,7 @@
     "select:manifests": "node ./selectManifest.js"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.1",
     "antd": "5.1.7",
     "lodash.difference": "4.5.0",
     "lodash.set": "4.3.2",

@@ -75,8 +75,7 @@ export default function OptionCardJira() {
                   </Button>
                 </div>
 
-                <section className="mt-4">
-                  <h2 className="text-sm mb-1">{ options.options?.github?.deemphasizeTextList?.length ? "Deemphasize PR containing these text: " : null }</h2>
+                <section className="mt-2">
                   {showSavedTextsToDeemphasize()}
                 </section>
               </div>

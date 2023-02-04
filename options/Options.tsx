@@ -7,6 +7,7 @@ import { Layout, Space, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
 import { LOGOS } from "../common/components/AppTitle";
+import { FileUnknownOutlined } from "@ant-design/icons";
 
 
 const { Sider, Content } = Layout;
@@ -22,7 +23,6 @@ export default function Options() {
   }
 
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
     setRoute(e.key as TRoute);
   };
 
@@ -48,7 +48,10 @@ export default function Options() {
               </div>
             </Menu.Item>
             <Menu.Item key={"environmentName"}>
-              Environment
+              <div className="flex items-center gap-2">
+                Environment
+                <FileUnknownOutlined />
+              </div>
             </Menu.Item>
           </Menu>
 

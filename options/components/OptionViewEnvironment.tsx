@@ -4,14 +4,26 @@ import { useForm, SubmitHandler, SubmitErrorHandler, Controller } from "react-ho
 import { useOptions } from "../../common/context/options.context";
 import set from "lodash.set";
 import { IEnvrionmentNameState } from "../../common/types/IOptionsState";
-import { Button, Col, Divider, Input, Modal, Popconfirm, Row, Select } from "antd";
+import { Button, Col, Input, message, Modal, Popconfirm, Row, Select } from "antd";
 import { ErrorMessage } from "@hookform/error-message";
 
 export default function OptionCardEnvironmentName() {
+  const [messageApi, contextHolder] = message.useMessage();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editEnvironmentIndex, setEditEnvironmentIndex] = useState<number | null>(null);
-  const { handleSubmit, control, reset, formState: { errors, touchedFields } } = useForm<IEnvrionmentNameState>();
+  const { handleSubmit, setValue, watch, getValues, control, reset, formState: { errors } } = useForm<IEnvrionmentNameState>({
+    mode: "onChange",
+    defaultValues: {
+      text: "",
+      url: "",
+      backgroundColor: "#878787",
+      textColor: "#000000",
+      horizontalAlign: "left",
+      shape: "ribbon"
+    }
+  });
   const [options, setOptions] = useOptions();
+  const shape = watch("shape");
 
   const onValid: SubmitHandler<IEnvrionmentNameState> = (data) => {
     const newOptions: typeof options = { ...options };
@@ -27,12 +39,15 @@ export default function OptionCardEnvironmentName() {
     }
 
     setOptions(newOptions);
+    messageApi.open({
+      type: "success",
+      content: "Environment saved"
+    });
     setIsModalOpen(false);
   };
 
   const onError: SubmitErrorHandler<IEnvrionmentNameState> = (error) => {
     console.log("🚀 ~ file: OptionCardEnvironmentName.tsx:99 ~ EnvironmentNameModal ~ error", error);
-    console.log("touchedFields ERrorr", touchedFields);
   };
 
   function addEnvironmentName() {
@@ -56,17 +71,27 @@ export default function OptionCardEnvironmentName() {
   }
 
   function editEnvironment(index: number) {
+    const defaultValuesLocal = options.options!.environmentName![index];
     reset();
+    Object.entries(defaultValuesLocal).forEach(([key, value]) => {
+      setValue(key as keyof typeof defaultValuesLocal, value, { shouldDirty: false });
+    });
     setEditEnvironmentIndex(index);
     setIsModalOpen(true);
   }
 
-  const defaultValues = editEnvironmentIndex !== null ? options?.options?.environmentName?.[editEnvironmentIndex] : undefined;
-  console.log("🚀 ~ file: OptionViewEnvironment.tsx:65 ~ OptionCardEnvironmentName ~ defaultValues", defaultValues);
+  if (shape==="line") {
+    if (getValues("text")) {
+      setValue("text", "");
+    }
+  }
+
+  const environmentExist = options?.options?.environmentName && options.options.environmentName.length > 0;
 
   return (
     <OptionView title="Environment Name">
       <>
+        {contextHolder}
         <Row gutter={[32, 16]}>
           <Col span={8}>
             <h1 className="text-lg font-semibold">
@@ -81,7 +106,7 @@ export default function OptionCardEnvironmentName() {
               <Button className="flex items-center justify-center" type="primary" onClick={addEnvironmentName} >Add environment identifier</Button>
             </div>
             <div>
-              <p className="text-base font-semibold mb-2 pb-2 border-b-[1px]">Existing Environments</p>
+              {environmentExist && <p className="text-base font-semibold mb-2 pb-2 border-b-[1px]">Existing Environments</p>}
               {
                 options?.options?.environmentName?.map((environment, index) => {
                   return (
@@ -111,14 +136,13 @@ export default function OptionCardEnvironmentName() {
 
               <Controller control={control}
                           name="text"
-                          defaultValue={defaultValues?.text}
                           rules={{ required: false, maxLength: { value: 10, message: "Maximum 10 characters" } }}
                           render={({ field: { onChange, onBlur, value, ref } }) =>
                             <Input onChange={onChange}
                                    onBlur={onBlur}
                                    value={value}
                                    status={errors.text ? "error" : undefined}
-                                   defaultValue={defaultValues?.text}
+                                   disabled={getValues("shape") === "line"}
                                    ref={ref}
                                    id="text"/>
                           }/>
@@ -126,17 +150,25 @@ export default function OptionCardEnvironmentName() {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="url">URL:</label>
+              <label htmlFor="url">URL (regex):</label>
               <Controller control={control}
                           name="url"
-                          rules={{ required: "This field is required" }}
-                          defaultValue={defaultValues?.url}
+                          rules={{
+                            required: "This field is required",
+                            validate: (val) => {
+                              try {
+                                new RegExp(val);
+                              } catch (e) {
+                                return "Invalid regex";
+                              }
+                              return true;
+                            }
+                          }}
                           render={({ field: { onChange, onBlur, value, ref } }) =>
                             <Input onChange={onChange}
                                    onBlur={onBlur}
                                    value={value}
                                    status={errors.url ? "error" : undefined}
-                                   defaultValue={defaultValues?.url}
                                    ref={ref}
                                    id="url"/>
                           }/>
@@ -148,7 +180,6 @@ export default function OptionCardEnvironmentName() {
               <div>
                 <Controller control={control}
                             name="horizontalAlign"
-                            defaultValue={defaultValues?.horizontalAlign ?? "right"}
                             rules={{ required: true }}
                             render={({ field: { onChange, onBlur, value, ref } }) =>
                               <Select options={[{ value: "right", label: "Top right" }, { value: "left", label: "Top left" }]}
@@ -157,28 +188,7 @@ export default function OptionCardEnvironmentName() {
                                       value={value}
                                       style={{ width: 100 }}
                                       ref={ref}
-                                      defaultValue={defaultValues?.horizontalAlign ?? "right"}
                                       id="horizontalAlign"/>
-                            }/>
-              </div>
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="position">Position:</label>
-              <div>
-                <Controller control={control}
-                            name="position"
-                            defaultValue={defaultValues?.position ?? "absolute"}
-                            rules={{ required: true }}
-                            render={({ field: { onChange, onBlur, value, ref } }) =>
-                              <Select options={[{ value: "absolute", label: "Absolute" }, { value: "fixed", label: "Fixed" }]}
-                                      onChange={onChange}
-                                      onBlur={onBlur}
-                                      value={value}
-                                      style={{ width: 100 }}
-                                      ref={ref}
-                                      defaultValue={defaultValues?.position ?? "absolute"}
-                                      id="position"/>
                             }/>
               </div>
             </div>
@@ -188,7 +198,6 @@ export default function OptionCardEnvironmentName() {
               <div>
                 <Controller control={control}
                             name="shape"
-                            defaultValue={defaultValues?.shape ?? "triangle"}
                             rules={{ required: true }}
                             render={({ field: { onChange, onBlur, value, ref } }) =>
                               <Select onChange={onChange}
@@ -196,7 +205,6 @@ export default function OptionCardEnvironmentName() {
                                       value={value}
                                       style={{ width: 100 }}
                                       ref={ref}
-                                      defaultValue={defaultValues?.shape ?? "triangle"}
                                       id="shape"
                                       options={[
                                         { value: "ribbon", label: "Ribbon" },
@@ -213,7 +221,6 @@ export default function OptionCardEnvironmentName() {
               <div>
                 <Controller control={control}
                             name="textColor"
-                            defaultValue={defaultValues?.textColor ?? "#000000"}
                             rules={{ required: true }}
                             render={({ field: { onChange, onBlur, value, ref } }) =>
                               <Input className="p-1 w-10"
@@ -222,7 +229,6 @@ export default function OptionCardEnvironmentName() {
                                      value={value}
                                      ref={ref}
                                      type="color"
-                                     defaultValue={defaultValues?.textColor ?? "#000000"}
                                      id="textColor"/>
                             }/>
               </div>
@@ -232,7 +238,6 @@ export default function OptionCardEnvironmentName() {
               <div>
                 <Controller control={control}
                             name="backgroundColor"
-                            defaultValue={ defaultValues?.backgroundColor ?? "#878787"}
                             rules={{ required: true }}
                             render={({ field: { onChange, onBlur, value, ref } }) =>
                               <Input className="p-1 w-10"
@@ -241,7 +246,6 @@ export default function OptionCardEnvironmentName() {
                                      value={value}
                                      ref={ref}
                                      type="color"
-                                     defaultValue={defaultValues?.backgroundColor ?? "#878787"}
                                      id="backgroundColor" />
                             }/>
               </div>

@@ -1,5 +1,5 @@
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
-import PopupSection from "./PopupSection";
+import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
+import PopupSection from "../_shared/components/PopupSection";
 
 export default function PopupSectionGithub() {
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
-import { useOptions } from "../../common/context/options.context";
+import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
+import { useOptions } from "../../_shared/context/options.context";
 import set from "lodash.set";
-import { useFocus } from "../../common/hooks/useFocus";
-import OptionView from "./OptionView";
+import { useFocus } from "../../_shared/hooks/useFocus";
+import OptionView from "../_shared/components/OptionView";
 import { Row, Col, Divider, Button, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 

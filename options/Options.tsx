@@ -1,12 +1,12 @@
-import { OptionsProvider } from "../common/context/options.context";
-import OptionViewEnvironmentName from "./components/OptionViewEnvironment";
-import OptionViewGithub from "./components/OptionViewGithub";
-import OptionViewJira from "./components/OptionViewJira";
+import { OptionsProvider } from "../_shared/context/options.context";
+import OptionViewEnvironmentName from "./environment/OptionViewEnvironment";
+import OptionViewGithub from "./github/OptionViewGithub";
+import OptionViewJira from "./jira/OptionViewJira";
 import browser from "webextension-polyfill";
 import { Layout, Space, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
-import { LOGOS } from "../common/components/AppTitle";
+import { LOGOS } from "../_shared/components/AppTitle";
 import { FileUnknownOutlined } from "@ant-design/icons";
 
 

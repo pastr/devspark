@@ -1,6 +1,6 @@
 import browser from "webextension-polyfill";
 import { addRibbon, addLine, addSquare } from "./ribbon-corner";
-import { IEnvrionmentNameState, IOptionsContextState } from "../../../common/types/IOptionsState";
+import { IEnvrionmentNameState, IOptionsContextState } from "../../../_shared/types/IOptionsState";
 
 browser.storage.sync.get("options").then((item) => {
   const options: IOptionsContextState = item.options;

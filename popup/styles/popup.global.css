@@ -1,4 +1,4 @@
-@import url('../../common/styles/common.css');
+@import url('../../_shared/styles/common.css');
 
 /* Also possible to use tailwind this way: */
 /* @apply text-6xl font-normal leading-normal mt-0 mb-2; */

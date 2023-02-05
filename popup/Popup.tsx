@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import browser from "webextension-polyfill";
-import PopupSectionJira from "./components/PopupSectionJira";
-import { OptionsProvider } from "../common/context/options.context";
+import PopupSectionJira from "./jira/PopupSectionJira";
+import { OptionsProvider } from "../_shared/context/options.context";
 
 function Popup() {
   const [_msg, setMsg] = useState("");

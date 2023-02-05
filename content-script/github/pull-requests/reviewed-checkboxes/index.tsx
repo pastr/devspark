@@ -77,7 +77,7 @@ async function initReviewedPullrequestStorage(organization: string, repository: 
     //   });
     // }
   } else {
-    browser.storage.local.set({ reviewedPrs:{ [organization]: { [repository]: {} } } });
+    browser.storage.local.set({ reviewedPrs: { [organization]: { [repository]: {} } } });
   }
 }
 

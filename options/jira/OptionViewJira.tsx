@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
-import { useOptions } from "../../common/context/options.context";
+import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
+import { useOptions } from "../../_shared/context/options.context";
 import set from "lodash.set";
-import OptionView from "./OptionView";
+import OptionView from "../_shared/components/OptionView";
 import { Button, Col, Divider, Input, message, Row } from "antd";
 
 export default function OptionCardJira() {

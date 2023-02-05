@@ -1,5 +1,5 @@
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
-import AppTitle from "../../common/components/AppTitle";
+import { ESupportedApps } from "../../../_shared/enums/ESupportedApps";
+import AppTitle from "../../../_shared/components/AppTitle";
 
 type Props = {
   title: string;

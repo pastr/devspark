@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
+import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
 import browser from "webextension-polyfill";
-import PopupSection from "./PopupSection";
-import { useOptions } from "../../common/context/options.context";
-import { useFocus } from "../../common/hooks/useFocus";
-import { useStateStorageSynced } from "../../common/hooks/useStateStorageSynced";
+import PopupSection from "../_shared/components/PopupSection";
+import { useOptions } from "../../_shared/context/options.context";
+import { useFocus } from "../../_shared/hooks/useFocus";
+import { useStateStorageSynced } from "../../_shared/hooks/useStateStorageSynced";
 
 const TICKET_HISTORY_LENGTH = 5;
 

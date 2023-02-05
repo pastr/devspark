@@ -1,6 +1,6 @@
 import { Button, Divider } from "antd";
-import AppTitle from "../../common/components/AppTitle";
-import { ESupportedApps } from "../../common/enums/ESupportedApps";
+import AppTitle from "../../../_shared/components/AppTitle";
+import { ESupportedApps } from "../../../_shared/enums/ESupportedApps";
 
 type Props = {
   title: string;

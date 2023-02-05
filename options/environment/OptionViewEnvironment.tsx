@@ -1,9 +1,9 @@
-import OptionView from "./OptionView";
+import OptionView from "../_shared/components/OptionView";
 import { useState } from "react";
 import { useForm, SubmitHandler, SubmitErrorHandler, Controller } from "react-hook-form";
-import { useOptions } from "../../common/context/options.context";
+import { useOptions } from "../../_shared/context/options.context";
 import set from "lodash.set";
-import { IEnvrionmentNameState } from "../../common/types/IOptionsState";
+import { IEnvrionmentNameState } from "../../_shared/types/IOptionsState";
 import { Button, Col, Input, message, Modal, Popconfirm, Row, Select } from "antd";
 import { ErrorMessage } from "@hookform/error-message";
 

@@ -1,4 +1,4 @@
-import { IEnvrionmentNameState } from "../../../common/types/IOptionsState";
+import { IEnvrionmentNameState } from "../../../_shared/types/IOptionsState";
 
 export type RibbonOptions = {
   backgroundColor: string;

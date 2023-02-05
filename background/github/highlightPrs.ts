@@ -1,5 +1,5 @@
 import browser from "webextension-polyfill";
-import { IOptionsContextState } from "../../common/types/IOptionsState";
+import { IOptionsContextState } from "../../_shared/types/IOptionsState";
 
 browser.tabs.onUpdated.addListener(async () => {
   const [tab] = await browser.tabs.query({ active: true, currentWindow: true });

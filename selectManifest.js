@@ -1,4 +1,3 @@
-// const fs = require("fs");
 import fs from "fs";
 
 const manifest = "./dist/manifest.json";

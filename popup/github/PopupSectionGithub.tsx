@@ -1,13 +1,14 @@
-import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
-import PopupSection from "../_shared/components/PopupSection";
+// Not used
+// import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
+// import PopupSection from "../_shared/components/PopupSection";
 
-export default function PopupSectionGithub() {
+// export default function PopupSectionGithub() {
 
-  return (
-    <PopupSection title='Github' icon={ESupportedApps.GitHub}>
-      <div>
-        what
-      </div>
-    </PopupSection>
-  );
-}
+//   return (
+//     <PopupSection title='Github' icon={ESupportedApps.GitHub}>
+//       <div>
+//         Nothing yet
+//       </div>
+//     </PopupSection>
+//   );
+// }

@@ -17,7 +17,6 @@ function Popup() {
     <OptionsProvider>
       <div className="w-64 p-4 pt-2 flex flex-col">
         <PopupSectionJira />
-        {/* <PopupSectionGithub /> */}
       </div>
     </OptionsProvider>
   );

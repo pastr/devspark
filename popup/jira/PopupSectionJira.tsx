@@ -45,10 +45,10 @@ export default function SectionJira() {
   }
 
   function onPrefixInputEnter() {
-    isButtonDisabled() ? setTicketNumberInputFocus() : openJiraTicket();
+    isButtonDisabled() ? setTicketNumberInputFocus(true) : openJiraTicket();
   }
   function onTicketNumberInputEnter() {
-    isButtonDisabled() ? setPrefixInputFocus() : openJiraTicket();
+    isButtonDisabled() ? setPrefixInputFocus(true) : openJiraTicket();
   }
 
   function isButtonDisabled(): boolean {
@@ -78,8 +78,8 @@ export default function SectionJira() {
                placeholder="ticket prefix"
                value={jiraTicketPrefix}
                ref={prefixInputRef}
-               onKeyDown={(e) => e.key === "Enter" ? onPrefixInputEnter(): null}
-               onChange={(e) => setJiraTicketPrefix(e.target.value)}/>
+               onKeyDown={(e) => e.key === "Enter" ? onPrefixInputEnter() : null}
+               onChange={(e) => setJiraTicketPrefix(e.target.value)} />
         <input className="input"
                autoFocus
                ref={ticketNumberInputRef}
@@ -88,7 +88,7 @@ export default function SectionJira() {
                min="1"
                placeholder="ticket number"
                value={jiraTicketNumber}
-               onChange={(e) => setJiraTicketNumber(e.target.value)}/>
+               onChange={(e) => setJiraTicketNumber(e.target.value)} />
         <button className="btn-primary"
                 disabled={isButtonDisabled()}
                 onClick={openJiraTicket}>
@@ -96,14 +96,14 @@ export default function SectionJira() {
         </button>
         {showErrors()}
         <section className="flex flex-col gap-1">
-          <JiraTicketHistory jiraTickets={jiraTicketHistory}/>
+          <JiraTicketHistory jiraTickets={jiraTicketHistory} />
         </section>
       </div>
     </PopupSection>
   );
 }
 
-function JiraTicketHistory({ jiraTickets }: {jiraTickets: string[]}) {
+function JiraTicketHistory({ jiraTickets }: { jiraTickets: string[] }) {
   function showTickets() {
     return jiraTickets.map((ticketUrl, index) => {
       const ticketNumber = ticketUrl.split("/")[4];

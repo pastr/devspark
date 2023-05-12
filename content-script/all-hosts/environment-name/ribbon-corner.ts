@@ -67,11 +67,17 @@ export function addSquare(userOptions: IEnvrionmentNameState) {
   element.style.fontSize = userOptions.fontSize + "px";
   element.style.width = userOptions.height + "px";
   element.style.backgroundColor = userOptions.backgroundColor;
+  element.style.color = userOptions.textColor;
   element.style.top = "0px";
+  element.style.overflow = "hidden";
+  element.style.fontWeight = "500";
   if (userOptions.horizontalAlign === "left") {
     element.style.left = "0px";
+    element.style.borderBottomRightRadius = "5px";
+
   } else if (userOptions.horizontalAlign === "right") {
     element.style.right = "0px";
+    element.style.borderBottomLeftRadius = "5px";
   }
   element.innerText = userOptions.text;
   document.body.appendChild(element);

@@ -1,4 +1,4 @@
-import "./pull-requests/copy-filename/index";
+import { addCopyFileNameButton } from "./pull-requests/copy-filename/index";
 import { AddCheckboxesElements } from "./pull-requests/reviewed-checkboxes/index";
 import { addResizePropertyToSidebar } from "./resize-sidebar/index";
 
@@ -17,6 +17,7 @@ function onTurboLoad(event: CustomEvent<TTurboLoadEventDetail>) {
 
   if (url.pathname.includes("/pull/")) {
     addResizePropertyToSidebar();
+    addCopyFileNameButton();
   }
 }
 

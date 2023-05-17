@@ -3,6 +3,8 @@ let isListenersAdded = false;
 let isResizing = false;
 let startWidth = 0;
 let startX = 0;
+let mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
+let mouseUpHandler: ((e: MouseEvent) => void) | null = null;
 
 function handleMouseDown(e: MouseEvent) {
   isResizing = true;
@@ -29,19 +31,26 @@ export function addResizePropertyToSidebar() {
 
   resizeHandle.addEventListener("mousedown", handleMouseDown);
 
-  if (!isListenersAdded) {
-    window.addEventListener("mousemove", (e) => {
-      if (!isResizing) return;
-      const diffX = e.pageX - startX;
-      sidebar.style.width = `${startWidth + diffX}px`;
-    });
-
-    window.addEventListener("mouseup", () => {
-      isResizing = false;
-    });
-
-    isListenersAdded = true;
+  if (isListenersAdded) {
+    window.removeEventListener("mousemove", mouseMoveHandler!);
+    window.removeEventListener("mouseup", mouseUpHandler!);
   }
+
+  mouseMoveHandler = (e: MouseEvent) => {
+    const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
+    if (!isResizing || !sidebar) return;
+    const diffX = e.pageX - startX;
+    sidebar.style.width = `${startWidth + diffX}px`;
+  };
+
+  mouseUpHandler = () => {
+    isResizing = false;
+  };
+
+  window.addEventListener("mousemove", mouseMoveHandler);
+  window.addEventListener("mouseup", mouseUpHandler);
+
+  isListenersAdded = true;
 }
 
 // Todo: centralize the creation of all styles

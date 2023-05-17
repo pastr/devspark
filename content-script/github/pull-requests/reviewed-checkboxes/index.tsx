@@ -2,7 +2,6 @@ import { createSignal } from "solid-js";
 import browser from "webextension-polyfill";
 import { ColumnCheckbox } from "./ColumnCheckbox";
 import { ColumnTitle } from "./ColumnTitle";
-import difference from "lodash.difference";
 
 type TReviewedPrStorage = {
   [organization: string]: {
@@ -12,22 +11,6 @@ type TReviewedPrStorage = {
   }
 }
 
-type TTurboLoadEventDetail = {
-  url: string;
-};
-
-function onTurboLoad(event: CustomEvent<TTurboLoadEventDetail>) {
-  const url = new URL(event.detail.url);
-  if (url.pathname.includes("/pull")) {
-    const prCheckbox = document.querySelector("[data-eqx-checkbox]");
-    if (!prCheckbox) {
-      AddCheckboxesElements(url);
-    }
-  }
-}
-
-// Custom Event dispatched by GitHub's code when the turbo frame is loaded
-window.addEventListener("turbo:load", onTurboLoad);
 
 // TODO: At some point remove the old PR from the storage
 export const [reviewedPrs, setReviewedPrs] = createSignal<TReviewedPrStorage>({});

@@ -22,7 +22,8 @@
     "tabs",
     "webRequest",
     "https://github.com/*",
-    "http://localhost/*"
+    "http://localhost/*",
+    "webNavigation"
   ],
   "content_scripts": [
     {

@@ -15,7 +15,8 @@
     "activeTab",
     "scripting",
     "tabs",
-    "webRequest"
+    "webRequest",
+    "webNavigation"
   ],
   "content_scripts": [
     {

@@ -1,6 +1,6 @@
-import { addCopyFileNameButton } from "./pull-requests/copy-filename/index";
-import { AddCheckboxesElements } from "./pull-requests/reviewed-checkboxes/index";
-import { addResizePropertyToSidebar } from "./resize-sidebar/index";
+import { addCopyFileNameButton } from "./pulls/copy-filename/index";
+import { AddCheckboxesElements } from "./pulls/reviewed-checkboxes/index";
+import { addResizePropertyToSidebar } from "./pull/files/resize-sidebar/index";
 import { addCopyFileNameButtonToComments } from "./pull/conversation/index";
 
 

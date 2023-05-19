@@ -16,8 +16,13 @@ function handleMouseDown(e: MouseEvent) {
 export function addResizePropertyToSidebar() {
   const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
   const pullFilesPage = window.location.href.split("/").at(-1) === "files";
-  console.log("🚀 ~ file: index.ts:19 ~ addResizePropertyToSidebar ~ pullFilesPage:", pullFilesPage);
+
   if (!sidebar || !pullFilesPage) return;
+
+  const searchInput = document.querySelector<HTMLInputElement>("#file-tree-filter-field");
+  if (searchInput) {
+    searchInput.style.borderBottomRightRadius = "0px";
+  }
 
   sidebar.style.setProperty("resize", "horizontal");
 
@@ -61,13 +66,13 @@ const style = document.createElement("style");
 style.textContent = `
 .resize-handle {
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 10px;
+  right: 0px;
+  top: 32px;
+  width: 7px;
   height: 100%;
   cursor: ew-resize;
-  background: rgba(0,0,0,0.15);
-  z-index: 999;
+  border-right: 1px solid var(--color-border-default);
+  z-index: 10;
 }`;
 
 document.head.append(style);

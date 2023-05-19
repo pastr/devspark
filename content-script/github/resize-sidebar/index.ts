@@ -15,7 +15,9 @@ function handleMouseDown(e: MouseEvent) {
 
 export function addResizePropertyToSidebar() {
   const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
-  if (!sidebar) return;
+  const pullFilesPage = window.location.href.split("/").at(-1) === "files";
+  console.log("🚀 ~ file: index.ts:19 ~ addResizePropertyToSidebar ~ pullFilesPage:", pullFilesPage);
+  if (!sidebar || !pullFilesPage) return;
 
   sidebar.style.setProperty("resize", "horizontal");
 

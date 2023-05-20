@@ -1,27 +1,12 @@
-import { addCopyFileNameButton } from "./pulls/copy-filename/index";
-import { AddCheckboxesElements } from "./pulls/reviewed-checkboxes/index";
-import { addResizePropertyToSidebar } from "./pull/files/resize-sidebar/index";
-import { addCopyFileNameButtonToComments } from "./pull/conversation/index";
+import { runScriptsForConversationPage } from "./pull/conversation/conversation";
+import { runScriptsForFilesPage } from "./pull/files/files";
+import { runScriptsForPullsPage } from "./pulls/pulls";
 
 
-type TTurboLoadEventDetail = {
-  url: string;
-};
-
-function onTurboLoad(event: CustomEvent<TTurboLoadEventDetail>) {
-  const url = new URL(event.detail.url);
-  if (url.pathname.includes("/pulls")) {
-    const prCheckbox = document.querySelector("[data-eqx-checkbox]");
-    if (!prCheckbox) {
-      AddCheckboxesElements(url);
-    }
-  }
-
-  if (url.pathname.includes("/pull/")) {
-    addResizePropertyToSidebar();
-    addCopyFileNameButton();
-    addCopyFileNameButtonToComments();
-  }
+function onTurboLoad() {
+  runScriptsForPullsPage();
+  runScriptsForConversationPage();
+  runScriptsForFilesPage();
 }
 
 // Custom Event dispatched by GitHub's code when the turbo frame is loaded

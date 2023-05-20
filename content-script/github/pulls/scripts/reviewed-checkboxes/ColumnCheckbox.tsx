@@ -1,6 +1,6 @@
 import { createEffect, createSignal } from "solid-js";
 import type { Component } from "solid-js";
-import { reviewedPrs, setReviewedPrs } from "./index";
+import { reviewedPrs, setReviewedPrs } from "./reviewed-checkboxes";
 import set from "lodash.set";
 import browser from "webextension-polyfill";
 
@@ -39,7 +39,7 @@ export const ColumnCheckbox: Component<Props> = ({ organization, repository, iss
   }
 
   return (
-    <span data-eqx-checkbox={issueId}>
+    <span>
       <input type="checkbox" style="cursor: pointer;" checked={checked()} onchange={onClick} />
     </span>
   );

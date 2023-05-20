@@ -1,4 +1,4 @@
-import { addCopyToClipboardButton } from "../../../../_shared/copy-to-clipboard";
+import { addCopyToClipboardButton } from "../../../_shared/copy-to-clipboard";
 
 export function addCopyFileNameButtonToFilesComments(): void {
   addCopyToClipboardButton<HTMLAnchorElement>(

@@ -1,28 +1,4 @@
-import browser from "webextension-polyfill";
-
-browser.tabs.onUpdated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: loadAllDifss
-    });
-  }
-});
-
-browser.tabs.onActivated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: loadAllDifss
-    });
-  }
-});
-
-function loadAllDifss() {
+export function loadAllDifss() {
   const buttonExist = !!document.querySelector<HTMLElement>("#devspark-load-all-diffs");
   const rev = document.querySelector(".pr-review-tools");
   if (!buttonExist && rev) {

@@ -1,13 +1,14 @@
+import { GITHUB_OBSERVED_URLS } from "./../../../../_shared/enums/GITHUB_OBSERVED_URLS";
 import { IMessage } from "./../../../../_shared/types/IMessage";
-import { EGithubObservedURLs } from "./../../../../_shared/enums/EGithubObservedURLs";
 import { IOptionsContextState } from "../../../../_shared/types/IOptionsState";
 
 import browser from "webextension-polyfill";
 
 browser.runtime.onMessage.addListener(
   function(message: IMessage) {
-    if (message.eventType === "WebRequestCompleted" && message.eventDetails.url === EGithubObservedURLs.PullRequestReviewDecisions)
+    if (message.eventType === "WebRequestCompleted" && GITHUB_OBSERVED_URLS.PullRequestReviewDecisions.test(message.eventDetails.url)) {
       highlightPrStatusWithDelay();
+    }
   }
 );
 

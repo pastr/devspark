@@ -1,11 +1,12 @@
+import { IMessage } from "./../../../../_shared/types/IMessage";
+import { EGithubObservedURLs } from "./../../../../_shared/enums/EGithubObservedURLs";
 import { IOptionsContextState } from "../../../../_shared/types/IOptionsState";
 
 import browser from "webextension-polyfill";
 
 browser.runtime.onMessage.addListener(
-  function(message) {
-    // TODO don't use a simple string here, use enum instead
-    if (message.url === "https://github.com/pull_request_review_decisions")
+  function(message: IMessage) {
+    if (message.eventType === "WebRequestCompleted" && message.eventDetails.url === EGithubObservedURLs.PullRequestReviewDecisions)
       highlightPrStatusWithDelay();
   }
 );

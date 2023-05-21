@@ -1,8 +1,8 @@
+import browser from "webextension-polyfill";
 import { GITHUB_OBSERVED_URLS } from "./../../../../_shared/enums/GITHUB_OBSERVED_URLS";
 import { IMessage } from "./../../../../_shared/types/IMessage";
 import { IOptionsContextState } from "../../../../_shared/types/IOptionsState";
 
-import browser from "webextension-polyfill";
 
 browser.runtime.onMessage.addListener(
   function(message: IMessage) {

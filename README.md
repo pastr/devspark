@@ -1,12 +1,15 @@
-# Devspark Toolbox
-
-## Requirements
-
-No special requirement that I'm aware of.
+# Devspark
 
 ## Stack
 
-React + TailwindCSS bundled with Vite.
+### Content-script
+SolidJS
+
+### Options
+React + TailwindCSS
+
+### Popup
+React + TailwindCSS
 
 # Installation
 
@@ -43,4 +46,4 @@ The generated files are in `dist/`.
 
 Simply ziping the `dist` folder didn't work. I had to use [web-ext](https://github.com/mozilla/web-ext).
 
-In the `dist` folder I ran `web-ext build` and it created a zip file that I uploaded to AMO (https://addons.mozilla.org)
+In the `dist` folder, run `web-ext build` and it will create a zip file that can be uploaded to AMO (https://addons.mozilla.org)

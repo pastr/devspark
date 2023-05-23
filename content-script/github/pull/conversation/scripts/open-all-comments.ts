@@ -1,28 +1,4 @@
-import browser from "webextension-polyfill";
-
-browser.tabs.onUpdated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addOpenAllCommentsButton
-    });
-  }
-});
-
-browser.tabs.onActivated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addOpenAllCommentsButton
-    });
-  }
-});
-
-function addOpenAllCommentsButton() {
+export function addOpenAllCommentsButton() {
   const devsparkSidebarSection = document.querySelector("#devspark-sidebar-section");
   const openAllCommentsButtonExist = document.querySelector("[data-all-comments-inserted]");
 

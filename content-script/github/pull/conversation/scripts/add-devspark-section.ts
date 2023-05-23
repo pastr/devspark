@@ -1,28 +1,4 @@
-import browser from "webextension-polyfill";
-
-browser.tabs.onUpdated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addDevsparkSectionToConversationPage
-    });
-  }
-});
-
-browser.tabs.onActivated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addDevsparkSectionToConversationPage
-    });
-  }
-});
-
-function addDevsparkSectionToConversationPage() {
+export function addDevsparkSectionToConversationPage() {
   const discussionSidebarContainer = document.querySelector<HTMLDivElement>("#partial-discussion-sidebar");
   const firstDiscussionSideBarItem = document.querySelector(".discussion-sidebar-item.sidebar-assignee.js-discussion-sidebar-item");
   const devsparkSectionExist = document.querySelector("[data-devspark-section-inserted");

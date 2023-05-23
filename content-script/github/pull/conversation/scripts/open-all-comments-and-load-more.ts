@@ -1,29 +1,4 @@
-import browser from "webextension-polyfill";
-
-browser.tabs.onUpdated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addOpenAllCommentsAndLoadMoreButton
-    });
-  }
-});
-
-browser.tabs.onActivated.addListener(async () => {
-  const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-
-  if (tab.url!.includes("github.com")) {
-    browser.scripting.executeScript({
-      target: { tabId: tab.id! },
-      func: addOpenAllCommentsAndLoadMoreButton
-    });
-  }
-});
-
-function addOpenAllCommentsAndLoadMoreButton() {
-
+export function addOpenAllCommentsAndLoadMoreButton() {
   const devsparkSidebarSection = document.querySelector("#devspark-sidebar-section");
   const openAllCommentsAndLoadMoreButtonExist = document.querySelector("[data-all-comments-and-load-more-inserted]");
 
@@ -32,7 +7,6 @@ function addOpenAllCommentsAndLoadMoreButton() {
     openAllCommentsAndLoadMoreButton.innerText = "Load and open all comments";
     openAllCommentsAndLoadMoreButton.classList.add("btn", "btn-outline", "btn-sm", "mr-3", "mb-2");
     openAllCommentsAndLoadMoreButton.dataset.allCommentsAndLoadMoreInserted = "true";
-
 
     function openAllCommentsAndLoadMore() {
       const ajaxButtons = document.querySelectorAll<HTMLButtonElement>(".ajax-pagination-btn");
@@ -54,6 +28,4 @@ function addOpenAllCommentsAndLoadMoreButton() {
     openAllCommentsAndLoadMoreButton.addEventListener("click", openAllCommentsAndLoadMore);
     devsparkSidebarSection.appendChild(openAllCommentsAndLoadMoreButton);
   }
-
-
 }

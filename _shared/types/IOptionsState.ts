@@ -1,13 +1,13 @@
 import { RibbonOptions } from "../../content-script/all-hosts/environment-name/ribbon-corner";
 
 export interface IOptionsContextState {
-  options?: {
-    jira?: {
-      organizationName?: string
-    },
-    github?: {
-      deemphasizeTextList?: string[]
-    },
+  jira?: {
+    organizationName?: string
+  },
+  github?: {
+    deemphasizeTextList?: string[]
+  },
+  allHost?: {
     environmentName?: IEnvrionmentNameState[]
   }
 }

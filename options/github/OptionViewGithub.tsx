@@ -4,7 +4,7 @@ import { useOptions } from "../../_shared/context/options.context";
 import set from "lodash.set";
 import { useFocus } from "../../_shared/hooks/useFocus";
 import OptionView from "../_shared/components/OptionView";
-import { Row, Col, Divider, Button, Input } from "antd";
+import { Row, Col, Button, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 export default function OptionCardJira() {
@@ -15,10 +15,10 @@ export default function OptionCardJira() {
   function addToTheList() {
     const newOptions: typeof options = { ...options };
 
-    if (newOptions?.options?.github?.deemphasizeTextList) {
-      newOptions.options.github.deemphasizeTextList.push(textToDeemphasize);
+    if (newOptions?.github?.deemphasizeTextList) {
+      newOptions.github.deemphasizeTextList.push(textToDeemphasize);
     } else {
-      set(newOptions, "options.github.deemphasizeTextList", []);
+      set(newOptions, "github.deemphasizeTextList", []);
     }
     setOptions(newOptions);
     setTextToDeemphasize("");
@@ -27,12 +27,12 @@ export default function OptionCardJira() {
 
   function removeFromList(index: number) {
     const newOptions: typeof options = { ...options };
-    newOptions.options!.github!.deemphasizeTextList?.splice(index, 1);
+    newOptions.github!.deemphasizeTextList?.splice(index, 1);
     setOptions(newOptions);
   }
 
   function showSavedTextsToDeemphasize() {
-    const texts = options?.options?.github?.deemphasizeTextList;
+    const texts = options?.github?.deemphasizeTextList;
     if (!texts?.length) return;
     return texts.map((text, index) => {
       return (

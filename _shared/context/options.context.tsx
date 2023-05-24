@@ -3,13 +3,13 @@ import { useStateStorageSynced } from "../hooks/useStateStorageSynced";
 import { IOptionsContextState } from "../types/IOptionsState";
 
 const defaultContextState: IOptionsContextState = {
-  options: {
-    jira: {
-      organizationName: ""
-    },
-    github: {
-      deemphasizeTextList: []
-    },
+  jira: {
+    organizationName: ""
+  },
+  github: {
+    deemphasizeTextList: []
+  },
+  allHost: {
     environmentName: []
   }
 };
@@ -17,7 +17,6 @@ const defaultContextState: IOptionsContextState = {
 const OptionsContext = createContext<[IOptionsContextState, Dispatch<React.SetStateAction<IOptionsContextState>>]>([] as unknown as [IOptionsContextState, Dispatch<React.SetStateAction<IOptionsContextState>>]);
 
 export const OptionsProvider = ({ children }: {children: JSX.Element}) => {
-  // TODO: Fix the options satte because it's {options: {options: {}}
   const [localOptions, setLocalOptions] = useStateStorageSynced("options", defaultContextState);
 
   return (

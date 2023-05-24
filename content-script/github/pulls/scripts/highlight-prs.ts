@@ -68,7 +68,7 @@ export function highlightPr() {
     const storage = await browser.storage.sync.get("options");
     const options = storage.options as IOptionsContextState;
     const prs = document.querySelectorAll<HTMLElement>("[id^=issue_] [id*=link]");
-    const deemphasizePrs = options?.options?.github?.deemphasizeTextList;
+    const deemphasizePrs = options?.github?.deemphasizeTextList;
 
     if (!deemphasizePrs) return;
 

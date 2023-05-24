@@ -28,14 +28,14 @@ export default function OptionCardEnvironmentName() {
   const onValid: SubmitHandler<IEnvrionmentNameState> = (data) => {
     const newOptions: typeof options = { ...options };
 
-    if (newOptions.options?.environmentName) {
+    if (newOptions.allHost?.environmentName) {
       if (editEnvironmentIndex !== null) {
-        newOptions.options.environmentName[editEnvironmentIndex] = data;
+        newOptions.allHost.environmentName[editEnvironmentIndex] = data;
       } else {
-        newOptions.options.environmentName.push(data);
+        newOptions.allHost.environmentName.push(data);
       }
     } else {
-      set(newOptions, "options.environmentName", [data]);
+      set(newOptions, "allHost.environmentName", [data]);
     }
 
     setOptions(newOptions);
@@ -71,7 +71,7 @@ export default function OptionCardEnvironmentName() {
   }
 
   function editEnvironment(index: number) {
-    const defaultValuesLocal = options.options!.environmentName![index];
+    const defaultValuesLocal = options.allHost!.environmentName![index];
     reset();
     Object.entries(defaultValuesLocal).forEach(([key, value]) => {
       setValue(key as keyof typeof defaultValuesLocal, value, { shouldDirty: false });
@@ -108,7 +108,7 @@ export default function OptionCardEnvironmentName() {
             <div>
               {environmentExist && <p className="text-base font-semibold mb-2 pb-2 border-b-[1px]">Existing Environments</p>}
               {
-                options?.options?.environmentName?.map((environment, index) => {
+                options?.allHost?.environmentName?.map((environment, index) => {
                   return (
                     <>
                       <EnvironmentLine key={`${environment.url}-${environment.text}`}

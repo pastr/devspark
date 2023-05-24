@@ -4,7 +4,7 @@ import { IEnvrionmentNameState, IOptionsContextState } from "../../../_shared/ty
 
 browser.storage.sync.get("options").then((item) => {
   const options: IOptionsContextState = item.options;
-  options.options?.environmentName?.forEach((environmentNameOption) => {
+  options.allHost?.environmentName?.forEach((environmentNameOption) => {
     addMarker(environmentNameOption);
   });
 });

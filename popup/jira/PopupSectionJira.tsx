@@ -16,7 +16,7 @@ export default function SectionJira() {
   const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();
   const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
-  const [{ options }] = useOptions();
+  const [options] = useOptions();
 
   useEffect(() => {
     if (options?.jira?.organizationName) {

@@ -1,12 +1,16 @@
 import browser from "webextension-polyfill";
-import { addRibbon, addLine, addSquare } from "./ribbon-corner";
+import { addRibbon, addLine, addSquare } from "../../../_shared/services/ribbon-corner";
 import { IEnvrionmentNameState, IOptionsContextState } from "../../../_shared/types/IOptionsState";
 
 browser.storage.sync.get("options").then((item) => {
-  const options: IOptionsContextState = item.options;
-  options.allHost?.environmentName?.forEach((environmentNameOption) => {
-    addMarker(environmentNameOption);
-  });
+  if (item.options) {
+    const options: IOptionsContextState = item.options;
+    if (options?.allHost?.environmentName) {
+      options.allHost.environmentName.forEach((environmentNameOption) => {
+        addMarker(environmentNameOption);
+      });
+    }
+  }
 });
 
 

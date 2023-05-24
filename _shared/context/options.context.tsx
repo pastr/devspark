@@ -4,7 +4,9 @@ import { IOptionsContextState } from "../types/IOptionsState";
 
 const defaultContextState: IOptionsContextState = {
   jira: {
-    organizationName: ""
+    organizationName: "",
+    ticketPrefix: "",
+    ticketHistory: []
   },
   github: {
     deemphasizeTextList: []

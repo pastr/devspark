@@ -11,7 +11,7 @@ export default function OptionCardJira() {
   const [options, setOptions] = useOptions();
 
   useEffect(() => {
-    if (options?.jira?.organizationName) {
+    if (options.jira?.organizationName) {
       setJiraOrganizationName(options.jira.organizationName);
     }
   }, [options]);
@@ -20,7 +20,7 @@ export default function OptionCardJira() {
   function saveJiraOrganizationName() {
     const newOptions: typeof options = { ...options };
 
-    if (newOptions?.jira?.organizationName) {
+    if (newOptions.jira?.organizationName) {
       newOptions.jira.organizationName = jiraOrganizationName;
     } else {
       set(newOptions, "jira.organizationName", jiraOrganizationName);

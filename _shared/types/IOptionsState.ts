@@ -1,8 +1,10 @@
-import { RibbonOptions } from "../../content-script/all-hosts/environment-name/ribbon-corner";
+import { RibbonOptions } from "../services/ribbon-corner";
 
 export interface IOptionsContextState {
   jira?: {
     organizationName?: string
+    ticketPrefix?: string
+    ticketHistory?: string[]
   },
   github?: {
     deemphasizeTextList?: string[]

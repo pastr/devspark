@@ -65,9 +65,9 @@ export default function OptionCardEnvironmentName() {
   }
 
   function deleteEnvironment(index: number) {
-    const localOptions = { ...options };
-    localOptions.options?.environmentName?.splice(index, 1);
-    setOptions(localOptions);
+    const newOptions = { ...options };
+    newOptions.allHost!.environmentName!.splice(index, 1);
+    setOptions(newOptions);
   }
 
   function editEnvironment(index: number) {

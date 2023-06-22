@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "../_shared/components/PopupSection";
@@ -37,11 +37,7 @@ export default function PopupSectionJira() {
     }
     copyJiraTicketHistory.unshift(url);
     set(newOptions, "jira.ticketHistory", copyJiraTicketHistory);
-    // newOptions.jira.ticketHistory = copyJiraTicketHistory;
-    // setJiraTicketHistory(copyJiraTicketHistory);
     setOptions(newOptions);
-
-    // browser.storage.sync.set({ jiraTicketHistory: copyJiraTicketHistory });
 
     browser.tabs.create({ url });
     window.close();
@@ -83,7 +79,6 @@ export default function PopupSectionJira() {
     <PopupSection title='Jira' icon={ESupportedApps.Jira}>
       <div className="flex flex-col gap-2">
         <input className="input"
-               disabled={organizationNameMissing}
                placeholder="ticket prefix"
                value={jiraTicketPrefix}
                ref={prefixInputRef}
@@ -91,7 +86,6 @@ export default function PopupSectionJira() {
                onChange={(e) => setJiraTicketPrefix(e.target.value)} />
         <input className="input"
                autoFocus
-               disabled={organizationNameMissing}
                ref={ticketNumberInputRef}
                onKeyDown={(e) => e.key === "Enter" ? onTicketNumberInputEnter() : null}
                type="number"

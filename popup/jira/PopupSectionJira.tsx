@@ -1,22 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ESupportedApps } from "../../_shared/enums/ESupportedApps";
 import browser from "webextension-polyfill";
 import PopupSection from "../_shared/components/PopupSection";
 import { useOptions } from "../../_shared/context/options.context";
 import { useFocus } from "../../_shared/hooks/useFocus";
-import { useStateStorageSynced } from "../../_shared/hooks/useStateStorageSynced";
 import set from "lodash.set";
 
 const TICKET_HISTORY_LENGTH = 5;
 
 export default function PopupSectionJira() {
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
-  // const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
-  // TODO: Move this to the options synced object instead
-  // const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
   const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
-  const [prefixInputRef, setPrefixInputFocus] = useFocus();
-  const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
+  const [prefixInputRef, setPrefixInputFocus] = useFocus<HTMLInputElement>();
+  const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus<HTMLInputElement>();
   const [options, setOptions] = useOptions();
   const jiraTicketPrefix = options?.jira?.ticketPrefix ?? "";
   const jiraTicketHistory = options?.jira?.ticketHistory ?? [];

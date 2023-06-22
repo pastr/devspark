@@ -1,9 +1,10 @@
-import { MutableRefObject, useRef } from "react";
+import { useRef } from "react";
 
-export function useFocus(): [any, (selectText?: boolean) => void] {
-  const htmlElRef: MutableRefObject<any> = useRef(null);
+export function useFocus<T extends HTMLInputElement | HTMLTextAreaElement>(): [React.RefObject<T>, (selectText?: boolean) => void] {
+  const htmlElRef = useRef<T>(null);
   const setFocus = (selectText?: boolean): void => {
     htmlElRef?.current?.focus?.();
+
     if (selectText) {
       htmlElRef?.current?.select?.();
     }

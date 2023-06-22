@@ -11,8 +11,8 @@ export default function OptionCardJira() {
   const [options, setOptions] = useOptions();
 
   useEffect(() => {
-    if (options?.options?.jira?.organizationName) {
-      setJiraOrganizationName(options.options.jira.organizationName);
+    if (options.jira?.organizationName) {
+      setJiraOrganizationName(options.jira.organizationName);
     }
   }, [options]);
 
@@ -20,10 +20,10 @@ export default function OptionCardJira() {
   function saveJiraOrganizationName() {
     const newOptions: typeof options = { ...options };
 
-    if (newOptions?.options?.jira?.organizationName) {
-      newOptions.options.jira.organizationName = jiraOrganizationName;
+    if (newOptions.jira?.organizationName) {
+      newOptions.jira.organizationName = jiraOrganizationName;
     } else {
-      set(newOptions, "options.jira.organizationName", jiraOrganizationName);
+      set(newOptions, "jira.organizationName", jiraOrganizationName);
     }
 
     setOptions(newOptions);
@@ -53,7 +53,7 @@ export default function OptionCardJira() {
                   Organization name
                 </label>
                 <Input value={jiraOrganizationName}
-                       defaultValue={options.options?.jira?.organizationName}
+                       defaultValue={options.jira?.organizationName}
                        onChange={(e) => setJiraOrganizationName(e.target.value)}
                        onKeyDown={(e) => e.key === "Enter" ? saveJiraOrganizationName() : null} // TODO: Remove this because the save button is for the whole page now
                        type="text"

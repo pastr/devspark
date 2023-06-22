@@ -5,28 +5,32 @@ import PopupSection from "../_shared/components/PopupSection";
 import { useOptions } from "../../_shared/context/options.context";
 import { useFocus } from "../../_shared/hooks/useFocus";
 import { useStateStorageSynced } from "../../_shared/hooks/useStateStorageSynced";
+import set from "lodash.set";
 
 const TICKET_HISTORY_LENGTH = 5;
 
-export default function SectionJira() {
+export default function PopupSectionJira() {
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
-  const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
+  // const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
   // TODO: Move this to the options synced object instead
-  const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
+  // const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
   const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();
   const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
-  const [{ options }] = useOptions();
+  const [options, setOptions] = useOptions();
+  const jiraTicketPrefix = options?.jira?.ticketPrefix ?? "";
+  const jiraTicketHistory = options?.jira?.ticketHistory ?? [];
 
   useEffect(() => {
-    if (options?.jira?.organizationName) {
+    if (options.jira?.organizationName) {
       setOrganizationNameMissing(false);
     }
-  }, [options?.jira?.organizationName]);
+  }, [options.jira?.organizationName]);
 
 
   function openJiraTicket() {
-    const jiraOrganizationName = options?.jira?.organizationName;
+    const jiraOrganizationName = options.jira?.organizationName;
+    const newOptions: typeof options = { ...options };
 
     const fullTicket = `${jiraTicketPrefix}-${jiraTicketNumber}`;
     const url = `https://${jiraOrganizationName}.atlassian.net/browse/${fullTicket}`;
@@ -36,12 +40,21 @@ export default function SectionJira() {
       copyJiraTicketHistory.pop();
     }
     copyJiraTicketHistory.unshift(url);
-    setJiraTicketHistory(copyJiraTicketHistory);
+    set(newOptions, "jira.ticketHistory", copyJiraTicketHistory);
+    // newOptions.jira.ticketHistory = copyJiraTicketHistory;
+    // setJiraTicketHistory(copyJiraTicketHistory);
+    setOptions(newOptions);
 
-    browser.storage.sync.set({ jiraTicketHistory: copyJiraTicketHistory });
+    // browser.storage.sync.set({ jiraTicketHistory: copyJiraTicketHistory });
 
     browser.tabs.create({ url });
     window.close();
+  }
+
+  function setJiraTicketPrefix(prefix: string) {
+    const newOptions: typeof options = { ...options };
+    set(newOptions, "jira.ticketPrefix", prefix);
+    setOptions(newOptions);
   }
 
   function onPrefixInputEnter() {
@@ -52,7 +65,6 @@ export default function SectionJira() {
   }
 
   function isButtonDisabled(): boolean {
-    console.log("organizationNameMissing", organizationNameMissing);
     return jiraTicketNumber === "" || jiraTicketPrefix === "" || organizationNameMissing;
   }
 
@@ -75,6 +87,7 @@ export default function SectionJira() {
     <PopupSection title='Jira' icon={ESupportedApps.Jira}>
       <div className="flex flex-col gap-2">
         <input className="input"
+               disabled={organizationNameMissing}
                placeholder="ticket prefix"
                value={jiraTicketPrefix}
                ref={prefixInputRef}
@@ -82,6 +95,7 @@ export default function SectionJira() {
                onChange={(e) => setJiraTicketPrefix(e.target.value)} />
         <input className="input"
                autoFocus
+               disabled={organizationNameMissing}
                ref={ticketNumberInputRef}
                onKeyDown={(e) => e.key === "Enter" ? onTicketNumberInputEnter() : null}
                type="number"

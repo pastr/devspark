@@ -2,8 +2,7 @@ import { OptionsProvider } from "../_shared/context/options.context";
 import OptionViewEnvironmentName from "./environment/OptionViewEnvironment";
 import OptionViewGithub from "./github/OptionViewGithub";
 import OptionViewJira from "./jira/OptionViewJira";
-import browser from "webextension-polyfill";
-import { Layout, Space, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
 import { LOGOS } from "../_shared/components/AppTitle";
@@ -18,9 +17,9 @@ type TRoute = "environmentName" | "jira" | "github";
 export default function Options() {
   const [route, setRoute] = useState<TRoute>("jira");
 
-  function clearStorage() {
-    browser.storage.sync.clear();
-  }
+  // function clearStorage() {
+  //   browser.storage.sync.clear();
+  // }
 
   const onClick: MenuProps["onClick"] = (e) => {
     setRoute(e.key as TRoute);

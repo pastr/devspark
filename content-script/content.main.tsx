@@ -1,2 +1,2 @@
-import "./all-hosts/environment-name/index";
+import "./all-hosts/scripts/environment-name";
 import "./github/github";

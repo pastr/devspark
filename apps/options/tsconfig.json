@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2015", "DOM"],
+    "module": "ESNext",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true,
+    "types": ["vite/client"],
+    "jsx": "react-jsx"
+  },
+  "exclude": ["node_modules"],
+  "extends": "@devspark/tsconfig/base.json"
+}

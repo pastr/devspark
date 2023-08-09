@@ -13,7 +13,7 @@ React + TailwindCSS
 
 # Installation
 
-`npm i`
+`pnpm install`
 
 # Dev
 
@@ -23,22 +23,22 @@ The development has to be improved but currently to start the extension in devel
 - `npm run dev:content` (it will generate the `index.global.js` file)
 - `npm run dev:background` (it will generate the `background.global.js` file)
 
-There are multiples `manifest.json` files for now.
+There are multiples `manifest.json` files. 
 `manifestV2.json` is a manifest V2 file for firefox.
 `manifestV3.json` is a manifest V3 file for chrome.
-`manifest.json` is the one being read by the browser so you can change its content to match the browser you want to test with.
 
 # Building the Extension:
+The generated files will be in `dist/`.
 
 ## Firefox
 
-`npm run build:firefox` builds the extension for Firefox.
+`pnpm run build:firefox` builds the extension for Firefox.
 
-The generated files are in `dist/`.
 
 ## Chrome
 
-`npm run build:chrome` builds the extensions for Google Chrome.
+`pnpm run build:chrome` builds the extensions for Google Chrome.
+
 
 # Publishing
 

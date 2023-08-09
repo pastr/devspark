@@ -1,0 +1,27 @@
+{
+  "name": "@devspark/content-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build --config vite.content.config.ts",
+    "dev": "vite build --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash.set": "^4.3.7",
+    "@types/webextension-polyfill": "^0.10.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8",
+    "vite-plugin-solid": "^2.7.0",
+    "webextension-polyfill": "0.10.0",
+    "@devspark/types": "workspace:*",
+    "@devspark/services": "workspace:*"
+  },
+  "dependencies": {
+    "lodash.set": "^4.3.2",
+    "solid-js": "^1.7.9"
+  }
+}

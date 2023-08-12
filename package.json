@@ -2,13 +2,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:chromium": "cross-env CHROMIUM=true npm run build",
-    "build:firefox": "cross-env FIREFOX=true npm run build",
-    "build": "run-s turboBuild selectManifest",
-    "turboBuild": "turbo run build",
-    "dev": "turbo run dev",
+    "build:chromium": "cross-env CHROMIUM=true pnpm run build",
+    "build:firefox": "cross-env FIREFOX=true pnpm run build",
+    "build": "turbo run build",
+    "prebuild": "node ./selectManifest.js",
+    "dev": "turbo run dev --concurrency=12",
+    "dev:chromium": "cross-env CHROMIUM=true pnpm run dev",
+    "dev:firefox": "cross-env FIREFOX=true pnpm run dev",
+    "predev": "node ./selectManifest.js",
     "lint": "turbo run lint",
-    "selectManifest": "node ./selectManifest.js",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {

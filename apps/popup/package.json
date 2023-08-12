@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build --config vite.popup.config.ts",
-    "selectManifestChrome": "node ./selectManifest.js",
-    "selectManifestFirefox": "cross-env FIREFOX=true node ./selectManifest.js"
+    "dev": "vite build --config vite.popup.config.ts --watch",
+    "build": "vite build --config vite.popup.config.ts"
   },
   "keywords": [],
   "author": "",

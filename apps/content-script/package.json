@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "vite build --config vite.content.config.ts",
-    "dev": "vite build --watch"
+    "dev": "vite build --config vite.content.config.ts --watch",
+    "build": "vite build --config vite.content.config.ts"
   },
   "keywords": [],
   "author": "",

@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite dev --config vite.options.config.ts",
+    "dev": "vite build --config vite.options.config.ts --watch",
     "build": "vite build --config vite.options.config.ts"
   },
   "keywords": [],

@@ -1,6 +1,7 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { resolve } from "path";
+
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,7 @@ export default defineConfig({
     },
     rollupOptions: {
       input: {
-        background: new URL("./background.html", import.meta.url).pathname, // for firefox, chrome doesn't use the background.html
+        background: new URL("./background.html", import.meta.url).pathname // for firefox, chrome doesn't use the background.html
       },
       output: {
         entryFileNames: "background.global.js",

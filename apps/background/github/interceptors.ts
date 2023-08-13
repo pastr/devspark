@@ -5,15 +5,17 @@ import { IMessage } from "@devspark/types/interfaces/IMessage";
 
 browser.webRequest.onCompleted.addListener(
   async (req) => {
-    const message: IMessage = {
-      eventType: "WebRequestCompleted",
-      eventDetails: {
-        url: req.url
-      }
-    };
-
     if (GITHUB_OBSERVED_URLS.PullRequestReviewDecisions.test(req.url) ||
-        GITHUB_OBSERVED_URLS.ShowPartial.test(req.url)) {
+        GITHUB_OBSERVED_URLS.ShowPartial.test(req.url) ||
+        GITHUB_OBSERVED_URLS.SuggestedReviewers.test(req.url)) {
+
+      const message: IMessage = {
+        eventType: "WebRequestCompleted",
+        eventDetails: {
+          url: req.url
+        }
+      };
+
       browser.tabs.sendMessage(req.tabId, message);
     }
   },

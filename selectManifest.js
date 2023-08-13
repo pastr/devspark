@@ -8,6 +8,8 @@ const newManifest = "./dist/manifest.json";
 
 async function main() {
   try {
+    await fs.rm('./dist', { recursive: true, force: true });
+
     const data = await fs.readFile(selectedManifest, 'utf8');
 
     const directory = path.dirname(newManifest);

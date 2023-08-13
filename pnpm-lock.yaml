@@ -35,6 +35,9 @@ importers:
       '@devspark/types':
         specifier: workspace:*
         version: link:../../packages/types
+      '@types/webextension-polyfill':
+        specifier: ^0.10.1
+        version: 0.10.1
       '@vitejs/plugin-react':
         specifier: ^4.0.4
         version: 4.0.4(vite@4.4.8)
@@ -57,6 +60,9 @@ importers:
       '@devspark/services':
         specifier: workspace:*
         version: link:../../packages/services
+      '@devspark/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       '@devspark/types':
         specifier: workspace:*
         version: link:../../packages/types
@@ -250,15 +256,6 @@ importers:
       '@types/webextension-polyfill':
         specifier: ^0.10.1
         version: 0.10.1
-
-  packages/public:
-    devDependencies:
-      typescript:
-        specifier: ^5.0.2
-        version: 5.1.6
-      vite:
-        specifier: ^4.4.5
-        version: 4.4.8(@types/node@17.0.45)
 
   packages/services:
     devDependencies:

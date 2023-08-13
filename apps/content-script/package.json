@@ -18,6 +18,7 @@
     "vite-plugin-solid": "^2.7.0",
     "webextension-polyfill": "0.10.0",
     "@devspark/types": "workspace:*",
+    "@devspark/tsconfig": "workspace:*",
     "@devspark/services": "workspace:*"
   },
   "dependencies": {

@@ -11,10 +11,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@devspark/services": "workspace:*",
+    "@devspark/types": "workspace:*",
+    "@types/webextension-polyfill": "^0.10.1",
     "@vitejs/plugin-react": "^4.0.4",
     "vite": "^4.4.8",
-    "webextension-polyfill": "0.10.0",
-    "@devspark/types": "workspace:*",
-    "@devspark/services": "workspace:*"
+    "webextension-polyfill": "0.10.0"
   }
 }

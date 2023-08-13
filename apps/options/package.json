@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite build --config vite.options.config.ts --watch",
+    "dev": "vite build --config vite.options.config.ts --mode development --watch",
     "build": "vite build --config vite.options.config.ts"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "@types/lodash.set": "^4.3.7",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "@types/webextension-polyfill": "^0.10.1",
     "@vitejs/plugin-react": "^4.0.4",
     "autoprefixer": "^10.4.14",
     "lodash.set": "^4.3.2",
@@ -33,6 +34,7 @@
     "antd": "^5.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.4"
+    "react-hook-form": "^7.45.4",
+    "webextension-polyfill": "0.10.0"
   }
 }

@@ -18,12 +18,12 @@ const menuConfig = [
   { key: "jira", label: "Jira", icon: LOGOS.jira },
   { key: "github", label: "GitHub", icon: LOGOS.github },
   { key: "environmentName", label: "Environment", iconComponent: <FileUnknownOutlined /> },
-  { key: "development", label: "Development", iconComponent: <CodeOutlined />, showInDevelopment: true },
+  { key: "development", label: "Development", iconComponent: <CodeOutlined />, showInDevelopment: true }
 ];
 
 export default function Options() {
   const [route, setRoute] = useState<TRoute>("jira");
-  const isDevelopment = import.meta.env.MODE === 'development';
+  const isDevelopment = import.meta.env.MODE === "development";
 
   const onClick: MenuProps["onClick"] = (e) => {
     setRoute(e.key as TRoute);
@@ -58,7 +58,6 @@ export default function Options() {
     </OptionsProvider>
   );
 }
-// {icon && <img className={`${iconClassName}`} src={LOGOS[icon]} alt={`${title} logo`} />}
 
 export function DisplayOption({ route }: { route: TRoute }) {
   switch (route) {

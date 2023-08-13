@@ -1,10 +1,10 @@
-import browser from "webextension-polyfill";
-import { GithubPages, LocationService } from "@devspark/services/location";
-import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
 import { addCopyFileNameButtonToConversationComments } from "./scripts/add-copy-filename-button";
 import { addDevsparkSectionToConversationPage } from "./scripts/add-devspark-section";
 import { addOpenAllCommentsButton } from "./scripts/open-all-comments";
 import { addOpenAllCommentsAndLoadMoreButton } from "./scripts/open-all-comments-and-load-more";
+import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
+import { GithubPages, LocationService } from "@devspark/services/location";
+import * as browser from "webextension-polyfill";
 import { GITHUB_OBSERVED_URLS } from "@devspark/types/enums/GITHUB_OBSERVED_URLS";
 import { IMessage } from "@devspark/types/interfaces/IMessage";
 
@@ -20,7 +20,7 @@ export function runScriptsForConversationPage() {
   if (LocationService.isCorrectPage(GithubPages.PullConversation)) {
     addDevsparkSectionToConversationPage();
     addCopyFileNameButtonToConversationComments();
-    // convertPrTitleToJiraLink();
+    convertPrTitleToJiraLink();
     addOpenAllCommentsButton();
     addOpenAllCommentsAndLoadMoreButton();
   }

@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
-import { useOptions } from "@devspark/context/options";
-import set from "lodash.set";
-import { useFocus } from "@devspark/hooks/useFocus";
-import OptionView from "../_shared/components/OptionView";
-import { Row, Col, Button, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import { Row, Col, Button, Input } from "antd";
+import set from "lodash.set";
+import { useState } from "react";
+
+import { useOptions } from "@devspark/context/options";
+import { useFocus } from "@devspark/hooks/useFocus";
+import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
+
+
+import OptionView from "../_shared/components/OptionView";
 
 export default function OptionCardJira() {
   const [textToDeemphasize, setTextToDeemphasize] = useState("");

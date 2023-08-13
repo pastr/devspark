@@ -1,4 +1,4 @@
-import browser from "webextension-polyfill";
+import * as browser from "webextension-polyfill";
 import { IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
 
 export async function convertPrTitleToJiraLink() {

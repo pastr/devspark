@@ -1,33 +1,17 @@
 module.exports = {
-  "parser": "@typescript-eslint/parser",
-  "extends": [
+  extends: [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended"
+    "plugin:import/recommended",
+    "plugin:import/typescript"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    },
+  settings: {
     "import/resolver": {
-      "node": {
-        "paths": [
-          "src"
-        ],
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
-      }
+      typescript: true,
+      node: true
     }
   },
-  "rules": {
+  rules: {
     "semi": [
       "error",
       "always"
@@ -132,6 +116,34 @@ module.exports = {
     "jsx-a11y/no-autofocus": [
       "off"
     ],
+
+    "import/first": ["error"],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@devspark/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ],
+    
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/array-type": [
@@ -155,54 +167,6 @@ module.exports = {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_"
       }
-    ],
-    "react/prop-types": "off",
-    "react/no-unknown-property": "off",
-    "react/jsx-indent": [
-      "error",
-      2
-    ],
-    "react/self-closing-comp": [
-      "error",
-      {
-        "component": true,
-        "html": false
-      }
-    ],
-    "react/jsx-max-props-per-line": [
-      "error",
-      {
-        "maximum": 1,
-        "when": "multiline"
-      }
-    ],
-    "react/jsx-indent-props": [
-      "error",
-      "first"
-    ],
-    "react/jsx-fragments": [
-      "error"
-    ],
-    "react/jsx-first-prop-new-line": [
-      "error",
-      "never"
-    ],
-    "react/jsx-equals-spacing": [
-      "error"
-    ],
-    "react/jsx-closing-tag-location": [
-      "error"
-    ],
-    "react/jsx-closing-bracket-location": [
-      "error",
-      {
-        "selfClosing": "after-props",
-        "nonEmpty": "after-props"
-      }
-    ],
-    "react/jsx-boolean-value": [
-      "error",
-      "never"
     ]
-  }
-}
+  },
+};

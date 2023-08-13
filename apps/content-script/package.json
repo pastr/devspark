@@ -19,7 +19,8 @@
     "webextension-polyfill": "0.10.0",
     "@devspark/types": "workspace:*",
     "@devspark/tsconfig": "workspace:*",
-    "@devspark/services": "workspace:*"
+    "@devspark/services": "workspace:*",
+    "eslint-config-devspark": "workspace:*"
   },
   "dependencies": {
     "lodash.set": "^4.3.2",

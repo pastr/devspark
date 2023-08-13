@@ -1,0 +1,15 @@
+{
+  "name": "eslint-config-devspark",
+  "main": "index.js",
+  "version": "1.0.0",
+  "dependencies": {
+    "eslint": "latest",
+    "eslint-config-turbo": "latest",
+    "eslint-plugin-react": "latest"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^6.3.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.0"
+  }
+}

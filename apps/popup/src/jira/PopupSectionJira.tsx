@@ -1,10 +1,12 @@
+import set from "lodash.set";
 import { useEffect, useState } from "react";
-import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 import browser from "webextension-polyfill";
-import PopupSection from "../_shared/components/PopupSection";
+
 import { useOptions } from "@devspark/context/options";
 import { useFocus } from "@devspark/hooks/useFocus";
-import set from "lodash.set";
+import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
+
+import PopupSection from "../_shared/components/PopupSection";
 
 const TICKET_HISTORY_LENGTH = 5;
 

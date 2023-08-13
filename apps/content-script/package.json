@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/lodash.set": "^4.3.7",
-    "@types/webextension-polyfill": "^0.10.1",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.8",
-    "vite-plugin-solid": "^2.7.0",
+    "@types/lodash.set": "4.3.7",
+    "@types/webextension-polyfill": "0.10.1",
+    "typescript": "5.1.6",
+    "vite": "4.4.8",
+    "vite-plugin-solid": "2.7.0",
     "webextension-polyfill": "0.10.0",
     "@devspark/types": "workspace:*",
     "@devspark/tsconfig": "workspace:*",
@@ -23,7 +23,7 @@
     "eslint-config-devspark": "workspace:*"
   },
   "dependencies": {
-    "lodash.set": "^4.3.2",
-    "solid-js": "^1.7.9"
+    "lodash.set": "4.3.2",
+    "solid-js": "1.7.9"
   }
 }

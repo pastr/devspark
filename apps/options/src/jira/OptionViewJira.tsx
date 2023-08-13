@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 import { useOptions } from "@devspark/context/options";
+import { useFocus } from "@devspark/hooks/useFocus";
 import set from "lodash.set";
 import OptionView from "../_shared/components/OptionView";
 import { Button, Col, Divider, Input, message, Row } from "antd";
@@ -8,9 +9,14 @@ import { Button, Col, Divider, Input, message, Row } from "antd";
 export default function OptionCardJira() {
   const [messageApi, contextHolder] = message.useMessage();
   const [jiraOrganizationName, setJiraOrganizationName] = useState("");
+  const organizationInputRef: MutableRefObject<any> = useRef(null);
   const [options, setOptions] = useOptions();
 
   useEffect(() => {
+    console.log("options.jira?.organizationName", options.jira?.organizationName);
+    console.log("jiraOrganizationName", jiraOrganizationName);
+    
+    
     if (options.jira?.organizationName) {
       setJiraOrganizationName(options.jira.organizationName);
     }
@@ -27,11 +33,15 @@ export default function OptionCardJira() {
     }
 
     setOptions(newOptions);
+    organizationInputRef.current.blur();
+    
     messageApi.open({
       type: "success",
       content: "Organization name saved!"
     });
   }
+
+
 
   return (
     <OptionView title={"Jira"} icon={ESupportedApps.Jira}>
@@ -53,6 +63,7 @@ export default function OptionCardJira() {
                   Organization name
                 </label>
                 <Input value={jiraOrganizationName}
+                       ref={organizationInputRef}
                        defaultValue={options.jira?.organizationName}
                        onChange={(e) => setJiraOrganizationName(e.target.value)}
                        onKeyDown={(e) => e.key === "Enter" ? saveJiraOrganizationName() : null} // TODO: Remove this because the save button is for the whole page now
@@ -65,7 +76,7 @@ export default function OptionCardJira() {
         </Row>
         <section>
           <Divider />
-          <Button type="primary" size="large" onClick={saveJiraOrganizationName}>
+          <Button type="primary" size="large" onClick={saveJiraOrganizationName} disabled={jiraOrganizationName === options.jira?.organizationName}>
             Save
           </Button>
         </section>

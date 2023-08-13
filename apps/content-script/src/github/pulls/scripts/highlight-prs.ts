@@ -1,14 +1,15 @@
-import browser from "webextension-polyfill";
+import * as browser from "webextension-polyfill";
+
 import { GITHUB_OBSERVED_URLS } from "@devspark/types/enums/GITHUB_OBSERVED_URLS";
 import { IMessage } from "@devspark/types/interfaces/IMessage";
 import { IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
 
+import { runScriptOnRequests } from "../../../helpers/run-script-on-request";
+
 
 browser.runtime.onMessage.addListener(
   function(message: IMessage) {
-    if (message.eventType === "WebRequestCompleted" && GITHUB_OBSERVED_URLS.PullRequestReviewDecisions.test(message.eventDetails.url)) {
-      highlightPrStatusWithDelay();
-    }
+    runScriptOnRequests(message, highlightPrStatusWithDelay, [GITHUB_OBSERVED_URLS.PullRequestReviewDecisions]);
   }
 );
 

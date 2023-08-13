@@ -1,6 +1,7 @@
-import browser from "webextension-polyfill";
-import { IMessage } from "@devspark/types/interfaces/IMessage";
+import * as browser from "webextension-polyfill";
+
 import { GITHUB_OBSERVED_URLS } from "@devspark/types/enums/GITHUB_OBSERVED_URLS";
+import { IMessage } from "@devspark/types/interfaces/IMessage";
 
 browser.webRequest.onCompleted.addListener(
   async (req) => {

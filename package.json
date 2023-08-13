@@ -9,7 +9,7 @@
     "dev": "turbo run dev --concurrency=13",
     "dev:chromium": "cross-env CHROMIUM=true pnpm run dev",
     "dev:firefox": "cross-env FIREFOX=true pnpm run dev",
-    "predev": "node ./selectManifest.js",
+    "predev": "node ./selectManifest.js"
   },
   "devDependencies": {
     "@turbo/gen": "1.9.7",

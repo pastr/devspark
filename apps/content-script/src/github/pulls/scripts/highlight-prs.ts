@@ -44,12 +44,12 @@ export function highlightPrStatusWithDelay() {
 
 export function highlightPr() {
   function highlightOwnPr() {
-    const prsOpenedBy = document.querySelectorAll<HTMLElement>(".js-navigation-item .opened-by");
+    const prsOpenedBy = document.querySelectorAll<HTMLElement>(".js-navigation-item .opened-by a");
     const userLoginElement = document.querySelector<HTMLMetaElement>("[name=user-login]");
     const userLogin = userLoginElement!.content;
     prsOpenedBy.forEach((pr) => {
-      if (pr.innerHTML.includes(userLogin)) {
-        const ownerPr = pr.parentElement?.parentElement?.firstElementChild as HTMLElement;
+      if (pr.title.includes(userLogin)) {
+        const ownerPr = pr.parentElement?.parentElement?.parentElement?.firstElementChild as HTMLElement;
         ownerPr.dataset.eqxOwnPr = "true";
         ownerPr.style.setProperty("color", "var(--color-accent-fg)", "important");
       }

@@ -1,6 +1,6 @@
 import set from "lodash.set";
 import { useEffect, useState } from "react";
-import browser from "webextension-polyfill";
+import * as browser from "webextension-polyfill";
 
 import { useOptions } from "@devspark/context/options";
 import { useFocus } from "@devspark/hooks/useFocus";
@@ -12,9 +12,6 @@ const TICKET_HISTORY_LENGTH = 5;
 
 export default function PopupSectionJira() {
   const [jiraTicketNumber, setJiraTicketNumber] = useState("");
-  // const [jiraTicketPrefix, setJiraTicketPrefix] = useStateStorageSynced("jiraTicketPrefix", "");
-  // TODO: Move this to the options synced object instead
-  // const [jiraTicketHistory, setJiraTicketHistory] = useStateStorageSynced<string[]>("jiraTicketHistory", []);
   const [organizationNameMissing, setOrganizationNameMissing] = useState(true);
   const [prefixInputRef, setPrefixInputFocus] = useFocus();
   const [ticketNumberInputRef, setTicketNumberInputFocus] = useFocus();
@@ -73,8 +70,8 @@ export default function PopupSectionJira() {
     if (organizationNameMissing) {
       return (
         <div >
-          <div className="text-red-400">Please set the organization name in the options first.</div>
-          <div className="text-red-400">You can access the options by clicking <button className="text-blue-600 underline" onClick={openOptionsPage}>here</button></div>
+          <div className="text-red-400">Please set the Jira organization name in the options first.</div>
+          <div className="text-red-400">You can access the options by clicking <button className="text-blue-600 underline bg-transparent" onClick={openOptionsPage}>here</button></div>
         </div>
       );
     }
@@ -83,29 +80,32 @@ export default function PopupSectionJira() {
   return (
     <PopupSection title='Jira' icon={ESupportedApps.Jira}>
       <div className="flex flex-col gap-2">
-        <input className="input"
-               disabled={organizationNameMissing}
-               placeholder="ticket prefix"
-               value={jiraTicketPrefix}
-               ref={prefixInputRef}
-               onKeyDown={(e) => e.key === "Enter" ? onPrefixInputEnter() : null}
-               onChange={(e) => setJiraTicketPrefix(e.target.value)} />
-        <input className="input"
-               autoFocus
-               disabled={organizationNameMissing}
-               ref={ticketNumberInputRef}
-               onKeyDown={(e) => e.key === "Enter" ? onTicketNumberInputEnter() : null}
-               type="number"
-               min="1"
-               placeholder="ticket number"
-               value={jiraTicketNumber}
-               onChange={(e) => setJiraTicketNumber(e.target.value)} />
-        <button className="btn-primary"
-                disabled={isButtonDisabled()}
-                onClick={openJiraTicket}>
-          Open ticket
-        </button>
-        {showErrors()}
+        {
+          organizationNameMissing ?
+            showErrors() :
+            <>
+              <input className="input"
+                     placeholder="ticket prefix"
+                     value={jiraTicketPrefix}
+                     ref={prefixInputRef}
+                     onKeyDown={(e) => e.key === "Enter" ? onPrefixInputEnter() : null}
+                     onChange={(e) => setJiraTicketPrefix(e.target.value)}/>
+              <input className="input"
+                     autoFocus
+                     ref={ticketNumberInputRef}
+                     onKeyDown={(e) => e.key === "Enter" ? onTicketNumberInputEnter() : null}
+                     type="number"
+                     min="1"
+                     placeholder="ticket number"
+                     value={jiraTicketNumber}
+                     onChange={(e) => setJiraTicketNumber(e.target.value)}/>
+              <button className="btn-primary"
+                      disabled={isButtonDisabled()}
+                      onClick={openJiraTicket}>
+                Open ticket
+              </button>
+            </>
+        }
         <section className="flex flex-col gap-1">
           <JiraTicketHistory jiraTickets={jiraTicketHistory} />
         </section>

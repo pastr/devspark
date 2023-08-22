@@ -8,6 +8,8 @@ import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 
 import PopupSection from "../_shared/components/PopupSection";
 
+import classes from "./popup.module.scss";
+
 const TICKET_HISTORY_LENGTH = 5;
 
 export default function PopupSectionJira() {
@@ -69,7 +71,7 @@ export default function PopupSectionJira() {
 
     if (organizationNameMissing) {
       return (
-        <div >
+        <div>
           <div className="text-red-400">Please set the Jira organization name in the options first.</div>
           <div className="text-red-400">You can access the options by clicking <button className="text-blue-600 underline bg-transparent" onClick={openOptionsPage}>here</button></div>
         </div>

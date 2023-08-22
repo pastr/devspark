@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
+    "rootDir": ".",
+    "declaration": true,
+    "types": ["vite/client"],
+    "jsx": "react-jsx"
+  },
+  "extends": "@devspark/tsconfig/base.json"
+}

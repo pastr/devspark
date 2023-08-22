@@ -1,0 +1,20 @@
+{
+  "name": "@devspark/hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^18.2.18",
+    "react": "^18.2.0",
+    "webextension-polyfill": "0.10.0"
+  },
+  "devDependencies": {
+    "@types/webextension-polyfill": "^0.10.1"
+  }
+}

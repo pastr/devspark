@@ -1,49 +1,72 @@
 # Devspark
 
+Devspark is a browser extension composed of several parts, unified in this monorepo. It leverages different technologies across various components.
+
 ## Stack
 
-### Content-script
-SolidJS
+Here's a breakdown of the technologies used in different parts of the extension:
 
-### Options
-React + TailwindCSS
+- **Content-script:** SolidJS
+- **Options:** React + TailwindCSS
+- **Popup:** React + TailwindCSS
+- **Background:** service-worker + vanilla js
 
-### Popup
-React + TailwindCSS
+## Installation
 
-# Installation
+Start by installing the required dependencies:
 
-`npm i`
+```bash
+pnpm install
+```
 
-# Dev
+## Development
 
-The development has to be improved but currently to start the extension in development mode you need to run three command in paralel:
+You can develop and test the extension in either a Chromium-based browser or Firefox. Use one of the following commands based on your preference:
 
-- `npm run dev`
-- `npm run dev:content` (it will generate the `index.global.js` file)
-- `npm run dev:background` (it will generate the `background.global.js` file)
+- For Chromium-based browsers:
 
-There are multiples `manifest.json` files for now.
-`manifestV2.json` is a manifest V2 file for firefox.
-`manifestV3.json` is a manifest V3 file for chrome.
-`manifest.json` is the one being read by the browser so you can change its content to match the browser you want to test with.
+```bash
+pnpm run dev:chromium
+```
 
-# Building the Extension:
+- For Firefox:
 
-## Firefox
+```bash
+pnpm run dev:firefox
+```
 
-`npm run build:firefox` builds the extension for Firefox.
+The only difference is that they will generate different `manifest.json` files. Firefox uses version 2, while Chromium uses version 3.
 
-The generated files are in `dist/`.
+## Building the Extension
 
-## Chrome
+The built extension files will be located in the `dist/` directory.
 
-`npm run build:chrome` builds the extensions for Google Chrome.
+### Firefox
 
-# Publishing
+Build the extension for Firefox using:
 
-## Firefox
+```bash
+pnpm run build:firefox
+```
 
-Simply ziping the `dist` folder didn't work. I had to use [web-ext](https://github.com/mozilla/web-ext).
+### Chrome
 
-In the `dist` folder, run `web-ext build` and it will create a zip file that can be uploaded to AMO (https://addons.mozilla.org)
+Build the extension for Google Chrome using:
+
+```bash
+pnpm run build:chrome
+```
+
+## Publishing
+
+### Firefox
+
+Zipping the `dist` folder directly might not work. You may need to use [web-ext](https://github.com/mozilla/web-ext).
+
+Navigate to the `dist` folder and run:
+
+```bash
+web-ext build
+```
+
+This will create a zip file that can be uploaded to [AMO](https://addons.mozilla.org).

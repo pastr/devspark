@@ -1,0 +1,39 @@
+{
+  "name": "devspark",
+  "description": "A Cross Browser Template for Google Chrome",
+  "version": "1.0.3",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "./popup.html",
+    "default_title": "Open the popup"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "webRequest",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./index.global.js"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "./background.global.js"
+  },
+  "options_page": "./options.html",
+  "icons": {
+    "128": "Devspark_logo.png"
+  }
+}

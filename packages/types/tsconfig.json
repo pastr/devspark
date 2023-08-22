@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true
+  },
+  "exclude": ["node_modules"],
+  "extends": "@devspark/tsconfig/base.json"
+}

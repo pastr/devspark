@@ -1,25 +1,25 @@
-import fs from "fs";
+import fs from "fs/promises";
+import path from 'path';
 
-const manifest = "./dist/manifest.json";
-const manifestV2 = "./dist/manifestV2.json";
-const manifestV3 = "./dist/manifestV3.json";
+const manifestV2 = "./manifests/manifestV2.json";
+const manifestV3 = "./manifests/manifestV3.json";
 const selectedManifest = process.env.CHROMIUM ? manifestV3 : manifestV2;
+const newManifest = "./dist/manifest.json";
 
-// Read the contents of manifestV2
-fs.readFile(selectedManifest, "utf8", (err, data) => {
-  if (err) throw err;
+async function main() {
+  try {
+    await fs.rm('./dist', { recursive: true, force: true });
 
-  // Write the contents of selectedManifest to manifest
-  fs.writeFile(manifest, data, "utf8", (err) => {
-    if (err) throw err;
+    const data = await fs.readFile(selectedManifest, 'utf8');
 
-    // Delete manifestV2
-    fs.unlink(manifestV2, (err) => {
-      if (err) throw err;
-    });
-    // Delete manifestV3
-    fs.unlink(manifestV3, (err) => {
-      if (err) throw err;
-    });
-  });
-});
+    const directory = path.dirname(newManifest);
+    await fs.mkdir(directory, { recursive: true });
+
+    await fs.writeFile(newManifest, data, 'utf8');
+    console.log('Manifest created successfully');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+main();

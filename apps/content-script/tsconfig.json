@@ -11,16 +11,13 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
   },
-  "exclude": [
-    "./content-script"
-  ]
+  "extends": "@devspark/tsconfig/base.json"
 }

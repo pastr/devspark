@@ -1,0 +1,10 @@
+@import '@devspark/styles/common.css';
+
+/* Also possible to use tailwind this way: */
+/* @apply text-6xl font-normal leading-normal mt-0 mb-2; */
+.popup-section + .popup-section {
+  margin-top: theme("margin.3");
+  padding-top: theme("margin.2");
+  border-top: 1px solid #ccc;
+}
+

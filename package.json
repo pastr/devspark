@@ -1,54 +1,23 @@
 {
-  "name": "devsparktoolbox",
   "private": true,
-  "version": "1.0.3",
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch",
-    "dev:content": "vite build --config vite.content.config.ts --watch",
-    "dev:background": "vite build --config vite.chrome.background.config.ts --watch",
-    "build:chromium": "cross-env CHROMIUM=true npm run build:all",
-    "build:firefox": "cross-env FIREFOX=true npm run build:all",
-    "build": "vite build",
-    "build:all": "run-s build build:background build:content select:manifests",
-    "build:background": "vite build --config vite.chrome.background.config.ts",
-    "build:content": "vite build --config vite.content.config.ts",
-    "lint": "eslint --ext .tsx,.ts popup/ options/ content-script/ background/ common/ --fix",
-    "select:manifests": "node ./selectManifest.js"
-  },
-  "dependencies": {
-    "@hookform/error-message": "^2.0.1",
-    "antd": "5.1.7",
-    "lodash.difference": "4.5.0",
-    "lodash.set": "4.3.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "7.42.1",
-    "sass": "1.57.1",
-    "solid-js": "1.6.9"
+    "build:chromium": "cross-env CHROMIUM=true pnpm run build",
+    "build:firefox": "cross-env FIREFOX=true pnpm run build",
+    "build": "turbo run build",
+    "prebuild": "node ./selectManifest.js",
+    "dev": "turbo run dev --concurrency=13",
+    "dev:chromium": "cross-env CHROMIUM=true pnpm run dev",
+    "dev:firefox": "cross-env FIREFOX=true pnpm run dev",
+    "predev": "node ./selectManifest.js"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.206",
-    "@types/lodash.set": "4.3.7",
-    "@types/react": "18.0.26",
-    "@types/react-dom": "18.0.10",
-    "@types/webextension-polyfill": "0.9.2",
-    "@typescript-eslint/eslint-plugin": "5.48.0",
-    "@typescript-eslint/parser": "5.48.0",
-    "@vitejs/plugin-react": "3.0.1",
-    "autoprefixer": "10.4.13",
+    "@turbo/gen": "1.9.7",
     "cross-env": "7.0.3",
-    "eslint": "8.31.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-jsx-a11y": "6.6.1",
-    "eslint-plugin-react": "7.31.11",
-    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint": "7.32.0",
     "npm-run-all": "4.1.5",
-    "postcss": "8.4.21",
-    "tailwindcss": "3.2.4",
-    "typescript": "4.9.4",
-    "vite": "4.0.3",
-    "vite-plugin-solid": "2.5.0",
-    "webextension-polyfill": "0.10.0"
-  }
+    "turbo": "1.10.12"
+  },
+  "packageManager": "pnpm@8.6.10",
+  "name": "devspark"
 }

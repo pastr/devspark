@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2015"],
+    "module": "ESNext",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "declaration": true,
+    "jsx": "react-jsx"
+  },
+  "exclude": ["node_modules"],
+  "extends": "@devspark/tsconfig/base.json"
+}

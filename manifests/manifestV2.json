@@ -1,11 +1,11 @@
 {
   "name": "devspark",
   "description": "A Cross Browser Template for Firefox",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
-      "id": "devsparktoolboxaddonid@pastr"
+      "id": "devsparkaddonid@pastr"
     }
   },
   "browser_action": {

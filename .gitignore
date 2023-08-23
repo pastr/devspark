@@ -44,5 +44,6 @@ pnpm-debug.log*
 # vercel
 .vercel
 
-
+# build output
 dist/
+web-ext-artifacts

@@ -1,6 +1,6 @@
 {
   "name": "devspark",
-  "description": "Enhance Your GitHub and Jira Experience with this browser extension. Whether you're a developer, project manager, or a team member, this tool is designed to dramatically improve your platform experience.  We believe in: Simplifying tasks Making navigation intuitive Enhancing the overall user interface By seamlessly integrating new features, we aim to elevate your workflow, reduce friction, and increase productivity. With this extension, users can dive into a reimagined user experience. Say goodbye to the original limitations and unlock a more dynamic, efficient, and enjoyable way to manage your projects on GitHub and Jira.",
+  "description": "Enhance Your GitHub and Jira Experience with this browser extension.",
   "version": "The version is defined in the root package.json file.",
   "manifest_version": 2,
   "browser_specific_settings": {
@@ -46,6 +46,7 @@
     "open_in_tab": true
   },
   "icons": {
-    "128": "devspark_logo.png"
+    "128": "devspark_logo_128.png",
+    "48": "devspark_logo_48.png"
   }
 }

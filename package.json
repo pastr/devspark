@@ -1,4 +1,10 @@
 {
+  "name": "devspark",
+  "author": "Emmanuel Pastor https://github.com/pastr",
+  "bugs": {
+    "url": "https://github.com/pastr/devspark/issues"
+  },
+  "version": "1.0.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,6 +26,5 @@
     "turbo": "1.10.12",
     "web-ext": "7.6.2"
   },
-  "packageManager": "pnpm@8.6.10",
-  "name": "devspark"
+  "packageManager": "pnpm@8.6.10"
 }

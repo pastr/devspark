@@ -61,12 +61,6 @@ pnpm run build:chrome
 
 ### Firefox
 
-Zipping the `dist` folder directly might not work. You may need to use [web-ext](https://github.com/mozilla/web-ext).
-
-Navigate to the `dist` folder and run:
-
-```bash
-web-ext build
-```
-
-This will create a zip file that can be uploaded to [AMO](https://addons.mozilla.org).
+When you run `pnpm run build:firefox` the source code will be automatically zipped by `web-ext`. 
+Once done you'll find the file in `./web-ext-artifacts`. 
+You can upload this zip file to [AMO](https://addons.mozilla.org).

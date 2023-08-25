@@ -19,7 +19,8 @@
     "storage",
     "scripting",
     "tabs",
-    "webRequest"
+    "webRequest",
+    "https://github.com/*"
   ],
   "content_scripts": [
     {

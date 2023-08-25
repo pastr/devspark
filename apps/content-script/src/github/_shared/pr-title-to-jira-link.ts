@@ -7,8 +7,6 @@ export async function convertPrTitleToJiraLink() {
   if (storage.options) {
     const options = storage.options as IOptionsContextState;
     const jiraTicketRegex = /[A-Z]{2,}-\d+/g;
-    console.log("options.jira?.organizationName", options.jira?.organizationName);
-
 
     if (options.jira?.organizationName) {
       const jiraUrl = `https://${options.jira.organizationName}.atlassian.net/browse/`;

@@ -17,13 +17,9 @@
   ],
   "permissions": [
     "storage",
-    "activeTab",
     "scripting",
     "tabs",
-    "webRequest",
-    "https://github.com/*",
-    "http://localhost/*",
-    "webNavigation"
+    "webRequest"
   ],
   "content_scripts": [
     {

@@ -1,10 +1,12 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
-import { useOptions } from "@devspark/context/options";
-import { useFocus } from "@devspark/hooks/useFocus";
-import set from "lodash.set";
-import OptionView from "../_shared/components/OptionView";
 import { Button, Col, Divider, Input, message, Row } from "antd";
+import set from "lodash.set";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+
+import { useOptions } from "@devspark/context/options";
+import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
+
+import OptionView from "../_shared/components/OptionView";
+
 
 export default function OptionCardJira() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -13,10 +15,6 @@ export default function OptionCardJira() {
   const [options, setOptions] = useOptions();
 
   useEffect(() => {
-    console.log("options.jira?.organizationName", options.jira?.organizationName);
-    console.log("jiraOrganizationName", jiraOrganizationName);
-    
-    
     if (options.jira?.organizationName) {
       setJiraOrganizationName(options.jira.organizationName);
     }
@@ -34,13 +32,12 @@ export default function OptionCardJira() {
 
     setOptions(newOptions);
     organizationInputRef.current.blur();
-    
+
     messageApi.open({
       type: "success",
       content: "Organization name saved!"
     });
   }
-
 
 
   return (

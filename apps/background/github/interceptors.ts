@@ -4,7 +4,6 @@ import { IMessage } from "@devspark/types/interfaces/IMessage";
 
 browser.webRequest.onCompleted.addListener(
   async (req) => {
-
     const message: IMessage = {
       eventType: "WebRequestCompleted",
       eventDetails: {

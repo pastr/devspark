@@ -4,13 +4,13 @@
   "bugs": {
     "url": "https://github.com/pastr/devspark/issues"
   },
-  "version": "1.0.5",
+  "version": "1.0.7",
   "private": true,
   "type": "module",
   "scripts": {
     "build:chromium": "cross-env CHROMIUM=true pnpm run build",
     "build:firefox": "cross-env FIREFOX=true pnpm run build",
-    "postbuild:firefox": "web-ext build --overwrite-dest --source-dir ./dist/",
+    "postbuild": "web-ext build --overwrite-dest --source-dir ./dist/",
     "build": "turbo run build",
     "prebuild": "node ./selectManifest.js",
     "dev": "turbo run dev --concurrency=13",

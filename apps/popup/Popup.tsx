@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import browser from "webextension-polyfill";
-import PopupSectionJira from "./src/jira/PopupSectionJira";
+import * as browser from "webextension-polyfill";
+
 import { OptionsProvider } from "@devspark/context/options";
+
+import PopupSectionJira from "./src/jira/PopupSectionJira";
 
 function Popup() {
   const [_msg, setMsg] = useState("");
 
   useEffect(() => {
     browser.runtime.onMessage.addListener((msg) => {
-      console.log("message received from content script: ", msg);
       setMsg(msg.action);
     });
   }, []);

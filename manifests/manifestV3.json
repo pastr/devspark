@@ -11,12 +11,10 @@
     "<all_urls>"
   ],
   "permissions": [
-    "storage",
-    "activeTab",
     "scripting",
+    "storage",
     "tabs",
-    "webRequest",
-    "webNavigation"
+    "webRequest"
   ],
   "content_scripts": [
     {

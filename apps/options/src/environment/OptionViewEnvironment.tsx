@@ -49,8 +49,7 @@ export default function OptionCardEnvironmentName() {
     setIsModalOpen(false);
   };
 
-  const onError: SubmitErrorHandler<IEnvrionmentNameState> = (error) => {
-    console.log("🚀 ~ file: OptionCardEnvironmentName.tsx:99 ~ EnvironmentNameModal ~ error", error);
+  const onError: SubmitErrorHandler<IEnvrionmentNameState> = (_error) => {
   };
 
   function addEnvironmentName() {

@@ -17,7 +17,6 @@
   ],
   "permissions": [
     "storage",
-    "scripting",
     "tabs",
     "webRequest",
     "https://github.com/*"

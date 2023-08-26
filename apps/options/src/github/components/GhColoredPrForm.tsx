@@ -1,11 +1,11 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { Button, ColorPicker, Input, Select } from "antd";
+import { Button, ColorPicker, Input, Select, Table } from "antd";
 import { useEffect, useState } from "react";
 
 import { useOptions } from "@devspark/context/options";
 import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 
-const SelectOptions: { value: TGhColorPrType, label: string }[] = [
+
+const selectOptions: { value: TGhColorPrType, label: string }[] = [
   { value: "ownPr", label: "Your own PR" },
   { value: "reviewedPr", label: "Reviewed PR" },
   { value: "titlePr", label: "PR's title that match this regex" },
@@ -19,14 +19,13 @@ const defaultColors = {
   userPr: "#5eff0a"
 };
 
-export function GhColoredPr() {
+export function GhColoredPrForm() {
   const [prType, setPrType] = useState<TGhColorPrType>("ownPr");
   const [regexString, setRegexString] = useState("");
   const [selectedColor, setSelectedColor] = useState(defaultColors.ownPr);
   const [options, setOptions] = useOptions();
 
   useEffect(() => {
-    console.log("prType", prType);
     if (prType === "ownPr") {
       setSelectedColor(defaultColors.ownPr);
     } else if (prType === "titlePr") {
@@ -57,31 +56,6 @@ export function GhColoredPr() {
     setOptions(newOptions);
   }
 
-  function removePrColor(index: number) {
-    const newOptions = { ...options };
-    newOptions.github!.prColors!.splice(index, 1);
-    setOptions(newOptions);
-  }
-
-  function getLabelFromType(type: TGhColorPrType) {
-    return SelectOptions.find((option) => option.value === type)?.label;
-  }
-
-  function showSavedPrColors() {
-    const prColors = options?.github?.prColors;
-    if (!prColors?.length) return;
-    return prColors.map((prColor, index) => {
-      return (
-        <div className="flex gap-2 items-center justify-between" key={`${index}-${prColor.type}`}>
-          <span className="text-sm font-semibold">{getLabelFromType(prColor.type)}</span>
-          { prColor.regexString && <span className="text-sm font-semibold">/{prColor.regexString}/</span> }
-          <span className="text-sm font-semibold" style={{ color: prColor.color }}>{prColor.color}</span>
-          <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removePrColor(index)} />
-        </div>
-      );
-    });
-  }
-
   function selectChange(value: TGhColorPrType) {
     setPrType(value);
   }
@@ -97,7 +71,7 @@ export function GhColoredPr() {
                   value={prType}
                   onChange={selectChange}
                   popupClassName="!w-[230px]"
-                  options={SelectOptions}/>
+                  options={selectOptions}/>
         </div>
         <RegexInput prType={prType} onRegexChange={setRegexString} />
         <div>
@@ -112,11 +86,6 @@ export function GhColoredPr() {
           Add
         </Button>
       </div>
-
-      <section className="mt-2">
-        {/* {showSavedTextsToDeemphasize()} */}
-        {showSavedPrColors()}
-      </section>
     </div>
   );
 }

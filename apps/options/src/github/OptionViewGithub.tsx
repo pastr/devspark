@@ -10,49 +10,50 @@ import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 
 import OptionView from "../_shared/components/OptionView";
 
-import { GhColoredPr } from "./components/GhColoredPr";
+import { GhColoredPrForm } from "./components/GhColoredPrForm";
+import { GhColoredPrTable } from "./components/GhColoredPrTable";
 
 export default function OptionCardJira() {
-  const [textToDeemphasize, setTextToDeemphasize] = useState("");
-  const [textInputRef, setTextInputFocus] = useFocus();
-  const [options, setOptions] = useOptions();
+  // const [textToDeemphasize, setTextToDeemphasize] = useState("");
+  // const [textInputRef, setTextInputFocus] = useFocus();
+  // const [options, setOptions] = useOptions();
 
-  function addToTheList() {
-    const newOptions: typeof options = { ...options };
+  // function addToTheList() {
+  //   const newOptions: typeof options = { ...options };
 
-    if (newOptions?.github?.deemphasizeTextList) {
-      newOptions.github.deemphasizeTextList.push(textToDeemphasize);
-    } else {
-      set(newOptions, "github.deemphasizeTextList", []);
-    }
-    setOptions(newOptions);
-    setTextToDeemphasize("");
-    setTextInputFocus();
-  }
+  //   if (newOptions?.github?.deemphasizeTextList) {
+  //     newOptions.github.deemphasizeTextList.push(textToDeemphasize);
+  //   } else {
+  //     set(newOptions, "github.deemphasizeTextList", []);
+  //   }
+  //   setOptions(newOptions);
+  //   setTextToDeemphasize("");
+  //   setTextInputFocus();
+  // }
 
-  function removeFromList(index: number) {
-    const newOptions: typeof options = { ...options };
-    newOptions.github!.deemphasizeTextList?.splice(index, 1);
-    setOptions(newOptions);
-  }
+  // function removeFromList(index: number) {
+  //   const newOptions: typeof options = { ...options };
+  //   newOptions.github!.deemphasizeTextList?.splice(index, 1);
+  //   setOptions(newOptions);
+  // }
 
-  function showSavedTextsToDeemphasize() {
-    const texts = options?.github?.deemphasizeTextList;
-    if (!texts?.length) return;
-    return texts.map((text, index) => {
-      return (
-        <div className="flex gap-2 items-center justify-between" key={`${index}-${text}`}>
-          <span className="text-sm font-semibold">{text}</span>
-          <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removeFromList(index)} />
-        </div>
-      );
-    });
-  }
+  // function showSavedTextsToDeemphasize() {
+  //   const texts = options?.github?.deemphasizeTextList;
+  //   if (!texts?.length) return;
+  //   return texts.map((text, index) => {
+  //     return (
+  //       <div className="flex gap-2 items-center justify-between" key={`${index}-${text}`}>
+  //         <span className="text-sm font-semibold">{text}</span>
+  //         <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removeFromList(index)} />
+  //       </div>
+  //     );
+  //   });
+  // }
 
   return (
     <OptionView title="GitHub" icon={ESupportedApps.GitHub}>
       <div>
-        <Row gutter={[32, 16]}>
+        <Row gutter={[48, 16]}>
           <Col span={8}>
             <h1 className="text-lg font-semibold">Customize PR Color</h1>
             <p className="text-gray-600 text-md">Change the colors of the pull requests in the pull request list page.</p>
@@ -60,9 +61,12 @@ export default function OptionCardJira() {
           </Col>
 
           <Col span={16}>
-            <Row>
-              <GhColoredPr />
-            </Row>
+            <GhColoredPrForm />
+          </Col>
+        </Row>
+        <Row className="mt-6">
+          <Col span={24}>
+            <GhColoredPrTable />
           </Col>
         </Row>
       </div>

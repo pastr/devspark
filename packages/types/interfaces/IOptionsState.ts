@@ -1,4 +1,5 @@
 import { RibbonOptions } from "./IRibbonOptions";
+import { IGhColorPr } from "./IghColorPr";
 import { TGhColorPrType } from "./TGhColorPrType";
 
 export interface IOptionsContextState {
@@ -8,11 +9,7 @@ export interface IOptionsContextState {
     ticketHistory?: string[]
   },
   github?: {
-    prColors?: {
-      type: TGhColorPrType
-      color: string
-      regexString: string
-    }[]
+    prColors?: IGhColorPr[]
   },
   allHost?: {
     environmentName?: IEnvrionmentNameState[]

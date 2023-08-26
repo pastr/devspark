@@ -1,16 +1,12 @@
-import { OptionsProvider } from "@devspark/context/options";
-import OptionViewEnvironmentName from "./src/environment/OptionViewEnvironment";
-import OptionViewGithub from "./src/github/OptionViewGithub";
-import OptionViewJira from "./src/jira/OptionViewJira";
-import OptionDevelopment from "./src/development/OptionDevelopment";
-import { Layout, Menu } from "antd";
-import type { MenuProps } from "antd";
-import { useState } from "react";
-import { LOGOS } from "@devspark/ui/components/AppTitle";
 import { FileUnknownOutlined, CodeOutlined } from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+import { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import { OptionsProvider } from "@devspark/context/options";
+import { LOGOS } from "@devspark/ui/components/AppTitle";
 
 const { Sider, Content } = Layout;
-
 
 type TRoute = "environmentName" | "jira" | "github" | "development";
 
@@ -22,25 +18,34 @@ const menuConfig = [
 ];
 
 export default function Options() {
-  const [route, setRoute] = useState<TRoute>("jira");
   const isDevelopment = import.meta.env.MODE === "development";
+  const fullLocation = useLocation();
+  const navigate = useNavigate();
+  const [location, setLocation] = useState<TRoute>(fullLocation.pathname.split("/")[1] as TRoute);
+  const defaultPathname = "jira";
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    setRoute(e.key as TRoute);
-  };
+  useEffect(() => {
+    setLocation(fullLocation.pathname.split("/")[1] as TRoute);
+
+    if (fullLocation.pathname === "/") {
+      navigate(`/${defaultPathname}`);
+    }
+
+  }, [fullLocation.pathname, navigate]);
+
 
   return (
     <OptionsProvider>
       <Layout hasSider className="max-h">
         <Sider theme="light">
-          <Menu theme="light" onClick={onClick} className="h-screen" defaultSelectedKeys={[route]}>
+          <Menu theme="light" className="h-screen" defaultSelectedKeys={[location]} >
             {menuConfig.map((item) => {
               if (item.showInDevelopment && !isDevelopment) return null;
 
               return (
                 <Menu.Item key={item.key}>
                   <div className="flex items-center gap-2">
-                    {item.label}
+                    <Link to={`${item.key}`}>{item.label}</Link>
                     {item.icon && <img className="h-4 ml-2" src={item.icon} alt={`${item.label} logo`} />}
                     {item.iconComponent}
                   </div>
@@ -51,23 +56,10 @@ export default function Options() {
         </Sider>
         <Layout>
           <Content>
-            <DisplayOption route={route} />
+            <Outlet />
           </Content>
         </Layout>
       </Layout>
     </OptionsProvider>
   );
-}
-
-export function DisplayOption({ route }: { route: TRoute }) {
-  switch (route) {
-  case "jira":
-    return <OptionViewJira />;
-  case "github":
-    return <OptionViewGithub />;
-  case "environmentName":
-    return <OptionViewEnvironmentName />;
-  case "development":
-    return <OptionDevelopment />;
-  }
 }

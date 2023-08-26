@@ -1,7 +1,7 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useOptions } from "@devspark/context/options";
 import { IGhColorPr } from "@devspark/types/interfaces/IghColorPr";
@@ -10,6 +10,10 @@ import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 export function GhColoredPrTable() {
   const [options, setOptions] = useOptions();
   const [savedPrColors, setSavedPrColors] = useState<IGhColorPr[]>(options?.github?.prColors || []);
+
+  useEffect(() => {
+    setSavedPrColors(options?.github?.prColors || []);
+  }, [options?.github?.prColors]);
 
   const prColors = options?.github?.prColors;
   if (!prColors?.length) return;

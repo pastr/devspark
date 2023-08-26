@@ -10,6 +10,8 @@ import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 
 import OptionView from "../_shared/components/OptionView";
 
+import { GhColoredPr } from "./components/GhColoredPr";
+
 export default function OptionCardJira() {
   const [textToDeemphasize, setTextToDeemphasize] = useState("");
   const [textInputRef, setTextInputFocus] = useFocus();
@@ -52,43 +54,17 @@ export default function OptionCardJira() {
       <div>
         <Row gutter={[32, 16]}>
           <Col span={8}>
-            <h1 className="text-lg font-semibold">Deemphasize PR</h1>
-            <p className="text-gray-600 text-md">Pull request in the pull request page will be deemphasized if their name contains one of the text you added</p>
+            <h1 className="text-lg font-semibold">Customize PR Color</h1>
+            <p className="text-gray-600 text-md">Change the colors of the pull requests in the pull request list page.</p>
+            <p className="text-gray-600 text-md">The order matter, if a PR match two rules then only the latest one will be applied</p>
           </Col>
 
           <Col span={16}>
             <Row>
-              <div>
-                <label className="text-xs font-bold text-gray-500" htmlFor="github_deemphasize_text">
-                  Text to deemphasize (case sensitive)
-                </label>
-                <div className="flex gap-2">
-                  <Input id="github_deemphasize_text"
-                         ref={textInputRef}
-                         onKeyDown={(e) => e.key === "Enter" ? addToTheList() : null}
-                         value={textToDeemphasize}
-                         onChange={(e) => setTextToDeemphasize(e.target.value)}
-                         placeholder="JiraTicket-123"
-                         type="text" />
-                  <Button disabled={textToDeemphasize === ""}
-                          onClick={addToTheList}>
-                    Add
-                  </Button>
-                </div>
-
-                <section className="mt-2">
-                  {showSavedTextsToDeemphasize()}
-                </section>
-              </div>
+              <GhColoredPr />
             </Row>
           </Col>
         </Row>
-        {/* <section>
-          <Divider />
-          <Button type="primary" size="large" onClick={addToTheList}>
-            Save
-          </Button>
-        </section> */}
       </div>
     </OptionView>
   );

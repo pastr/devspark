@@ -1,4 +1,5 @@
-import browser from "webextension-polyfill";
+import * as browser from "webextension-polyfill";
+
 import { addRibbon, addLine, addSquare } from "@devspark/services/ribbon-corner";
 import { IEnvrionmentNameState, IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
 

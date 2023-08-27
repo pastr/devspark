@@ -1,4 +1,6 @@
 import { RibbonOptions } from "./IRibbonOptions";
+import { IGhColorPr } from "./IghColorPr";
+import { TGhColorPrType } from "./TGhColorPrType";
 
 export interface IOptionsContextState {
   jira?: {
@@ -7,7 +9,7 @@ export interface IOptionsContextState {
     ticketHistory?: string[]
   },
   github?: {
-    deemphasizeTextList?: string[]
+    prColors?: IGhColorPr[]
   },
   allHost?: {
     environmentName?: IEnvrionmentNameState[]

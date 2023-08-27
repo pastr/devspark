@@ -9,7 +9,7 @@ const defaultContextState: IOptionsContextState = {
     ticketHistory: []
   },
   github: {
-    deemphasizeTextList: []
+    prColors: []
   },
   allHost: {
     environmentName: []

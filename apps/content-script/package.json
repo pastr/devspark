@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite build --config vite.content.config.ts --watch",
+    "dev": "vite build --config vite.content.config.ts --mode development --watch --minify false --sourcemap",
     "build": "vite build --config vite.content.config.ts"
   },
   "keywords": [],

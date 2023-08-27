@@ -15,6 +15,7 @@ function handleMouseDown(e: MouseEvent) {
 
 export function addResizePropertyToSidebar() {
   const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
+  const originalSidebarWidth = sidebar.offsetWidth;
   const pullFilesPage = window.location.href.split("/").at(-1) === "files";
 
   if (!sidebar || !pullFilesPage) return;
@@ -45,8 +46,8 @@ export function addResizePropertyToSidebar() {
 
   mouseMoveHandler = (e: MouseEvent) => {
     const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
-    if (!isResizing || !sidebar) return;
     const diffX = e.pageX - startX;
+    if (!isResizing || !sidebar || startWidth + diffX < originalSidebarWidth) return;
     sidebar.style.width = `${startWidth + diffX}px`;
   };
 

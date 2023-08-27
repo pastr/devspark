@@ -1,8 +1,9 @@
+import set from "lodash.set";
 import { createEffect, createSignal } from "solid-js";
 import type { Component } from "solid-js";
+import * as browser from "webextension-polyfill";
+
 import { reviewedPrs, setReviewedPrs } from "./reviewed-checkboxes";
-import set from "lodash.set";
-import browser from "webextension-polyfill";
 
 type Props = {
   issueId: string;
@@ -15,18 +16,10 @@ export const ColumnCheckbox: Component<Props> = ({ organization, repository, iss
   const [checked, setChecked] = createSignal(reviewedPrs()?.[organization]?.[repository]?.[issueId] ?? false);
 
   createEffect(() => {
-    const isOwnPr = !!PR_LINK_EL?.dataset.eqxOwnPr;
-    const deemphasizedPr = !!PR_LINK_EL?.dataset.eqxDeemphasizedPr;
     if (checked()) {
       PR_LINK_EL?.style.setProperty("text-decoration", "line-through", "important");
-      if (!isOwnPr && !deemphasizedPr) {
-        PR_LINK_EL?.style.setProperty("color", "var(--color-fg-subtle)", "important");
-      }
     } else {
       PR_LINK_EL?.style.setProperty("text-decoration", "");
-      if (!isOwnPr && !deemphasizedPr) {
-        PR_LINK_EL?.style.setProperty("color", "");
-      }
     }
   });
 

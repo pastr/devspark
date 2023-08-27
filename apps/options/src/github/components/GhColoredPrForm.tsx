@@ -1,4 +1,4 @@
-import { Button, ColorPicker, Input, Select, Table } from "antd";
+import { Button, ColorPicker, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 
 import { useOptions } from "@devspark/context/options";

@@ -13,11 +13,8 @@ import OptionViewJira from "./src/jira/OptionViewJira";
 
 function NoMatch() {
   return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
+    <div className="flex justify-center items-center h-full">
+      <h1 className="font-bold text-xl">Nothing to see here!</h1>
     </div>
   );
 }

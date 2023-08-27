@@ -9,10 +9,10 @@ import OptionView from "../_shared/components/OptionView";
 
 
 export default function OptionCardJira() {
-  const [messageApi, contextHolder] = message.useMessage();
-  const [jiraOrganizationName, setJiraOrganizationName] = useState("");
-  const organizationInputRef: MutableRefObject<any> = useRef(null);
   const [options, setOptions] = useOptions();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [jiraOrganizationName, setJiraOrganizationName] = useState(options.jira?.organizationName ?? "");
+  const organizationInputRef: MutableRefObject<any> = useRef(null);
 
   useEffect(() => {
     if (options.jira?.organizationName) {

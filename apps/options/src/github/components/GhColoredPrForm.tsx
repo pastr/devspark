@@ -82,7 +82,7 @@ export function GhColoredPrForm() {
                        onChange={(color) => setSelectedColor(color.toHex())}
                        disabledAlpha />
         </div>
-        <Button onClick={addNewPrColor}>
+        <Button type="primary" onClick={addNewPrColor}>
           Add
         </Button>
       </div>

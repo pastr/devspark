@@ -38,7 +38,7 @@ export default function Options() {
     <OptionsProvider>
       <Layout hasSider className="max-h">
         <Sider theme="light">
-          <Menu theme="light" className="h-screen" defaultSelectedKeys={[location]} >
+          <Menu theme="light" className="h-screen" selectedKeys={[location]} >
             {menuConfig.map((item) => {
               if (item.showInDevelopment && !isDevelopment) return null;
 

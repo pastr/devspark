@@ -7,14 +7,12 @@ import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 
 const selectOptions: { value: TGhColorPrType, label: string }[] = [
   { value: "ownPr", label: "Your own PR" },
-  { value: "reviewedPr", label: "Reviewed PR" },
   { value: "titlePr", label: "PR's title that match this regex" },
-  { value: "userPr", label: "GitHub user who own the PR" }
+  { value: "userPr", label: "GitHub's user who own the PR" }
 ];
 
 const defaultColors = {
   ownPr: "#2f81f7",
-  reviewedPr: "#8C8D8E",
   titlePr: "#a60565",
   userPr: "#5eff0a"
 };
@@ -30,8 +28,6 @@ export function GhColoredPrForm() {
       setSelectedColor(defaultColors.ownPr);
     } else if (prType === "titlePr") {
       setSelectedColor(defaultColors.titlePr);
-    } else if (prType === "reviewedPr") {
-      setSelectedColor(defaultColors.reviewedPr);
     } else if (prType === "userPr") {
       setSelectedColor(defaultColors.userPr);
     }
@@ -79,7 +75,7 @@ export function GhColoredPrForm() {
           <ColorPicker value={selectedColor}
                        showText
                        format={"hex"}
-                       onChange={(color) => setSelectedColor(color.toHex())}
+                       onChange={(color) => setSelectedColor(color.toHexString())}
                        disabledAlpha />
         </div>
         <Button type="primary" onClick={addNewPrColor}>

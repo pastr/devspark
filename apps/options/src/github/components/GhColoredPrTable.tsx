@@ -60,9 +60,8 @@ export function GhColoredPrTable() {
   function getLabelFromType(type: TGhColorPrType) {
     return {
       ownPr: "Your own PR",
-      reviewedPr: "Reviewed PR",
       titlePr: "PR's title that match this regex",
-      userPr: "GitHub user who own the PR"
+      userPr: "GitHub's user who own the PR"
     }[type];
   }
 

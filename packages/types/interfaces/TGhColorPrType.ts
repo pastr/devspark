@@ -1,1 +1,1 @@
-export type TGhColorPrType = "ownPr" | "titlePr" | "userPr" | "reviewedPr";
+export type TGhColorPrType = "ownPr" | "titlePr" | "userPr" 

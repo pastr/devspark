@@ -15,11 +15,10 @@ function handleMouseDown(e: MouseEvent) {
 
 export function addResizePropertyToSidebar() {
   const sidebar = document.querySelector(".Layout .Layout-sidebar") as HTMLDivElement;
-  const originalSidebarWidth = sidebar.offsetWidth;
   const pullFilesPage = window.location.href.split("/").at(-1) === "files";
-
   if (!sidebar || !pullFilesPage) return;
 
+  const originalSidebarWidth = sidebar.offsetWidth;
   const searchInput = document.querySelector<HTMLInputElement>("#file-tree-filter-field");
   if (searchInput) {
     searchInput.style.borderBottomRightRadius = "0px";

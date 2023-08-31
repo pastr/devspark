@@ -8,8 +8,6 @@ import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
 
 import PopupSection from "../_shared/components/PopupSection";
 
-import classes from "./popup.module.scss";
-
 const TICKET_HISTORY_LENGTH = 5;
 
 export default function PopupSectionJira() {

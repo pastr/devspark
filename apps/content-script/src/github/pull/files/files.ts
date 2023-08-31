@@ -5,6 +5,7 @@ import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
 import { addCopyFileNameButtonToFilesComments } from "./scripts/add-copy-filename-button";
 import { addNoWrapForDiffButton } from "./scripts/diff-no-wrap";
 import { loadAllDifss } from "./scripts/load-all-diffs";
+import { submitReview } from "./scripts/on-submit-review";
 import { addResizePropertyToSidebar } from "./scripts/resize-sidebar";
 
 export function runScriptsForFilesPage() {
@@ -14,5 +15,6 @@ export function runScriptsForFilesPage() {
     convertPrTitleToJiraLink();
     addNoWrapForDiffButton();
     loadAllDifss();
+    submitReview();
   }
 }

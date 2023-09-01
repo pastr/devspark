@@ -5,9 +5,7 @@ import { GithubResourcesService } from "../../../services/github-resources.servi
 let isListenersAdded = false;
 
 async function setCurrentPrToReviewed() {
-  // browser.storage.local.clear();
   const { reviewedPrs } = await browser.storage.local.get("reviewedPrs");
-  console.log("🚀 ~ file: on-submit-review.ts:10 ~ setCurrentPrToReviewed ~ reviewedPrs:", reviewedPrs);
   const repository = GithubResourcesService.getRepository();
   const organization = GithubResourcesService.getOrganization();
   const issueId = GithubResourcesService.getIssueId();
@@ -19,7 +17,6 @@ async function setCurrentPrToReviewed() {
 
 function onSubmitReview(event: Event) {
   const formEl = event.target as HTMLFormElement;
-  // get the form values
   const formData = new FormData(formEl);
   const formGithubEvent = formData.get("pull_request_review[event]") as "comment" | "approve" | "reject";
 

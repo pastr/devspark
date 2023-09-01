@@ -9,6 +9,7 @@ import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
 
 import { addCopyFileNameButtonToConversationComments } from "./scripts/add-copy-filename-button";
 import { addDevsparkSectionToConversationPage } from "./scripts/add-devspark-section";
+import { addReviewersButton } from "./scripts/add-reviewers";
 import { addOpenAllCommentsButton } from "./scripts/open-all-comments";
 import { addOpenAllCommentsAndLoadMoreButton } from "./scripts/open-all-comments-and-load-more";
 
@@ -25,5 +26,6 @@ export function runScriptsForConversationPage(): void {
     convertPrTitleToJiraLink();
     addOpenAllCommentsButton();
     addOpenAllCommentsAndLoadMoreButton();
+    addReviewersButton();
   }
 }

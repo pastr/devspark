@@ -4,7 +4,7 @@
   "bugs": {
     "url": "https://github.com/pastr/devspark/issues"
   },
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "type": "module",
   "scripts": {

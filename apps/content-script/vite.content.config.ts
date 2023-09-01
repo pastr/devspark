@@ -1,10 +1,12 @@
 import { resolve } from "path";
+
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
+import solidSvg from "vite-plugin-solid-svg";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), solidSvg()],
   define: {
     "process.env": {}
   },

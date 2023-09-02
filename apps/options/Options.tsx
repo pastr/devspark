@@ -1,58 +1,80 @@
-import { FileUnknownOutlined, CodeOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
-import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import Icon, { FileUnknownOutlined, CodeOutlined } from "@ant-design/icons";
+import { Layout, Menu, MenuProps } from "antd";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { OptionsProvider } from "@devspark/context/options";
-import { LOGOS } from "@devspark/ui/components/AppTitle";
+
+import { ReactComponent as GithubIcon } from "../../images/logo/github.svg";
+import { ReactComponent as JiraIcon } from "../../images/logo/jira.svg";
 
 const { Sider, Content } = Layout;
 
-type TRoute = "environmentName" | "jira" | "github" | "development";
+const IS_DEVELOPMENT = import.meta.env.MODE === "development";
 
-const menuConfig = [
-  { key: "jira", label: "Jira", icon: LOGOS.jira },
-  { key: "github", label: "GitHub", icon: LOGOS.github },
-  { key: "environmentName", label: "Environment", iconComponent: <FileUnknownOutlined /> },
-  { key: "development", label: "Development", iconComponent: <CodeOutlined />, showInDevelopment: true }
+
+type MenuItem = Required<MenuProps>["items"][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: "group"
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type
+  };
+}
+
+
+const menuItems: MenuProps["items"] = [
+  getItem("Jira", "jira", <Icon component={JiraIcon} />, [
+    getItem("Organization", "organization")
+  ]),
+
+  getItem("GitHub", "github", <Icon component={GithubIcon} />, [
+    getItem("Customize PR colors", "pr-colors")
+  ]),
+  getItem("Environment name", "environmentName", <FileUnknownOutlined />)
 ];
 
+if (IS_DEVELOPMENT) {
+  menuItems.push(getItem("Development", "development", <CodeOutlined />));
+}
+
 export default function Options() {
-  const isDevelopment = import.meta.env.MODE === "development";
+  const LEFT_MENU_WIDTH = 240;
   const fullLocation = useLocation();
   const navigate = useNavigate();
-  const [location, setLocation] = useState<TRoute>(fullLocation.pathname.split("/")[1] as TRoute);
-  const defaultPathname = "jira";
 
   useEffect(() => {
-    setLocation(fullLocation.pathname.split("/")[1] as TRoute);
+    console.log("🚀 ~ file: Options.tsx:61 ~ Options ~ fullLocation:", fullLocation);
 
-    if (fullLocation.pathname === "/") {
-      navigate(`/${defaultPathname}`);
-    }
+  }, [fullLocation, fullLocation.pathname, navigate]);
 
-  }, [fullLocation.pathname, navigate]);
+  const onClick: MenuProps["onClick"] = (e) => {
+    const reverseKeyPath = e.keyPath.reverse();
+    const finalLocation = reverseKeyPath.join("/");
 
+    navigate(`/${finalLocation}`);
+  };
 
   return (
     <OptionsProvider>
       <Layout hasSider className="max-h">
-        <Sider theme="light">
-          <Menu theme="light" className="h-screen" selectedKeys={[location]} >
-            {menuConfig.map((item) => {
-              if (item.showInDevelopment && !isDevelopment) return null;
-
-              return (
-                <Menu.Item key={item.key}>
-                  <div className="flex items-center gap-2">
-                    <Link to={`${item.key}`}>{item.label}</Link>
-                    {item.icon && <img className="h-4 ml-2" src={item.icon} alt={`${item.label} logo`} />}
-                    {item.iconComponent}
-                  </div>
-                </Menu.Item>
-              );
-            })}
-          </Menu>
+        <Sider theme="light" width={LEFT_MENU_WIDTH}>
+          <Menu onClick={onClick}
+                className="h-screen"
+                defaultSelectedKeys={fullLocation.pathname.split("/")}
+                defaultOpenKeys={fullLocation.pathname.split("/")}
+                style={{ width: LEFT_MENU_WIDTH }}
+                mode="inline"
+                items={menuItems}/>
         </Sider>
         <Layout>
           <Content>

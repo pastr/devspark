@@ -1,9 +1,10 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
+import svgrPlugin from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), splitVendorChunkPlugin()],
+  plugins: [react(), splitVendorChunkPlugin(), svgrPlugin()],
   build: {
     outDir: "../../dist",
     emptyOutDir: false,

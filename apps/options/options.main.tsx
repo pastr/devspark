@@ -10,7 +10,6 @@ import OptionViewEnvironmentName from "./src/environment/OptionViewEnvironment";
 import OptionViewGithub from "./src/github/OptionViewGithub";
 import OptionViewJira from "./src/jira/OptionViewJira";
 
-
 function NoMatch() {
   return (
     <div className="flex justify-center items-center h-full">
@@ -19,6 +18,7 @@ function NoMatch() {
   );
 }
 
+
 const router = createHashRouter([
   {
     path: "/",
@@ -26,11 +26,21 @@ const router = createHashRouter([
     children: [
       {
         path: "github",
-        element: <OptionViewGithub />
+        children: [
+          {
+            path: "pr-colors",
+            element: <OptionViewGithub />
+          }
+        ]
       },
       {
         path: "jira",
-        element: <OptionViewJira />
+        children: [
+          {
+            path: "organization",
+            element: <OptionViewJira />
+          }
+        ]
       },
       {
         path: "environmentName",

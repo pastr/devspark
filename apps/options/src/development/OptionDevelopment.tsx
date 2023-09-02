@@ -1,17 +1,25 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
+import { Button } from "antd";
+import { useEffect, useState } from "react";
+import * as browser from "webextension-polyfill";
+
 import { useOptions } from "@devspark/context/options";
-import { useFocus } from "@devspark/hooks/useFocus";
-import set from "lodash.set";
+
 import OptionView from "../_shared/components/OptionView";
-import browser from "webextension-polyfill"
-import { Button, Col, Divider, Input, message, Row } from "antd";
+
 
 export default function OptionDevelopment() {
-  const [messageApi, contextHolder] = message.useMessage();
-  const [jiraOrganizationName, setJiraOrganizationName] = useState("");
-  const organizationInputRef: MutableRefObject<any> = useRef(null);
   const [options, setOptions] = useOptions();
+  const [browserStorage, setBrowserStorage] = useState<any>(null);
+
+  useEffect(() => {
+    async function getBrowserStorage() {
+
+      setBrowserStorage(await browser.storage.local.get());
+    }
+    getBrowserStorage();
+
+  }, []);
+
 
   function clearStorage() {
     browser.storage.sync.clear();
@@ -20,9 +28,21 @@ export default function OptionDevelopment() {
 
   return (
     <OptionView title={"Development"}>
-      <div className="">
-      <Button onClick={clearStorage}>Clear storage</Button>
-      </div>
+      <>
+        <div className="">
+          <Button onClick={clearStorage}>Clear storage</Button>
+        </div>
+
+        <div className="mt-4">
+          <h1 className="mb-4 font-bold text-xl">User's options:</h1>
+          <pre>{JSON.stringify(options, null, 2)}</pre>
+        </div>
+
+        <div className="mt-4">
+          <h1 className="mb-4 font-bold text-xl">Browser's storage (browser.storage.local.get)</h1>
+          <pre>{JSON.stringify(browserStorage, null, 2)}</pre>
+        </div>
+      </>
     </OptionView>
   );
 }

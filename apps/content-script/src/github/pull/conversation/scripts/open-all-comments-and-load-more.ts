@@ -1,6 +1,9 @@
 export function addOpenAllCommentsAndLoadMoreButton() {
   const devsparkSidebarSection = document.querySelector("#devspark-sidebar-section");
   const openAllCommentsAndLoadMoreButtonExist = document.querySelector("[data-all-comments-and-load-more-inserted]");
+  const ajaxButtons = document.querySelectorAll<HTMLButtonElement>(".ajax-pagination-btn");
+
+  if (ajaxButtons.length === 0) return;
 
   if (!openAllCommentsAndLoadMoreButtonExist && devsparkSidebarSection) {
     const openAllCommentsAndLoadMoreButton = document.createElement("button");
@@ -9,7 +12,7 @@ export function addOpenAllCommentsAndLoadMoreButton() {
     openAllCommentsAndLoadMoreButton.dataset.allCommentsAndLoadMoreInserted = "true";
 
     function openAllCommentsAndLoadMore() {
-      const ajaxButtons = document.querySelectorAll<HTMLButtonElement>(".ajax-pagination-btn");
+      console.log("🚀 ~ file: open-all-comments-and-load-more.ts:13 ~ openAllCommentsAndLoadMore ~ ajaxButtons:", ajaxButtons);
       for (const ajaxButton of ajaxButtons) {
         ajaxButton.click();
       }

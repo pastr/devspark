@@ -1,6 +1,10 @@
 export function addOpenAllCommentsButton() {
+  const showResolvedButtons = document.querySelectorAll(".js-resolvable-timeline-thread-container");
+  console.log("🚀 ~ file: open-all-comments.ts:3 ~ addOpenAllCommentsButton ~ showResolvedButtons:", showResolvedButtons);
   const devsparkSidebarSection = document.querySelector("#devspark-sidebar-section");
   const openAllCommentsButtonExist = document.querySelector("[data-all-comments-inserted]");
+
+  if (showResolvedButtons.length === 0) return;
 
   if (!openAllCommentsButtonExist && devsparkSidebarSection) {
     const openAllCommentsButton = document.createElement("button");

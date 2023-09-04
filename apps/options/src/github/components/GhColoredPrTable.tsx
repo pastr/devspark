@@ -4,7 +4,7 @@ import { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 
 import { useOptions } from "@devspark/context/options";
-import { IGhColorPr } from "@devspark/types/interfaces/IghColorPr";
+import { IGhColorPr } from "@devspark/types/interfaces/IGhColorPr";
 import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 
 export function GhColoredPrTable() {

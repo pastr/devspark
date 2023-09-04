@@ -1,6 +1,5 @@
 import Icon, { FileUnknownOutlined, CodeOutlined } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
-import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { OptionsProvider } from "@devspark/context/options";
@@ -32,30 +31,30 @@ function getItem(
 }
 
 
-const menuItems: MenuProps["items"] = [
+const commonMenuItems: MenuProps["items"] = [
   getItem("Jira", "jira", <Icon component={JiraIcon} />, [
     getItem("Organization", "organization")
   ]),
 
   getItem("GitHub", "github", <Icon component={GithubIcon} />, [
-    getItem("Customize PR colors", "pr-colors")
+    getItem("Customize PR colors", "pr-colors"),
+    getItem("Reviewers Group", "reviewers-group")
   ]),
+
   getItem("Environment name", "environmentName", <FileUnknownOutlined />)
 ];
 
-if (IS_DEVELOPMENT) {
-  menuItems.push(getItem("Development", "development", <CodeOutlined />));
-}
+const devMenuItems = IS_DEVELOPMENT ? [getItem("Development", "development", <CodeOutlined />)] : [];
+
+const menuItems = [...commonMenuItems, ...devMenuItems];
+
 
 export default function Options() {
   const LEFT_MENU_WIDTH = 240;
-  const fullLocation = useLocation();
+  const location = useLocation();
+  const locationArray = location.pathname.split("/");
+
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("🚀 ~ file: Options.tsx:61 ~ Options ~ fullLocation:", fullLocation);
-
-  }, [fullLocation, fullLocation.pathname, navigate]);
 
   const onClick: MenuProps["onClick"] = (e) => {
     const reverseKeyPath = e.keyPath.reverse();
@@ -66,12 +65,12 @@ export default function Options() {
 
   return (
     <OptionsProvider>
-      <Layout hasSider className="max-h">
-        <Sider theme="light" width={LEFT_MENU_WIDTH}>
+      <Layout hasSider className="h-full">
+        <Sider width={LEFT_MENU_WIDTH}>
           <Menu onClick={onClick}
-                className="h-screen"
-                defaultSelectedKeys={fullLocation.pathname.split("/")}
-                defaultOpenKeys={fullLocation.pathname.split("/")}
+                className="h-full"
+                defaultSelectedKeys={locationArray}
+                defaultOpenKeys={locationArray}
                 style={{ width: LEFT_MENU_WIDTH }}
                 mode="inline"
                 items={menuItems}/>

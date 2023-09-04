@@ -9,7 +9,8 @@ const defaultContextState: IOptionsContextState = {
     ticketHistory: []
   },
   github: {
-    prColors: []
+    prColors: [],
+    reviewersGroup: []
   },
   allHost: {
     environmentName: []

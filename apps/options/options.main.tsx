@@ -2,13 +2,17 @@ import "./src/styles/options.tailwind.css";
 import "./src/styles/options.global.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { Link, RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import Options from "./Options";
 import OptionDevelopment from "./src/development/OptionDevelopment";
 import OptionViewEnvironmentName from "./src/environment/OptionViewEnvironment";
 import OptionViewGithub from "./src/github/OptionViewGithub";
+import GhPrColors from "./src/github/pages/GhPrColors";
+import GhReviewersGroup from "./src/github/pages/GhReviewersGroup";
 import OptionViewJira from "./src/jira/OptionViewJira";
+
+const IS_DEVELOPMENT = import.meta.env.MODE === "development";
 
 function NoMatch() {
   return (
@@ -26,10 +30,15 @@ const router = createHashRouter([
     children: [
       {
         path: "github",
+        element: <OptionViewGithub />,
         children: [
           {
             path: "pr-colors",
-            element: <OptionViewGithub />
+            element: <GhPrColors />
+          },
+          {
+            path: "reviewers-group",
+            element: <GhReviewersGroup />
           }
         ]
       },
@@ -48,7 +57,7 @@ const router = createHashRouter([
       },
       {
         path: "development",
-        element: <OptionDevelopment />
+        element: IS_DEVELOPMENT ? <OptionDevelopment /> : <NoMatch />
       },
       {
         path: "*",

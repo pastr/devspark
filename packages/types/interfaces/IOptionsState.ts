@@ -1,6 +1,7 @@
 import { RibbonOptions } from "./IRibbonOptions";
-import { IGhColorPr } from "./IghColorPr";
+import { IGhColorPr } from "./IGhColorPr";
 import { TGhColorPrType } from "./TGhColorPrType";
+import { IGhReviewersGroup } from "./IGhReviewersGroup";
 
 export interface IOptionsContextState {
   jira?: {
@@ -9,7 +10,8 @@ export interface IOptionsContextState {
     ticketHistory?: string[]
   },
   github?: {
-    prColors?: IGhColorPr[]
+    prColors?: IGhColorPr[],
+    reviewersGroup: IGhReviewersGroup[],
   },
   allHost?: {
     environmentName?: IEnvrionmentNameState[]

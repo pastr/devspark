@@ -4,17 +4,17 @@ import { TGhColorPrType } from "./TGhColorPrType";
 import { IGhReviewersGroup } from "./IGhReviewersGroup";
 
 export interface IOptionsContextState {
-  jira?: {
-    organizationName?: string
-    ticketPrefix?: string
-    ticketHistory?: string[]
+  jira: {
+    organizationName: string
+    ticketPrefix: string
+    ticketHistory: string[]
   },
-  github?: {
-    prColors?: IGhColorPr[],
+  github: {
+    prColors: IGhColorPr[],
     reviewersGroup: IGhReviewersGroup[],
   },
-  allHost?: {
-    environmentName?: IEnvrionmentNameState[]
+  allHost: {
+    environmentName: IEnvrionmentNameState[]
   }
 }
 

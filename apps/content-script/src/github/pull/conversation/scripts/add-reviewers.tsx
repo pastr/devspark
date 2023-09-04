@@ -1,3 +1,10 @@
+import { For, Show, createSignal, onMount } from "solid-js";
+import * as browser from "webextension-polyfill";
+
+import { IGhReviewersGroup } from "@devspark/types/interfaces/IGhReviewersGroup";
+import { IMessageOpenOptionsPage } from "@devspark/types/interfaces/IMessage";
+import { IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
+
 import { Details } from "./details/Details";
 
 export function addReviewersButton() {
@@ -11,12 +18,20 @@ export function addReviewersButton() {
 }
 
 function ReviewersDetailsButton() {
+  const [groups, setGroups] = createSignal<IGhReviewersGroup[] | null>(null);
 
-  function onGroupSelection(event: Event) {
+  onMount(async () => {
+    const { options } = await browser.storage.sync.get() as {options: IOptionsContextState};
+    setGroups(options.github?.reviewersGroup);
+  });
+
+  async function onGroupSelection(event: Event) {
     event.preventDefault();
-    const formEl = event.target as HTMLFormElement;
-    const formDataGroup = new FormData(formEl);
-    const selectedGroup = formDataGroup.get("dvs-select-reviewer-group");
+    if (!groups()) return;
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const selectedGroup = formData.get("dvs-select-reviewer-group") as unknown as number;
+    const users = groups()![selectedGroup].users.map((user) => user.id);
 
     const authenticity_token = document.querySelector("#partial-discussion-sidebar > div.discussion-sidebar-item.sidebar-assignee.js-discussion-sidebar-item.position-relative > form > input[type=hidden]")?.value;
     const githubOrganization = window.location.pathname.split("/")[1];
@@ -42,8 +57,10 @@ function ReviewersDetailsButton() {
     headers.append("sec-fetch-mode", "cors");
     headers.append("sec-fetch-site", "same-origin");
     headers.append("x-requested-with", "XMLHttpRequest");
-    formDataRequest.append("reviewer_user_ids[]", selectedGroup as string);
-    console.log("🚀 ~ file: add-reviewers.tsx:46 ~ onGroupSelection ~ formDataRequest:", formDataRequest);
+    // formDataRequest.append("reviewer_user_ids[]", users as string);
+    users.forEach((user) => {
+      formDataRequest.append("reviewer_user_ids[]", user.toString());
+    });
 
     fetch(`${prUrl}/review-requests`, {
       "headers": headers,
@@ -56,23 +73,45 @@ function ReviewersDetailsButton() {
     });
   }
 
+  function openOptionsPage() {
+    const message: IMessageOpenOptionsPage = { eventType: "OpenOptionsPage", path: "/github/reviewers-group" };
+    browser.runtime.sendMessage(message);
+  }
+
   return (
     <Details dataDvs="add-reviewers" title="Add reviewers">
-      <form class="mx-3 mb-3" onsubmit={onGroupSelection}>
-        <dl class="form-group">
-          <dt>
-            <label for="dvs-select-reviewer-group">Select your group</label>
-          </dt>
+      <div class="mb-2"></div>
+      <Show when={!groups()?.length}>
+        <div class="mx-3">You don't have any group</div>
+      </Show>
+      <div class="mx-3 mb-3">click <a href="#" class="text" onclick={openOptionsPage}>here</a> to create or see existing groups</div>
 
-          <dd>
-            <select name="dvs-select-reviewer-group" id="dvs-select-group" class="form-select form-control">
-              <option value="6838136">pastr</option>
-            </select>
-          </dd>
-        </dl>
+      <Show when={groups()?.length}>
+        <form class="mx-3 mb-3" onsubmit={onGroupSelection}>
+          <dl class="form-group">
+            <dt>
+              <label for="dvs-select-reviewer-group">Select a group</label>
+            </dt>
 
-        <button type="submit" class="btn btn-sm btn-primary">Select</button>
-      </form>
+            <dd>
+              <select name="dvs-select-reviewer-group"
+                    id="dvs-select-group"
+                    class="form-select form-control">
+                <For each={groups()}>{(group, i) =>
+                  <option value={i()}>
+                    {group.groupName}
+                  </option>
+                }</For>
+              </select>
+            </dd>
+          </dl>
+
+          <button type="submit"
+                class="btn btn-sm btn-primary">
+                  Select
+          </button>
+        </form>
+      </Show>
     </Details>
   );
 

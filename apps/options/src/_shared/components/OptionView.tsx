@@ -1,5 +1,5 @@
-import AppTitle from "@devspark/ui/components/AppTitle";
 import { ESupportedApps } from "@devspark/types/enums/ESupportedApps";
+import AppTitle from "@devspark/ui/components/AppTitle";
 
 type Props = {
   title: string;
@@ -9,7 +9,7 @@ type Props = {
 
 export default function OptionView({ title, icon, children }: Props) {
   return (
-    <main className="m-4 max-w-screen-xl">
+    <div className="m-4 max-w-screen-xl">
       <header className="mb-6">
         <h1 className="font-bold text-5xl flex">
           <AppTitle title={title} icon={icon} iconClassName="h-10 ml-2" />
@@ -18,6 +18,6 @@ export default function OptionView({ title, icon, children }: Props) {
       <section className="p-2">
         {children}
       </section>
-    </main>
+    </div>
   );
 }

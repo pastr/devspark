@@ -1,5 +1,5 @@
 export interface IGhUser {
   id: number;
   login: string;
-  avatarUrl: string;
+  avatar_url: string;
 }

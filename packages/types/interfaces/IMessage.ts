@@ -12,5 +12,10 @@ interface IWebRequestStarted {
   eventDetails: IEventWebRequestDetails;
 }
 
+export interface IMessageOpenOptionsPage {
+  eventType: "OpenOptionsPage";
+  path: string;
+}
 
-export type IMessage = IWebRequestCompleted | IWebRequestStarted;
+
+export type IMessage = IWebRequestCompleted | IWebRequestStarted ;

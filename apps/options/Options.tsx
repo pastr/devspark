@@ -76,7 +76,7 @@ export default function Options() {
                 items={menuItems}/>
         </Sider>
         <Layout>
-          <Content>
+          <Content style={{ minHeight: "100vh" }}>
             <Outlet />
           </Content>
         </Layout>

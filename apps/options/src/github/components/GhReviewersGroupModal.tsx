@@ -1,6 +1,5 @@
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { FormInstance, Modal, Input, Button, Form } from "antd";
-import set from "lodash.set";
 import { useState } from "react";
 
 import { useOptions } from "@devspark/context/options";
@@ -34,8 +33,8 @@ export function GhReviewersGroupModal({ isModalOpen, setIsModalOpen, form, editI
   async function onOk() {
     try {
       await form.validateFields();
-
       const fieldsValue = form.getFieldsValue();
+
       if (!fieldsValue?.users?.length) {
         setGlobalErrors(["You need to have at least one user"]);
         return;
@@ -45,7 +44,9 @@ export function GhReviewersGroupModal({ isModalOpen, setIsModalOpen, form, editI
       const invalidUsernames = [];
       const validGhUsers = [];
       setLoading(true);
+
       for (const [index, username] of fieldsValue.users.entries()) {
+        // could be improve with a Promise.all
         const ghUser = await GithubApi.getGithubUser(username);
 
         if (!ghUser) {
@@ -57,44 +58,27 @@ export function GhReviewersGroupModal({ isModalOpen, setIsModalOpen, form, editI
             }
           ]);
         } else {
-          validGhUsers.push(ghUser);
+          validGhUsers.push({ id: ghUser.id, login: ghUser.login, avatar_url: ghUser.avatar_url });
         }
       }
 
+      if (invalidUsernames.length) return;
 
-      if (invalidUsernames.length === 0) {
-        const formatedGhUsers = validGhUsers.map((ghUser) => ({
-          id: ghUser.id,
-          login: ghUser.login,
-          avatarUrl: ghUser.avatar_url
-        }));
-
-        // move this part belown into a fn
-        const copyOptions = { ...options };
-        if (copyOptions.github?.reviewersGroup.length) {
-          if (editMode) {
-            copyOptions.github.reviewersGroup[editIndex] = { groupName: fieldsValue.groupName, users: formatedGhUsers };
-            setOptions(copyOptions);
-            setIsModalOpen(false);
-            setEditIndex(null);
-            return;
-          }
-
-
-          copyOptions.github.reviewersGroup.push({ groupName: fieldsValue.groupName, users: formatedGhUsers });
-        } else {
-          set(copyOptions, "github.reviewersGroup", [{ groupName: fieldsValue.groupName, users: formatedGhUsers }]);
-        }
-        setOptions(copyOptions);
-
-        setIsModalOpen(false);
+      const copyOptions = { ...options };
+      if (editMode) {
+        copyOptions.github.reviewersGroup[editIndex] = { groupName: fieldsValue.groupName, users: validGhUsers };
+      } else {
+        copyOptions.github.reviewersGroup.push({ groupName: fieldsValue.groupName, users: validGhUsers });
       }
+
+      setOptions(copyOptions);
+      setEditIndex(null);
+      setIsModalOpen(false);
     } catch (e) {
-      console.log("hohohohohooo");
+      console.error("Error creating reviewers group", e);
     } finally {
       setLoading(false);
     }
-
   }
 
   return (

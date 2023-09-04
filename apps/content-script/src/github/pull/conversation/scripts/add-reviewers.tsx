@@ -7,6 +7,7 @@ import { IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
 
 import { Details } from "./details/Details";
 
+
 export function addReviewersButton() {
   const devsparkSidebarSection = document.querySelector("#devspark-sidebar-section");
   if (!devsparkSidebarSection) return;
@@ -19,13 +20,14 @@ export function addReviewersButton() {
 
 function ReviewersDetailsButton() {
   const [groups, setGroups] = createSignal<IGhReviewersGroup[] | null>(null);
+  const [selectedGroupIndex, setSelectedGroupIndex] = createSignal<number>(0);
 
   onMount(async () => {
     const { options } = await browser.storage.sync.get() as {options: IOptionsContextState};
     setGroups(options.github?.reviewersGroup);
   });
 
-  async function onGroupSelection(event: Event) {
+  async function submitForm(event: Event) {
     event.preventDefault();
     if (!groups()) return;
 
@@ -78,6 +80,10 @@ function ReviewersDetailsButton() {
     browser.runtime.sendMessage(message);
   }
 
+  function selectGroup(event: Event) {
+    setSelectedGroupIndex(event.target.value);
+  }
+
   return (
     <Details dataDvs="add-reviewers" title="Add reviewers">
       <div class="mb-2"></div>
@@ -87,7 +93,7 @@ function ReviewersDetailsButton() {
       <div class="mx-3 mb-3">click <a href="#" class="text" onclick={openOptionsPage}>here</a> to create or see existing groups</div>
 
       <Show when={groups()?.length}>
-        <form class="mx-3 mb-3" onsubmit={onGroupSelection}>
+        <form class="mx-3 mb-3" onsubmit={submitForm}>
           <dl class="form-group">
             <dt>
               <label for="dvs-select-reviewer-group">Select a group</label>
@@ -96,15 +102,33 @@ function ReviewersDetailsButton() {
             <dd>
               <select name="dvs-select-reviewer-group"
                     id="dvs-select-group"
-                    class="form-select form-control">
-                <For each={groups()}>{(group, i) =>
-                  <option value={i()}>
+                    class="form-select form-control" onchange={selectGroup} >
+                <For each={groups()}>{(group, index) =>
+                  <option value={index()}>
                     {group.groupName}
                   </option>
                 }</For>
               </select>
             </dd>
           </dl>
+
+          <div>Users:</div>
+          <div class="mb-4" style={{ display: "flex", "flex-wrap": "wrap", "gap": "4px" }}>
+            <For each={groups()![selectedGroupIndex()].users}>
+              {
+                (user, index) =>
+                  <div>
+                    <a data-hovercard-type="user" data-hovercard-url={`/users/${user.login}/hovercard`} data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href={`/${user.login}`}>
+                      <span class="Link--primary text-bold">{user.login}</span>
+                    </a>
+                    <Show when={index() !== groups()![selectedGroupIndex()].users.length -1}>
+                      <span>, </span>
+                    </Show>
+                  </div>
+              }
+            </For>
+          </div>
+
 
           <button type="submit"
                 class="btn btn-sm btn-primary">

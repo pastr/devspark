@@ -12,7 +12,6 @@ export function addOpenAllCommentsAndLoadMoreButton() {
     openAllCommentsAndLoadMoreButton.dataset.allCommentsAndLoadMoreInserted = "true";
 
     function openAllCommentsAndLoadMore() {
-      console.log("🚀 ~ file: open-all-comments-and-load-more.ts:13 ~ openAllCommentsAndLoadMore ~ ajaxButtons:", ajaxButtons);
       for (const ajaxButton of ajaxButtons) {
         ajaxButton.click();
       }

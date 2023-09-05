@@ -12,6 +12,7 @@ import { addDevsparkSectionToConversationPage } from "./scripts/add-devspark-sec
 import { addReviewersButton } from "./scripts/add-reviewers";
 import { addOpenAllCommentsButton } from "./scripts/open-all-comments";
 import { addOpenAllCommentsAndLoadMoreButton } from "./scripts/open-all-comments-and-load-more";
+import { replaceMdImage } from "./scripts/replace-md-image";
 
 browser.runtime.onMessage.addListener(
   function(message: IMessage) {
@@ -27,5 +28,6 @@ export function runScriptsForConversationPage(): void {
     addOpenAllCommentsButton();
     addOpenAllCommentsAndLoadMoreButton();
     addReviewersButton();
+    replaceMdImage();
   }
 }

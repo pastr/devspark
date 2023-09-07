@@ -1,6 +1,7 @@
 import { GithubPages, LocationService } from "@devspark/services/location";
 
 import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
+import { replaceMdImageSetup } from "../_shared/replace-md-image";
 
 import { addCopyFileNameButtonToFilesComments } from "./scripts/add-copy-filename-button";
 import { addNoWrapForDiffButton } from "./scripts/diff-no-wrap";
@@ -16,5 +17,6 @@ export function runScriptsForFilesPage() {
     addNoWrapForDiffButton();
     loadAllDifss();
     submitReview();
+    replaceMdImageSetup();
   }
 }

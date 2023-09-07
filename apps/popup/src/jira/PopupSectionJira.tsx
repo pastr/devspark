@@ -64,7 +64,7 @@ export default function PopupSectionJira() {
 
   function showErrors() {
     function openOptionsPage() {
-      browser.runtime.openOptionsPage();
+      browser.tabs.create({ "url": `chrome-extension://${browser.runtime.id}/options.html#/jira/organization` });
     }
 
     if (organizationNameMissing) {

@@ -6,13 +6,13 @@ import { IMessage } from "@devspark/types/interfaces/IMessage";
 
 import { runScriptOnRequests } from "../../../helpers/run-script-on-request";
 import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
+import { replaceMdImageSetup } from "../_shared/replace-md-image";
 
 import { addCopyFileNameButtonToConversationComments } from "./scripts/add-copy-filename-button";
 import { addDevsparkSectionToConversationPage } from "./scripts/add-devspark-section";
 import { addReviewersButton } from "./scripts/add-reviewers";
 import { addOpenAllCommentsButton } from "./scripts/open-all-comments";
 import { addOpenAllCommentsAndLoadMoreButton } from "./scripts/open-all-comments-and-load-more";
-import { replaceMdImage } from "./scripts/replace-md-image";
 
 browser.runtime.onMessage.addListener(
   function(message: IMessage) {
@@ -28,6 +28,6 @@ export function runScriptsForConversationPage(): void {
     addOpenAllCommentsButton();
     addOpenAllCommentsAndLoadMoreButton();
     addReviewersButton();
-    replaceMdImage();
+    replaceMdImageSetup();
   }
 }

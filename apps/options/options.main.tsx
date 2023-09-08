@@ -9,8 +9,8 @@ import OptionDevelopment from "./src/development/OptionDevelopment";
 import OptionViewEnvironmentName from "./src/environment/OptionViewEnvironment";
 import OptionViewGithub from "./src/github/OptionViewGithub";
 import GhGeneralOptions from "./src/github/pages/GhGeneralOption/GhGeneralOptions";
-import GhPrColors from "./src/github/pages/GhPrColors";
-import GhReviewersGroup from "./src/github/pages/GhReviewersGroup";
+import GhPrColors from "./src/github/pages/GhPrColors/GhPrColors";
+import GhReviewersGroup from "./src/github/pages/GhReviewersGroup/GhReviewersGroup";
 import OptionViewJira from "./src/jira/OptionViewJira";
 
 const IS_DEVELOPMENT = import.meta.env.MODE === "development";

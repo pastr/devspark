@@ -7,7 +7,7 @@ import { useOptions } from "@devspark/context/options";
 import { IGhColorPr } from "@devspark/types/interfaces/IGhColorPr";
 import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 
-export function GhColoredPrTable() {
+export function GhPrColorsTable() {
   const [options, setOptions] = useOptions();
   const [savedPrColors, setSavedPrColors] = useState<IGhColorPr[]>(options?.github?.prColors || []);
 

@@ -4,7 +4,7 @@ import { Button, FormInstance } from "antd";
 import { useOptions } from "@devspark/context/options";
 import { IGhReviewersGroup } from "@devspark/types/interfaces/IGhReviewersGroup";
 
-import { GhUserTag } from "./GhUserTag";
+import { GhUserTag } from "../../../components/GhUserTag";
 
 type GhReviewersGroupListProps = {
   setIsModalOpen: (isModalOpen: boolean) => void;

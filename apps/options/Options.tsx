@@ -37,6 +37,7 @@ const commonMenuItems: MenuProps["items"] = [
   ]),
 
   getItem("GitHub", "github", <Icon component={GithubIcon} />, [
+    getItem("General Options", "general-options"),
     getItem("Customize PR colors", "pr-colors"),
     getItem("Reviewers Group", "reviewers-group")
   ]),

@@ -8,6 +8,7 @@ import Options from "./Options";
 import OptionDevelopment from "./src/development/OptionDevelopment";
 import OptionViewEnvironmentName from "./src/environment/OptionViewEnvironment";
 import OptionViewGithub from "./src/github/OptionViewGithub";
+import GhGeneralOptions from "./src/github/pages/GhGeneralOption/GhGeneralOptions";
 import GhPrColors from "./src/github/pages/GhPrColors";
 import GhReviewersGroup from "./src/github/pages/GhReviewersGroup";
 import OptionViewJira from "./src/jira/OptionViewJira";
@@ -32,6 +33,10 @@ const router = createHashRouter([
         path: "github",
         element: <OptionViewGithub />,
         children: [
+          {
+            path: "general-options",
+            element: <GhGeneralOptions />
+          },
           {
             path: "pr-colors",
             element: <GhPrColors />

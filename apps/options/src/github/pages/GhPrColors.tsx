@@ -21,7 +21,6 @@ export default function GhPrColors() {
       <Row className="mt-6">
         <Col span={24}>
           <GhColoredPrTable />
-          <Outlet />
         </Col>
       </Row>
     </div>

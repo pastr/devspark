@@ -1,5 +1,6 @@
 import Icon, { FileUnknownOutlined, CodeOutlined } from "@ant-design/icons";
 import { Layout, Menu, MenuProps } from "antd";
+import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { OptionsProvider } from "@devspark/context/options";
@@ -32,14 +33,14 @@ function getItem(
 
 
 const commonMenuItems: MenuProps["items"] = [
-  getItem("Jira", "jira", <Icon component={JiraIcon} />, [
-    getItem("Organization", "organization")
-  ]),
-
   getItem("GitHub", "github", <Icon component={GithubIcon} />, [
     getItem("General Options", "general-options"),
     getItem("Customize PR colors", "pr-colors"),
     getItem("Reviewers Group", "reviewers-group")
+  ]),
+
+  getItem("Jira", "jira", <Icon component={JiraIcon} />, [
+    getItem("Organization", "organization")
   ]),
 
   getItem("Environment name", "environmentName", <FileUnknownOutlined />)
@@ -71,7 +72,7 @@ export default function Options() {
           <Menu onClick={onClick}
                 className="h-full"
                 defaultSelectedKeys={locationArray}
-                defaultOpenKeys={locationArray}
+                defaultOpenKeys={["jira", "github"]}
                 style={{ width: LEFT_MENU_WIDTH }}
                 mode="inline"
                 items={menuItems}/>

@@ -2,7 +2,7 @@ import "./src/styles/options.tailwind.css";
 import "./src/styles/options.global.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter, redirect } from "react-router-dom";
 
 import Options from "./Options";
 import OptionDevelopment from "./src/development/OptionDevelopment";
@@ -28,6 +28,14 @@ const router = createHashRouter([
   {
     path: "/",
     element: <Options />,
+    loader: async ({ request }) => {
+      const url = new URL(request.url);
+      if (url.pathname === "/") {
+        return redirect("/github/general-options");
+      }
+
+      return null;
+    },
     children: [
       {
         path: "github",

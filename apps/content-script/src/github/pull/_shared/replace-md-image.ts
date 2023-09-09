@@ -29,7 +29,6 @@ export function replaceMdImageSetup() {
         handleChildListChange(mutation);
       }
     });
-    console.log("🚀 ~ file: replace-md-image.ts:22 ~ mutations.forEach ~ mutation:", mutation);
   });
 
   const config = { attributes: true, childList: true, subtree: true };

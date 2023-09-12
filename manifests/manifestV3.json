@@ -7,9 +7,6 @@
     "default_popup": "./popup.html",
     "default_title": "Open the popup"
   },
-  "host_permissions": [
-    "https://github.com/*"
-  ],
   "permissions": [
     "storage",
     "tabs",
@@ -22,7 +19,25 @@
       ],
       "run_at": "document_end",
       "js": [
-        "./index.global.js"
+        "./content.github.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "./content.jira.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "./content.allHosts.js"
       ]
     }
   ],

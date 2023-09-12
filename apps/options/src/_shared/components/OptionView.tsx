@@ -4,7 +4,7 @@ import AppTitle from "@devspark/ui/components/AppTitle";
 type Props = {
   title: string;
   icon?: ESupportedApps;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export default function OptionView({ title, icon, children }: Props) {

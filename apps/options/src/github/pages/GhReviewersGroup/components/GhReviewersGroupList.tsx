@@ -7,9 +7,9 @@ import { IGhReviewersGroup } from "@devspark/types/interfaces/IGhReviewersGroup"
 import { GhUserTag } from "../../../components/GhUserTag";
 
 type GhReviewersGroupListProps = {
-  setIsModalOpen: (isModalOpen: boolean) => void;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   form: FormInstance;
-  setEditIndex: (index: number) => void;
+  setEditIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export function GhReviewersGroupList({ setIsModalOpen, form, setEditIndex }: GhReviewersGroupListProps) {

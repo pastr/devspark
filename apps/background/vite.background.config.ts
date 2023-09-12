@@ -15,9 +15,6 @@ export default defineConfig({
       name: "devspark"
     },
     rollupOptions: {
-      input: {
-        background: new URL("./background.html", import.meta.url).pathname // for firefox, chrome doesn't use the background.html
-      },
       output: {
         entryFileNames: "background.global.js",
         extend: true

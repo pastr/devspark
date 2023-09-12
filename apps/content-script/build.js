@@ -1,5 +1,7 @@
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+import solidPlugin from "vite-plugin-solid";
+import solidSvg from "vite-plugin-solid-svg";
 
 import { build } from "vite";
 
@@ -13,6 +15,7 @@ const isSourcemap = process.argv.includes("--sourcemap");
 
 async function buildProject(input) {
   await build({
+    plugins: [solidPlugin(), solidSvg()],
     build: {
       minify: !isMinify,
       sourcemap: isSourcemap,

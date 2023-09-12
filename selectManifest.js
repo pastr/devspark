@@ -1,10 +1,10 @@
 import fs from "fs/promises";
 import path from 'path';
 
-const manifestV2 = "./manifests/manifestV2.json";
-const manifestV3 = "./manifests/manifestV3.json";
+const manifestFirefox = "./manifests/manifestFirefox.json";
+const manifestChromium = "./manifests/manifestChromium.json";
 const packageJSONPath = "./package.json";  // Assuming package.json is in root directory of your project
-const selectedManifest = process.env.CHROMIUM ? manifestV3 : manifestV2;
+const selectedManifest = process.env.CHROMIUM ? manifestChromium : manifestFirefox;
 const newManifest = "./dist/manifest.json";
 
 async function main() {

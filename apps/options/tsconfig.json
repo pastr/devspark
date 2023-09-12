@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
+    "module": "NodeNext",
     "rootDir": ".",
     "declaration": true,
     

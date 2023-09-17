@@ -3,8 +3,10 @@ import Button from "antd/es/button";
 import { useEffect, useRef, useState } from "react";
 
 
-import { GhReviewersGroupList } from "../components/GhReviewersGroupList";
-import { GhReviewersGroupModal } from "../components/GhReviewersGroupModal";
+import GhOptionPageTitle from "../../components/GhOptionPageTitle";
+
+import { GhReviewersGroupList } from "./components/GhReviewersGroupList";
+import { GhReviewersGroupModal } from "./components/GhReviewersGroupModal";
 
 const useResetFormOnCloseModal = ({ form, open }: { form: FormInstance; open: boolean }) => {
   const prevOpenRef = useRef<boolean>();
@@ -33,8 +35,10 @@ export default function GhReviewersGroup() {
 
   return (
     <>
-      <h1 className="font-bold text-xl mb-2">Create reviewers group</h1>
-      <div className="mb-4">Create a group of users that you can easily add as reviewers to your pull requests.</div>
+      <GhOptionPageTitle title="Create reviewers group" >
+        <p>Create a group of users that you can easily add as reviewers to your pull requests.</p>
+      </GhOptionPageTitle>
+
       <Button type="primary" onClick={() => setIsModalOpen(!isModalOpen)}>Create Group</Button>
 
       <section className="mt-6">

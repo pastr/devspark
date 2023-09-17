@@ -10,7 +10,10 @@ const defaultContextState: IOptionsContextState = {
   },
   github: {
     prColors: [],
-    reviewersGroup: []
+    reviewersGroup: [],
+    generalOptions: {
+      mdImage: false,
+    }
   },
   allHost: {
     environmentName: []

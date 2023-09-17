@@ -1,8 +1,10 @@
 import { createSignal } from "solid-js";
-import browser from "webextension-polyfill";
+import * as browser from "webextension-polyfill";
+
+import { LocationService } from "@devspark/services/location";
+
 import { ColumnCheckbox } from "./ColumnCheckbox";
 import { ColumnTitle } from "./ColumnTitle";
-import { LocationService } from "@devspark/services/location";
 
 type TReviewedPrStorage = {
   [organization: string]: {

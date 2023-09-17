@@ -3,9 +3,13 @@ import * as browser from "webextension-polyfill";
 import { GithubPages, LocationService } from "@devspark/services/location";
 import { GITHUB_OBSERVED_URLS } from "@devspark/types/enums/GITHUB_OBSERVED_URLS";
 import { IMessage } from "@devspark/types/interfaces/IMessage";
+import { IOptionsContextState } from "@devspark/types/interfaces/IOptionsState";
 
+import { conditionallyRunScript } from "../../../helpers/contionallyRunScript";
 import { runScriptOnRequests } from "../../../helpers/run-script-on-request";
 import { convertPrTitleToJiraLink } from "../../_shared/pr-title-to-jira-link";
+import { OptionsService } from "../../services/options.service";
+import { replaceMdImageSetup } from "../_shared/replace-md-image";
 
 import { addCopyFileNameButtonToConversationComments } from "./scripts/add-copy-filename-button";
 import { addDevsparkSectionToConversationPage } from "./scripts/add-devspark-section";
@@ -19,7 +23,9 @@ browser.runtime.onMessage.addListener(
   }
 );
 
-export function runScriptsForConversationPage(): void {
+export async function runScriptsForConversationPage() {
+  const options = await OptionsService.getSyncOptions();
+
   if (LocationService.isCorrectPage(GithubPages.PullConversation)) {
     addDevsparkSectionToConversationPage();
     addCopyFileNameButtonToConversationComments();
@@ -27,5 +33,7 @@ export function runScriptsForConversationPage(): void {
     addOpenAllCommentsButton();
     addOpenAllCommentsAndLoadMoreButton();
     addReviewersButton();
+
+    conditionallyRunScript(options.github.generalOptions.mdImage, replaceMdImageSetup);
   }
 }

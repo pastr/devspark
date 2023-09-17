@@ -17,7 +17,7 @@ const defaultColors = {
   userPr: "#5eff0a"
 };
 
-export function GhColoredPrForm() {
+export function GhPrColorsForm() {
   const [prType, setPrType] = useState<TGhColorPrType>("ownPr");
   const [regexString, setRegexString] = useState("");
   const [selectedColor, setSelectedColor] = useState(defaultColors.ownPr);
@@ -42,7 +42,10 @@ export function GhColoredPrForm() {
         regexString: regexString
       });
     } else {
-      newOptions.github = { prColors: [] };
+      newOptions.github = {
+        ...newOptions.github,
+        prColors: []
+      };
       newOptions.github.prColors!.push({
         type: prType,
         color: selectedColor,

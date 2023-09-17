@@ -11,4 +11,3 @@ function onTurboLoad() {
 
 // Custom Event dispatched by GitHub's code when the turbo frame is loaded
 window.addEventListener("turbo:load", onTurboLoad);
-

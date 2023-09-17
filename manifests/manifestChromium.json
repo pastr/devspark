@@ -22,12 +22,31 @@
       ],
       "run_at": "document_end",
       "js": [
-        "./index.global.js"
+        "./content.github.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "./content.jira.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "./content.allHosts.js"
       ]
     }
   ],
   "background": {
-    "service_worker": "./background.global.js"
+    "service_worker": "./background.global.js",
+    "type": "module"
   },
   "options_page": "./options.html",
   "icons": {

@@ -4,7 +4,8 @@ import { useState } from "react";
 
 import { useOptions } from "@devspark/context/options";
 
-import { GithubApi } from "../GithubApi.service";
+import { GithubApi } from "../../../GithubApi.service";
+
 
 const formItemLayout = {
   labelCol: {

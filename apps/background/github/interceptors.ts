@@ -20,7 +20,8 @@ browser.webRequest.onCompleted.addListener(
 browser.runtime.onMessage.addListener(
   function(message: IMessageOpenOptionsPage) {
     if (message.eventType === "OpenOptionsPage") {
-      browser.tabs.create({ "url": `chrome-extension://${browser.runtime.id}/options.html#${message.path}` });
+      const optionsUrl = browser.runtime.getURL("options.html");
+      browser.tabs.create({ "url": `${optionsUrl}#${message.path}` });
     }
   }
 );

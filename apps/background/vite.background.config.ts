@@ -10,7 +10,7 @@ export default defineConfig({
     emptyOutDir: false,
     outDir: resolve(__dirname, "../../dist"),
     lib: {
-      formats: ["iife"],
+      formats: ["es"],
       entry: resolve(__dirname, "./background.main.ts"),
       name: "devspark"
     },

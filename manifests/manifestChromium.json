@@ -45,7 +45,8 @@
     }
   ],
   "background": {
-    "service_worker": "./background.global.js"
+    "service_worker": "./background.global.js",
+    "type": "module"
   },
   "options_page": "./options.html",
   "icons": {

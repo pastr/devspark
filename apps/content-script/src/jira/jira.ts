@@ -33,7 +33,7 @@ const observer = new MutationObserver(() => {
     const fullscreenButton = document.createElement("button");
     fullscreenButton.classList.add("dvs-fullscreen-button");
     fullscreenButton.innerHTML = fsButtonIcon;
-    fullscreenButton.style.marginTop = parentContainer.id ? "" : "8px";
+    fullscreenButton.style.marginTop = parentContainer.id ? "" : "3px";
 
 
     fullscreenButton.addEventListener("click", () => {

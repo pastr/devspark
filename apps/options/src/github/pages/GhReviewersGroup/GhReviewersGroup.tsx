@@ -1,26 +1,13 @@
-import { Form, FormInstance } from "antd";
+import { Form } from "antd";
 import Button from "antd/es/button";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 
+import { useResetFormOnCloseModal } from "../../../_shared/hooks/useResetFormOnCloseModal";
 import GhOptionPageTitle from "../../components/GhOptionPageTitle";
 
 import { GhReviewersGroupList } from "./components/GhReviewersGroupList";
 import { GhReviewersGroupModal } from "./components/GhReviewersGroupModal";
-
-const useResetFormOnCloseModal = ({ form, open }: { form: FormInstance; open: boolean }) => {
-  const prevOpenRef = useRef<boolean>();
-  useEffect(() => {
-    prevOpenRef.current = open;
-  }, [open]);
-  const prevOpen = prevOpenRef.current;
-
-  useEffect(() => {
-    if (!open && prevOpen) {
-      form.resetFields();
-    }
-  }, [form, prevOpen, open]);
-};
 
 export default function GhReviewersGroup() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -60,6 +60,7 @@ module.exports = {
     "react/jsx-boolean-value": [
       "error",
       "never"
-    ]
+    ], 
+    "react/no-unescaped-entities": ["error"]
   }
 }

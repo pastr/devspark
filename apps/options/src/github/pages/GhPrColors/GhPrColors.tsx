@@ -1,10 +1,23 @@
+import { Button, Form } from "antd";
+import { useState } from "react";
+
+import { useResetFormOnCloseModal } from "../../../_shared/hooks/useResetFormOnCloseModal";
 import GhOptionPageTitle from "../../components/GhOptionPageTitle";
 
-import { GhPrColorsForm } from "./components/GhPrColorsForm";
+import GhPrColorsModal from "./components/GhPrColorsModal";
 import { GhPrColorsTable } from "./components/GhPrColorsTable";
 
 
 export default function GhPrColors() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+
+  useResetFormOnCloseModal({
+    form,
+    open: isModalOpen
+  });
+
   return (
     <div>
       <GhOptionPageTitle title="Customize Pull Requests Color" >
@@ -14,10 +27,18 @@ export default function GhPrColors() {
         </>
       </GhOptionPageTitle>
 
-      <GhPrColorsForm />
+      <Button type="primary" onClick={() => setIsModalOpen(!isModalOpen)}>Create Rule</Button>
+
+      <GhPrColorsModal editIndex={editIndex}
+                       setEditIndex={setEditIndex}
+                       form={form}
+                       setIsModalOpen={setIsModalOpen}
+                       isModalOpen={isModalOpen} />
 
       <div className="mt-4">
-        <GhPrColorsTable />
+        <GhPrColorsTable setEditIndex={setEditIndex}
+                         form={form}
+                         setIsModalOpen={setIsModalOpen} />
       </div>
     </div>
   );

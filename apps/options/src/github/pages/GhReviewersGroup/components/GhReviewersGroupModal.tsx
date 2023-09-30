@@ -75,8 +75,8 @@ export function GhReviewersGroupModal({ isModalOpen, setIsModalOpen, form, editI
       setOptions(copyOptions);
       setEditIndex(null);
       setIsModalOpen(false);
-    } catch (e) {
-      console.error("Error creating reviewers group", e);
+    } catch (error) {
+      console.error("Error creating reviewers group", error);
     } finally {
       setLoading(false);
     }

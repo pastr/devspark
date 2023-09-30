@@ -90,7 +90,7 @@ function ReviewersDetailsButton() {
       <Show when={!groups()?.length}>
         <div class="mx-3">You don't have any group</div>
       </Show>
-      <div class="mx-3 mb-3">click <a href="#" class="text" onclick={openOptionsPage}>here</a> to create or see existing groups</div>
+      <div class="mx-3 mb-3">click <a href="#" class="text" onclick={openOptionsPage}>here</a> to create a group</div>
 
       <Show when={groups()?.length}>
         <form class="mx-3 mb-3" onsubmit={submitForm}>

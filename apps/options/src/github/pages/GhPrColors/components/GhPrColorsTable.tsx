@@ -1,5 +1,5 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Table } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, FormInstance, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 
@@ -7,13 +7,19 @@ import { useOptions } from "@devspark/context/options";
 import { IGhColorPr } from "@devspark/types/interfaces/IGhColorPr";
 import { TGhColorPrType } from "@devspark/types/interfaces/TGhColorPrType";
 
-export function GhPrColorsTable() {
+type GhPrColorsTableProps = {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  form: FormInstance;
+  setEditIndex: React.Dispatch<React.SetStateAction<number | null>>;
+}
+
+export function GhPrColorsTable({ form, setEditIndex, setIsModalOpen }: GhPrColorsTableProps) {
   const [options, setOptions] = useOptions();
   const [savedPrColors, setSavedPrColors] = useState<IGhColorPr[]>(options?.github?.prColors || []);
 
   useEffect(() => {
-    setSavedPrColors(options?.github?.prColors || []);
-  }, [options?.github?.prColors]);
+    setSavedPrColors([...options.github.prColors]);
+  }, [options, options.github.prColors]);
 
   const prColors = options?.github?.prColors;
   if (!prColors?.length) return;
@@ -41,14 +47,24 @@ export function GhPrColorsTable() {
       width: 120
     },
     {
-      title: "Remove",
+      title: "action",
       dataIndex: "action",
       key: "action",
       align: "center",
       width: 80,
-      render: (_, record, index) => <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removePrColor(index)} />
+      render: (_, record, index) =>
+        <div className="flex gap-2">
+          <Button type="link" className="flex justify-center items-center mr-1" icon={<EditOutlined />} onClick={() => editPrColor(index)} />
+          <Button type="link" danger className="flex justify-center items-center mr-1" icon={<DeleteOutlined />} onClick={() => removePrColor(index)} />
+        </div>
     }
   ];
+
+  function editPrColor(index: number) {
+    setEditIndex(index);
+    form.setFieldsValue({ ruleType: prColors![index].type, color: prColors![index].color, regexString: prColors![index].regexString });
+    setIsModalOpen(true);
+  }
 
   function removePrColor(index: number) {
     const newOptions = { ...options };
